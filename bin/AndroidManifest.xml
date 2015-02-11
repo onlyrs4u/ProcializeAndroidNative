@@ -1,0 +1,66 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.procialize"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".SocialMediaLogin"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AppSignUp" >
+        </activity>
+        <activity android:name=".ProfileActivity" >
+        </activity>
+        <activity android:name=".EditProfileActivity" >
+        </activity>
+        <activity
+            android:name=".EventWallAcitvity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SingleContactActivity"
+            android:label="Contact" >
+        </activity>
+        <activity
+            android:name=".MainActivity_old"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AttendeeDetailPage"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ExhibitorDetailPage"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SpeakerDetailPage"
+            android:label="@string/app_name" >
+        </activity>
+    </application>
+
+</manifest>

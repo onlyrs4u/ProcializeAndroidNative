@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
+
+    <RelativeLayout
+        android:id="@+id/attendee_detail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/attendee_detail_thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_launcher" />
+
+        <!-- Name -->
+
+        <TextView
+            android:id="@+id/attendee_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/attendee_detail_thumbnail"
+            android:layout_toRightOf="@+id/attendee_detail_thumbnail"
+            android:text="@string/attendees_detail_full_name"
+            android:textStyle="bold" />
+
+        <!-- Designation -->
+
+        <TextView
+            android:id="@+id/attendee_detail_designation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/attendee_detail_name"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/attendee_detail_thumbnail"
+            android:text="@string/attendees_detail_designation" />
+
+        <!-- Company Name -->
+
+        <TextView
+            android:id="@+id/attendee_detail_comp_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/attendee_detail_designation"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/attendee_detail_thumbnail"
+            android:text="@string/attendees_detail_company_name" />
+
+        <!-- City -->
+
+        <TextView
+            android:id="@+id/attendee_detail_city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/attendee_detail_comp_name"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/attendee_detail_thumbnail"
+            android:text="@string/attendees_detail_city_name" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/attendee_detail_msg_meet_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attendee_detail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/attendee_detail_send_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attendees_detail_send_message" />
+
+        <Button
+            android:id="@+id/attendee_detail_set_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/attendee_detail_send_message"
+            android:text="@string/attendees_detail_set_meeting" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/attendee_detail_save_share_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attendee_detail_msg_meet_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/attendee_detail_save_attendee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attendees_detail_save_attendee" />
+
+        <Button
+            android:id="@+id/attendee_detail_share_attendee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/attendee_detail_save_attendee"
+            android:text="@string/attendees_detail_share_attendee" />
+    </RelativeLayout>
+
+</RelativeLayout>

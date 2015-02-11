@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/single_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
+
+    <ImageView
+        android:id="@+id/wall_sender_thumbnail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_launcher" />
+
+    <!-- Sender Name -->
+
+    <TextView
+        android:id="@+id/wall_sender_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_sender_thumbnail"
+        android:text="@string/wall_notification_sender_full_name"
+        android:textStyle="bold" />
+    
+    <!-- Sender designation -->
+
+    <TextView
+        android:id="@+id/wall_sender_designation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_sender_name"
+        android:text="@string/wall_notification_sender_designation"
+        android:textStyle="bold" />
+    
+    <!-- Sender company name -->
+
+    <TextView
+        android:id="@+id/wall_sender_company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_sender_designation"
+        android:text="@string/wall_notification_sender_company_name"
+        android:textStyle="bold" />
+
+    <!-- Notification type -->
+
+    <TextView
+        android:id="@+id/wall_notification_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_sender_company_name"
+        android:text="@string/wall_notification_type" />
+
+    <!-- Receiver Name -->
+
+    <TextView
+        android:id="@+id/wall_receiver_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_notification_type"
+        android:text="@string/wall_notification_receiver_full_name"
+        android:textStyle="bold" />
+
+    <!-- Receiver Designation -->
+
+    <TextView
+        android:id="@+id/wall_receiver_designation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_receiver_name"
+        android:text="@string/wall_notification_receiver_designation"
+        android:textStyle="bold" />
+    
+    <!-- Receiver Company Name -->
+
+    <TextView
+        android:id="@+id/wall_receiver_company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wall_sender_thumbnail"
+        android:layout_toRightOf="@+id/wall_receiver_designation"
+        android:text="@string/wall_notification_receiver_company_name"
+        android:textStyle="bold" />
+
+</RelativeLayout>
