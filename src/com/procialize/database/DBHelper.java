@@ -1392,7 +1392,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 attendeeList.add(attendeesList);
             } while (cursor.moveToNext());
         }
-        db.close();
+        db.close(); 
         return attendeeList;
     }
     
