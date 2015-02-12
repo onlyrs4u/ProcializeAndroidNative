@@ -1279,7 +1279,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	//Get Attendees List
     public List<Attendees> getAttendeesList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
-				" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'A\'";
+				", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'A\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1292,6 +1292,7 @@ public class DBHelper extends SQLiteOpenHelper {
             	attendeesList.setAttendee_designation(cursor.getString(2));
             	attendeesList.setAttendee_company_name(cursor.getString(3));
             	attendeesList.setAttendee_city(cursor.getString(4));
+            	attendeesList.setAttendee_image(cursor.getString(5));
                 attendeeList.add(attendeesList);
             } while (cursor.moveToNext());
         }
@@ -1302,7 +1303,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Get Exhibitors List
     public List<Attendees> getExhibitorsList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
-				" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'E\'";
+        		", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'E\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1315,6 +1316,7 @@ public class DBHelper extends SQLiteOpenHelper {
             	exhibitorsList.setAttendee_designation(cursor.getString(2));
             	exhibitorsList.setAttendee_company_name(cursor.getString(3));
                 exhibitorsList.setAttendee_city(cursor.getString(4));
+                exhibitorsList.setAttendee_image(cursor.getString(5));
                 exhibitorList.add(exhibitorsList);
             } while (cursor.moveToNext());
         }
@@ -1325,7 +1327,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Get Speakers List
     public List<Attendees> getSpeakersList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
-				" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'S\'";
+        		", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'S\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1338,6 +1340,7 @@ public class DBHelper extends SQLiteOpenHelper {
             	speakersList.setAttendee_designation(cursor.getString(2));
             	speakersList.setAttendee_company_name(cursor.getString(3));
             	speakersList.setAttendee_city(cursor.getString(4));
+            	speakersList.setAttendee_image(cursor.getString(5));
                 speakerList.add(speakersList);
             } while (cursor.moveToNext());
         }

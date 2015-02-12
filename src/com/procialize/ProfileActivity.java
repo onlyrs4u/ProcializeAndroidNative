@@ -63,6 +63,8 @@ public class ProfileActivity extends Activity {
 	// Variables
 	String provider_name;
 	ImageLoader imageLoader;
+	// Loader image - will be shown before loading image
+    int loader = R.drawable.ic_launcher;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class ProfileActivity extends Activity {
 
 		imageLoader = new ImageLoader(ProfileActivity.this);
 
-		imageLoader.DisplayImage(profileMap.getProfileImageURL(), image);
+		imageLoader.DisplayImage(profileMap.getProfileImageURL(), loader, image);
 
 		// Name:
 		// Facebook, Instagram returns : FullName,FirstName,Last Name

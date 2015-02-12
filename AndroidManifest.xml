@@ -7,10 +7,14 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
+    <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
+    <!-- Permission to access data on network -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
     </uses-permission>
+    <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

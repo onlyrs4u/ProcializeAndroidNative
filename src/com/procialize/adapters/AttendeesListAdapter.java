@@ -8,18 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.procialize.R;
 import com.procialize.customClasses.Attendees;
+import com.procialize.libraries.ImageLoader;
+import com.procialize.utility.Constants;
 
 public class AttendeesListAdapter extends BaseAdapter{
 
 	private Activity activity;
     private LayoutInflater inflater;
     private List<Attendees> attendeesList;
-//    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    
+    Constants constant = new Constants();
+//    Loader image - will be shown before loading image
+    int loader = R.drawable.ic_launcher;
  
     public AttendeesListAdapter(Activity activity, List<Attendees> attendeesList) {
         this.activity = activity;
@@ -54,10 +59,7 @@ public class AttendeesListAdapter extends BaseAdapter{
         if (convertView == null)
             convertView = inflater.inflate(R.layout.single_list_row, null);
  
-//        if (imageLoader == null)
-//            imageLoader = AppController.getInstance().getImageLoader();
-//        NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
-        RelativeLayout single_relative_layout = (RelativeLayout) convertView.findViewById(R.id.single_relative_layout);
+        ImageView attendee_thumnail = (ImageView) convertView.findViewById(R.id.thumbnail);
         TextView attendee_name = (TextView) convertView.findViewById(R.id.name);
         TextView attendee_designation = (TextView) convertView.findViewById(R.id.designation);
         TextView attendee_comp_name = (TextView) convertView.findViewById(R.id.comp_name);
@@ -65,8 +67,19 @@ public class AttendeesListAdapter extends BaseAdapter{
  
         Attendees attendees = attendeesList.get(position);
  
-        // thumbnail image
-//        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+        // Image url
+        String image_url = "";
+        if(!(attendees.getAttendee_image().equalsIgnoreCase("") || attendees.getAttendee_image().equalsIgnoreCase(null)))
+        		image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL + attendees.getAttendee_image();
+        
+        ImageLoader imgLoader = new ImageLoader(activity);
+        
+        // whenever you want to load an image from url
+        // call DisplayImage function
+        // url - image url to load
+        // loader - loader image, will be displayed before getting image
+        // image - ImageView 
+        imgLoader.DisplayImage(image_url, loader, attendee_thumnail);
          
         attendee_name.setText(attendees.getAttendee_first_name()+ " "+ attendees.getAttendee_last_name());
          
@@ -76,16 +89,6 @@ public class AttendeesListAdapter extends BaseAdapter{
          
         attendee_city.setText(attendees.getAttendee_city());
         
-        /*convertView.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				// TODO Auto-generated method stub
-				Intent attendeeDetail = new Intent(activity, AttendeeDetailPage.class);
-				activity.startActivity(attendeeDetail);
-			}
-		});*/
- 
         return convertView;
     }
 }

@@ -16,11 +16,11 @@ public class Constants {
 	
 	public	String API_ACCESS_TOKEN = "";
 	
-	public	String ATTENDEE_IMAGE_NAME = "uploads/attendee/";
+	public	String ATTENDEE_IMAGE_URL = "uploads/attendee/";
 	
-	public	String EXHIBITOR_IMAGE_NAME = "uploads/exhibitor/";
+	public	String EXHIBITOR_IMAGE_URL = "uploads/exhibitor/";
 	
-	public	String SPEAKER_IMAGE_NAME = "uploads/speaker/";
+	public	String SPEAKER_IMAGE_URL = "uploads/speaker/";
 	
-	public	String SPONSOR_IMAGE_NAME = "uploads/sponsor/";
+	public	String SPONSOR_IMAGE_URL = "uploads/sponsor/";
 }
