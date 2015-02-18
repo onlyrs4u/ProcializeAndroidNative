@@ -10,6 +10,7 @@ import org.brickred.socialauth.android.SocialAuthListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,14 +44,18 @@ public class SocialMediaLogin extends Activity implements OnClickListener{
 		
 		setContentView(R.layout.social_media_login_screen);
 		
+		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		//Declaring elements
 		facebookLoginBtn = (Button)findViewById(R.id.fb_login);
 		linkedInLoginBtn = (Button)findViewById(R.id.linkedin_login);
 		alreadyHaveAccount = (TextView)findViewById(R.id.already_account_text);
+		alreadyHaveAccount.setTypeface(typeFace);
+		
 		appUsername = (EditText)findViewById(R.id.app_username);
 		appPassword = (EditText)findViewById(R.id.app_password);
 		loginBtn = (Button)findViewById(R.id.login_button);
 		createNewAccount = (TextView)findViewById(R.id.create_new_account);
+		createNewAccount.setTypeface(typeFace);
 		
 		// Applying listeners to elements
 		facebookLoginBtn.setOnClickListener(this);

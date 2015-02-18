@@ -59,7 +59,7 @@ public class AttendeesListAdapter extends BaseAdapter{
         if (convertView == null)
             convertView = inflater.inflate(R.layout.single_list_row, null);
  
-        ImageView attendee_thumnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+        ImageView attendee_thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
         TextView attendee_name = (TextView) convertView.findViewById(R.id.name);
         TextView attendee_designation = (TextView) convertView.findViewById(R.id.designation);
         TextView attendee_comp_name = (TextView) convertView.findViewById(R.id.comp_name);
@@ -79,7 +79,7 @@ public class AttendeesListAdapter extends BaseAdapter{
         // url - image url to load
         // loader - loader image, will be displayed before getting image
         // image - ImageView 
-        imgLoader.DisplayImage(image_url, loader, attendee_thumnail);
+        imgLoader.DisplayImage(image_url, loader, attendee_thumbnail);
          
         attendee_name.setText(attendees.getAttendee_first_name()+ " "+ attendees.getAttendee_last_name());
          

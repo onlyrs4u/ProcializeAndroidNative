@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.procialize.customClasses.Profile;
+import com.procialize.utility.Constants;
 
 public class UserProfileParser {
 	JSONObject userJsonObject = null;
@@ -16,6 +17,7 @@ public class UserProfileParser {
     private static final String USER_PROFILE_LIST = "user_data";
  
     ArrayList<Profile> userData;
+    Constants constant = new Constants();
     
 	public ArrayList<Profile> UserData_Parser(String jsonStr) {
 		// TODO Auto-generated constructor stub
@@ -35,7 +37,8 @@ public class UserProfileParser {
 				String apiAccessToken = user.getString("api_access_token");
 				if(!(apiAccessToken.equalsIgnoreCase("") || apiAccessToken.equalsIgnoreCase(null)))
 				{
-					userProfile.setApi_access_token(apiAccessToken);	
+					userProfile.setApi_access_token(apiAccessToken);
+					constant.API_ACCESS_TOKEN = userProfile.getApi_access_token();
 				}
 				String userEmail = user.getString("email");
 				if(!(userEmail.equalsIgnoreCase("") || userEmail.equalsIgnoreCase(null)))

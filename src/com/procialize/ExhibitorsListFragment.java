@@ -46,7 +46,7 @@ public class ExhibitorsListFragment extends SherlockFragment {
 	    exhibitorDBList = new ArrayList<Attendees>();
 	    
 	    exhibitorsList = (ListView)getActivity().findViewById(R.id.exhibitors_list);
-	    exhibitorDBList = dbHelper.getExhibitorsList();
+	    exhibitorDBList = dbHelper.getExhibitorDetails();
 	    
 	    adapter = new ExhibitorsListAdapter(getActivity(), exhibitorDBList);
 	    exhibitorsList.setAdapter(adapter);
@@ -59,13 +59,15 @@ public class ExhibitorsListFragment extends SherlockFragment {
 				Attendees specificExhibitor = adapter.getExhibitorFromList(position);
 				
 				Intent exhibitorDetail = new Intent(getActivity(), ExhibitorDetailPage.class);
-				exhibitorDetail.putExtra("ExhibitorName", specificExhibitor.getAttendee_first_name()+" "+specificExhibitor.getAttendee_last_name());
-				exhibitorDetail.putExtra("ExhibitorDesignation", specificExhibitor.getAttendee_designation());
-				exhibitorDetail.putExtra("ExhibitorCompany", specificExhibitor.getAttendee_company_name());
-				exhibitorDetail.putExtra("ExhibitorCity", specificExhibitor.getAttendee_city());
+				exhibitorDetail.putExtra("SpecificExhibitor", specificExhibitor);
+//				exhibitorDetail.putExtra("ExhibitorName", specificExhibitor.getAttendee_first_name()+" "+specificExhibitor.getAttendee_last_name());
+//				exhibitorDetail.putExtra("ExhibitorDesignation", specificExhibitor.getAttendee_designation());
+//				exhibitorDetail.putExtra("ExhibitorCompany", specificExhibitor.getAttendee_company_name());
+//				exhibitorDetail.putExtra("ExhibitorCity", specificExhibitor.getAttendee_city());
 				getActivity().startActivity(exhibitorDetail);
 			}
 		});
+	    
 	}
 
 }

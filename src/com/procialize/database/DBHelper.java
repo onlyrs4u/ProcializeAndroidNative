@@ -14,7 +14,8 @@ import android.util.Log;
 
 import com.procialize.customClasses.Attendees;
 import com.procialize.customClasses.Events;
-import com.procialize.customClasses.Notifications;
+import com.procialize.customClasses.UserNotifications;
+import com.procialize.customClasses.WallNotifications;
 import com.procialize.customClasses.Profile;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -122,11 +123,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String WALL_NOTIFICATION_SUBJECT_TYPE = "WALL_NOTIFICATION_SUBJECT_TYPE";
 	public static final String WALL_NOTIFICATION_OBJECT_ID = "WALL_NOTIFICATION_OBJECT_ID";
 	public static final String WALL_NOTIFICATION_OBJECT_TYPE = "WALL_NOTIFICATION_OBJECT_TYPE";
-	public static final String WALL_NOTIFICATION_READ = "WALL_NOTIFICATION_READ";
 	public static final String WALL_NOTIFICATION_CONTENT = "WALL_NOTIFICATION_CONTENT";
-	public static final String WALL_NOTIFICATION_MEETING_ID = "WALL_NOTIFICATION_MEETING_ID";
-	public static final String WALL_NOTIFICATION_MESSAGE_ID = "WALL_NOTIFICATION_MESSAGE_ID";
 	public static final String WALL_NOTIFICATION_EVENT_ID = "WALL_NOTIFICATION_EVENT_ID";
+	public static final String WALL_NOTIFICATION_ANNOUNCEMENT_ID = "WALL_NOTIFICATION_ANNOUNCEMENT_ID";
 	public static final String WALL_NOTIFICATION_DATE = "WALL_NOTIFICATION_DATE";
 	public static final String WALL_NOTIFICATION_USER_ID = "WALL_NOTIFICATION_USER_ID";
 	public static final String WALL_NOTIFICATION_FIRST_NAME = "WALL_NOTIFICATION_FIRST_NAME";
@@ -139,6 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String WALL_NOTIFICATION_EVENT_NAME = "WALL_NOTIFICATION_EVENT_NAME";
 	public static final String WALL_NOTIFICATION_ATTENDEE_ID = "WALL_NOTIFICATION_ATTENDEE_ID";
 	public static final String WALL_NOTIFICATION_ATTENDEE_NAME = "WALL_NOTIFICATION_ATTENDEE_NAME";
+	public static final String WALL_NOTIFICATION_ORGANIZER_PHOTO = "WALL_NOTIFICATION_ORGANIZER_PHOTO";
 	public static final String WALL_NOTIFICATION_ORGANIZER_NAME = "WALL_NOTIFICATION_ORGANIZER_NAME";
 	//Wall Notification Receiver Data
 	public static final String WALL_RECEIVER_USER_ID = "WALL_RECEIVER_USER_ID";
@@ -147,8 +147,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String WALL_RECEIVER_TYPE_OF_USER = "WALL_RECEIVER_TYPE_OF_USER";
 	public static final String WALL_RECEIVER_COMPANY_NAME = "WALL_RECEIVER_COMPANY_NAME";
 	public static final String WALL_RECEIVER_DESIGNATION = "WALL_RECEIVER_DESIGNATION";
-	public static final String WALL_RECEIVER_PHONE = "WALL_RECEIVER_PHONE";
-	public static final String WALL_RECEIVER_PHOTO = "WALL_RECEIVER_PHOTO";
 	public static final String WALL_RECEIVER_ATTENDEE_ID = "WALL_RECEIVER_ATTENDEE_ID";
 	public static final String WALL_RECEIVER_ATTENDEE_TYPE = "WALL_RECEIVER_ATTENDEE_TYPE";
 	
@@ -231,17 +229,18 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ PROFILE_COUNRTY+" text, "+PROFILE_INDUSTRY+" text, "+PROFILE_FUNCTIONALITY+" text, "+PROFILE_PHONE_NUMBER+" text, "
 				+ PROFILE_MOBILE_NUMBER+" text)");
 		
-		// Creating wall notification table		
+		// Creating wall notification table
 		db.execSQL("create table " + WALL_NOTIFICATION_TABLE_NAME 
 				+ "("
 				+ WALL_NOTIFICATION_ID+" text, "+WALL_NOTIFICATION_TYPE+" text, "+WALL_NOTIFICATION_SUBJECT_ID+" text, "+WALL_NOTIFICATION_SUBJECT_TYPE+" text, "
-				+ WALL_NOTIFICATION_OBJECT_ID+" text, "+WALL_NOTIFICATION_OBJECT_TYPE+" text, "+WALL_NOTIFICATION_READ+" text, "+WALL_NOTIFICATION_CONTENT+" text, "
-				+ WALL_NOTIFICATION_MEETING_ID+" text, "+WALL_NOTIFICATION_MESSAGE_ID+" text, "+WALL_NOTIFICATION_EVENT_ID+" text, "+WALL_NOTIFICATION_DATE+" text, "
+				+ WALL_NOTIFICATION_OBJECT_ID+" text, "+WALL_NOTIFICATION_OBJECT_TYPE+" text, "+WALL_NOTIFICATION_CONTENT+" text, "
+				+ WALL_NOTIFICATION_EVENT_ID+" text, "+WALL_NOTIFICATION_ANNOUNCEMENT_ID+" text, "+WALL_NOTIFICATION_DATE+" text, "
 				+ WALL_NOTIFICATION_USER_ID+" text, "+WALL_NOTIFICATION_FIRST_NAME+" text, "+WALL_NOTIFICATION_LAST_NAME+" text, "+WALL_NOTIFICATION_TYPE_OF_USER+" text, "
 				+ WALL_NOTIFICATION_COMPANY_NAME+" text, "+WALL_NOTIFICATION_DESIGNATION+" text, "+WALL_NOTIFICATION_PHONE_NUMBER+" text, "+WALL_NOTIFICATION_PHOTO+" text, "
-				+ WALL_NOTIFICATION_EVENT_NAME+" text, "+WALL_NOTIFICATION_ATTENDEE_ID+" text, "+WALL_NOTIFICATION_ATTENDEE_NAME+" text, "+WALL_NOTIFICATION_ORGANIZER_NAME+" text, "
-				+ WALL_RECEIVER_USER_ID+" text, "+WALL_RECEIVER_FIRST_NAME+" text, "+WALL_RECEIVER_LAST_NAME+" text, "+WALL_RECEIVER_TYPE_OF_USER+" text, "+WALL_RECEIVER_COMPANY_NAME+" text, "
-				+ WALL_RECEIVER_DESIGNATION+" text, "+WALL_RECEIVER_PHONE+" text, "+WALL_RECEIVER_PHOTO+" text, "+WALL_RECEIVER_ATTENDEE_ID+" text, "+WALL_RECEIVER_ATTENDEE_TYPE+" text)");
+				+ WALL_NOTIFICATION_EVENT_NAME+" text, "+WALL_NOTIFICATION_ATTENDEE_ID+" text, "+WALL_NOTIFICATION_ATTENDEE_NAME+" text, "
+				+ WALL_NOTIFICATION_ORGANIZER_PHOTO+" text, "+WALL_NOTIFICATION_ORGANIZER_NAME+" text, "+WALL_RECEIVER_USER_ID+" text, "
+				+ WALL_RECEIVER_FIRST_NAME+" text, "+WALL_RECEIVER_LAST_NAME+" text, "+WALL_RECEIVER_TYPE_OF_USER+" text, "+WALL_RECEIVER_COMPANY_NAME+" text, "
+				+ WALL_RECEIVER_DESIGNATION+" text, "+WALL_RECEIVER_ATTENDEE_ID+" text, "+WALL_RECEIVER_ATTENDEE_TYPE+" text)");
 
 		// Creating user notification table		
 		db.execSQL("create table " + USER_NOTIFICATION_TABLE_NAME 
@@ -256,7 +255,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ USER_RECEIVER_FIRST_NAME+" text, "+USER_RECEIVER_LAST_NAME+" text, "+USER_RECEIVER_TYPE_OF_USER+" text, "+USER_RECEIVER_COMPANY_NAME+" text, "
 				+ USER_RECEIVER_DESIGNATION+" text, "+USER_RECEIVER_PHONE+" text, "+USER_RECEIVER_PHOTO+" text, "+USER_RECEIVER_ATTENDEE_ID+" text, "
 				+ USER_RECEIVER_ATTENDEE_TYPE+" text)");
-
+		
 		Log.d("DB", "Database created with five tables");
 	}
 
@@ -939,7 +938,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		return;
 	}
 	
-	public void insertWallNotificationData(ArrayList<Notifications> wallNotificationsList, SQLiteDatabase db) {
+	public void insertWallNotificationData(ArrayList<WallNotifications> wallNotificationsList, SQLiteDatabase db) {
 		db = this.getWritableDatabase();
 		ContentValues contentValues;
 
@@ -971,25 +970,17 @@ public class DBHelper extends SQLiteOpenHelper {
 				if (!(objectType.equalsIgnoreCase("") || objectType.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_OBJECT_TYPE, objectType);
 				}
-				String read = wallNotificationsList.get(i).getRead();
-				if (!(read.equalsIgnoreCase("") || read.equalsIgnoreCase(null))) {
-					contentValues.put(WALL_NOTIFICATION_READ, read);
-				}
 				String notificationContent = wallNotificationsList.get(i).getNotification_content();
 				if (!(notificationContent.equalsIgnoreCase("") || notificationContent.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_CONTENT, notificationContent);
 				}
-				String meetingId = wallNotificationsList.get(i).getMeeting_id();
-				if (!(meetingId.equalsIgnoreCase("") || meetingId.equalsIgnoreCase(null))) {
-					contentValues.put(WALL_NOTIFICATION_MEETING_ID, meetingId);
-				}
-				String messageId = wallNotificationsList.get(i).getMessage_id();
-				if (!(messageId.equalsIgnoreCase("") || messageId.equalsIgnoreCase(null))) {
-					contentValues.put(WALL_NOTIFICATION_MESSAGE_ID, messageId);
-				}
 				String eventId = wallNotificationsList.get(i).getEvent_id();
 				if (!(eventId.equalsIgnoreCase("") || eventId.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_EVENT_ID, eventId);
+				}
+				String announcementId = wallNotificationsList.get(i).getAnnouncement_id();
+				if (!(announcementId.equalsIgnoreCase("") || announcementId.equalsIgnoreCase(null))) {
+					contentValues.put(WALL_NOTIFICATION_ANNOUNCEMENT_ID, announcementId);
 				}
 				String notificationDate = wallNotificationsList.get(i).getNotification_date();
 				if (!(notificationDate.equalsIgnoreCase("") || notificationDate.equalsIgnoreCase(null))) {
@@ -1023,11 +1014,10 @@ public class DBHelper extends SQLiteOpenHelper {
 				if(!(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_PHONE_NUMBER, phone); 
 				}
-				/*String photo = wallNotificationsList.get(i).getPhoto();
-				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null) || photo.equalsIgnoreCase("null")))
-				{	
+				String photo = wallNotificationsList.get(i).getPhoto();
+				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null))){	
 					contentValues.put(WALL_NOTIFICATION_PHOTO, photo); 
-				}*/
+				}
 				String eventName = wallNotificationsList.get(i).getEvent_name();
 				if (!(eventName.equalsIgnoreCase("") || eventName.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_EVENT_NAME, eventName);
@@ -1039,6 +1029,10 @@ public class DBHelper extends SQLiteOpenHelper {
 				String attendeeName = wallNotificationsList.get(i).getAttendee_name();
 				if (!(attendeeName.equalsIgnoreCase("") || attendeeName.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_ATTENDEE_NAME, attendeeName);
+				}
+				String organizerPhoto = wallNotificationsList.get(i).getOrganizer_photo();
+				if (!(organizerPhoto.equalsIgnoreCase("") || organizerPhoto.equalsIgnoreCase(null))) {
+					contentValues.put(WALL_NOTIFICATION_ORGANIZER_PHOTO, organizerPhoto);
 				}
 				String organizerName = wallNotificationsList.get(i).getOrganizer_name();
 				if (!(organizerName.equalsIgnoreCase("") || organizerName.equalsIgnoreCase(null))) {
@@ -1069,14 +1063,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				if (!(receiverDesignation.equalsIgnoreCase("") || receiverDesignation.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_RECEIVER_DESIGNATION, receiverDesignation);
 				}
-				String receiverPhone = wallNotificationsList.get(i).getReceiver_phone();
-				if (!(receiverPhone.equalsIgnoreCase("") || receiverPhone.equalsIgnoreCase(null))) {
-					contentValues.put(WALL_RECEIVER_PHONE, receiverPhone);
-				}
-				/*String receiverPhoto = wallNotificationsList.get(i).getReceiver_photo();
-				if (!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null))) {
-					contentValues.put(WALL_RECEIVER_PHOTO, receiverPhoto);
-				}*/
 				String receiverAttendeeId = wallNotificationsList.get(i).getReceiver_attendee_id();
 				if (!(receiverAttendeeId.equalsIgnoreCase("") || receiverAttendeeId.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_RECEIVER_ATTENDEE_ID, receiverAttendeeId);
@@ -1095,7 +1081,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		return;
 	}
 	
-	public void insertUserNotificationData(ArrayList<Notifications> userNotificationsList, SQLiteDatabase db) {
+	public void insertUserNotificationData(ArrayList<UserNotifications> userNotificationsList, SQLiteDatabase db) {
 		db = this.getWritableDatabase();
 		ContentValues contentValues;
 
@@ -1179,11 +1165,10 @@ public class DBHelper extends SQLiteOpenHelper {
 				if(!(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null))) {
 					contentValues.put(USER_NOTIFICATION_PHONE_NUMBER, phone); 
 				}
-				/*String photo = userNotificationsList.get(i).getPhoto();
-				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null) || photo.equalsIgnoreCase("null")))
-				{	
+				String photo = userNotificationsList.get(i).getPhoto();
+				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null))) {	
 					contentValues.put(USER_NOTIFICATION_PHOTO, photo); 
-				}*/
+				}
 				String approve = userNotificationsList.get(i).getEvent_name();
 				if (!(approve.equalsIgnoreCase("") || approve.equalsIgnoreCase(null))) {
 					contentValues.put(USER_NOTIFICATION_APPROVE, approve);
@@ -1213,45 +1198,60 @@ public class DBHelper extends SQLiteOpenHelper {
 					contentValues.put(USER_NOTIFICATION_ORGANIZER_NAME, organizerName);
 				}
 				//Receiver Data Insert
-				String receiverUserId = userNotificationsList.get(i).getReceiver_user_id();
-				if (!(receiverUserId.equalsIgnoreCase("") || receiverUserId.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_USER_ID, receiverUserId);
-				}
-				String receiverFname = userNotificationsList.get(i).getReceiver_first_name();
-				if (!(receiverFname.equalsIgnoreCase("") || receiverFname.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_FIRST_NAME, receiverFname);
-				}
-				String receiverLname = userNotificationsList.get(i).getReceiver_last_name();
-				if (!(receiverLname.equalsIgnoreCase("") || receiverLname.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_LAST_NAME, receiverLname);
-				}
 				String receiverTypeOfuser = userNotificationsList.get(i).getReceiver_type_of_user();
 				if (!(receiverTypeOfuser.equalsIgnoreCase("") || receiverTypeOfuser.equalsIgnoreCase(null))) {
 					contentValues.put(USER_RECEIVER_TYPE_OF_USER, receiverTypeOfuser);
 				}
-				String receiverCompanyName = userNotificationsList.get(i).getReceiver_company_name();
-				if (!(receiverCompanyName.equalsIgnoreCase("") || receiverCompanyName.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_COMPANY_NAME, receiverCompanyName);
-				}
-				String receiverDesignation = userNotificationsList.get(i).getReceiver_designation();
-				if (!(receiverDesignation.equalsIgnoreCase("") || receiverDesignation.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_DESIGNATION, receiverDesignation);
-				}
-				String receiverPhone = userNotificationsList.get(i).getReceiver_phone();
-				if (!(receiverPhone.equalsIgnoreCase("") || receiverPhone.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_PHONE, receiverPhone);
-				}
-				/*String receiverPhoto = userNotificationsList.get(i).getReceiver_photo();
-				if (!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_PHOTO, receiverPhoto);
-				}*/
-				String receiverAttendeeId = userNotificationsList.get(i).getReceiver_attendee_id();
-				if (!(receiverAttendeeId.equalsIgnoreCase("") || receiverAttendeeId.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_ATTENDEE_ID, receiverAttendeeId);
-				}
-				String receiverAttendeeType = userNotificationsList.get(i).getReceiver_attendee_type();
-				if (!(receiverAttendeeType.equalsIgnoreCase("") || receiverAttendeeType.equalsIgnoreCase(null))) {
-					contentValues.put(USER_RECEIVER_ATTENDEE_TYPE, receiverAttendeeType);
+				if(receiverTypeOfuser.equalsIgnoreCase("O")){
+					String receiverUserId = userNotificationsList.get(i).getReceiver_user_id();
+					if (!(receiverUserId.equalsIgnoreCase("") || receiverUserId.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_USER_ID, receiverUserId);
+					}
+					String receiverFname = userNotificationsList.get(i).getReceiver_first_name();
+					if (!(receiverFname.equalsIgnoreCase("") || receiverFname.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_FIRST_NAME, receiverFname);
+					}
+					String receiverLname = userNotificationsList.get(i).getReceiver_last_name();
+					if (!(receiverLname.equalsIgnoreCase("") || receiverLname.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_LAST_NAME, receiverLname);
+					}
+				}else{
+					String receiverUserId = userNotificationsList.get(i).getReceiver_user_id();
+					if (!(receiverUserId.equalsIgnoreCase("") || receiverUserId.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_USER_ID, receiverUserId);
+					}
+					String receiverFname = userNotificationsList.get(i).getReceiver_first_name();
+					if (!(receiverFname.equalsIgnoreCase("") || receiverFname.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_FIRST_NAME, receiverFname);
+					}
+					String receiverLname = userNotificationsList.get(i).getReceiver_last_name();
+					if (!(receiverLname.equalsIgnoreCase("") || receiverLname.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_LAST_NAME, receiverLname);
+					}
+					String receiverCompanyName = userNotificationsList.get(i).getReceiver_company_name();
+					if (!(receiverCompanyName.equalsIgnoreCase("") || receiverCompanyName.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_COMPANY_NAME, receiverCompanyName);
+					}
+					String receiverDesignation = userNotificationsList.get(i).getReceiver_designation();
+					if (!(receiverDesignation.equalsIgnoreCase("") || receiverDesignation.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_DESIGNATION, receiverDesignation);
+					}
+					String receiverPhone = userNotificationsList.get(i).getReceiver_phone();
+					if (!(receiverPhone.equalsIgnoreCase("") || receiverPhone.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_PHONE, receiverPhone);
+					}
+					String receiverPhoto = userNotificationsList.get(i).getReceiver_photo();
+					if (!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_PHOTO, receiverPhoto);
+					}
+					String receiverAttendeeId = userNotificationsList.get(i).getReceiver_attendee_id();
+					if (!(receiverAttendeeId.equalsIgnoreCase("") || receiverAttendeeId.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_ATTENDEE_ID, receiverAttendeeId);
+					}
+					String receiverAttendeeType = userNotificationsList.get(i).getReceiver_attendee_type();
+					if (!(receiverAttendeeType.equalsIgnoreCase("") || receiverAttendeeType.equalsIgnoreCase(null))) {
+						contentValues.put(USER_RECEIVER_ATTENDEE_TYPE, receiverAttendeeType);
+					}
 				}
 				
 				db.insert(USER_NOTIFICATION_TABLE_NAME, null, contentValues);
@@ -1277,7 +1277,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	}
 	
 	//Get Attendees List
-    public List<Attendees> getAttendeesList(){
+    /*public List<Attendees> getAttendeesList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
 				", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'A\'";
         
@@ -1298,10 +1298,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return attendeeList;
-    }
+    }*/
     
     //Get Exhibitors List
-    public List<Attendees> getExhibitorsList(){
+    /*public List<Attendees> getExhibitorsList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
         		", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'E\'";
         
@@ -1322,10 +1322,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return exhibitorList;
-    }
+    }*/
     
     //Get Speakers List
-    public List<Attendees> getSpeakersList(){
+    /*public List<Attendees> getSpeakersList(){
         String selectQuery = "select "+ATTENDEE_FIRST_NAME+", "+ATTENDEE_LAST_NAME+", "+ATTENDEE_DESIGNATION+", "+ATTENDEE_COMPANY_NAME+", "+ATTENDEE_CITY+
         		", "+ATTENDEE_IMAGE+" from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'S\'";
         
@@ -1346,15 +1346,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return speakerList;
-    }
+    }*/
     
-    //get Attendee Details
+    //get Attendee List/ Details
     public List<Attendees> getAttendeeDetails(){
         String selectQuery = "select * from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'A\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        List<Attendees> attendeeList = new ArrayList<Attendees>();
+        List<Attendees> exhibitorList = new ArrayList<Attendees>();
         if (cursor.moveToFirst()) {
             do {
             	Attendees attendeesList = new Attendees();
@@ -1392,14 +1392,116 @@ public class DBHelper extends SQLiteOpenHelper {
             	attendeesList.setBrochure(cursor.getString(26));
             	attendeesList.setAttendee_mobile_number(cursor.getString(27));
             	
-                attendeeList.add(attendeesList);
+            	exhibitorList.add(attendeesList);
+            } while (cursor.moveToNext());
+        }
+        db.close(); 
+        return exhibitorList;
+    }
+    
+    //get Exhibitor List/ Details
+    public List<Attendees> getExhibitorDetails(){
+        String selectQuery = "select * from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'E\'";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Attendees> attendeeList = new ArrayList<Attendees>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Attendees exhibitorsList = new Attendees();
+            	exhibitorsList.setAttendee_id(cursor.getString(0));
+            	exhibitorsList.setAttendee_first_name(cursor.getString(1));
+            	exhibitorsList.setAttendee_last_name(cursor.getString(2));
+            	exhibitorsList.setAttendee_type(cursor.getString(3));
+            	exhibitorsList.setAttendee_industry(cursor.getString(4));
+            	
+            	exhibitorsList.setAttendee_functionality(cursor.getString(5));
+            	exhibitorsList.setAttendee_email(cursor.getString(6));
+            	exhibitorsList.setAttendee_company_name(cursor.getString(7));
+            	exhibitorsList.setAttendee_designation(cursor.getString(8));
+            	exhibitorsList.setAttendee_phone_number(cursor.getString(9));
+            	
+            	exhibitorsList.setAttendee_image(cursor.getString(10));
+            	exhibitorsList.setAttendee_location(cursor.getString(11));
+            	exhibitorsList.setAttendee_city(cursor.getString(12));
+            	exhibitorsList.setAttendee_country(cursor.getString(13));
+            	exhibitorsList.setAttendee_description(cursor.getString(14));
+            	
+            	exhibitorsList.setAttendee_linkedin_id(cursor.getString(15));
+            	exhibitorsList.setAttendee_facebook_id(cursor.getString(16));
+            	exhibitorsList.setAttendee_passcode(cursor.getString(17));
+            	exhibitorsList.setAttendee_gcm_registration_id(cursor.getString(18));
+            	exhibitorsList.setAttendee_mobile_os(cursor.getString(19));
+            	
+            	exhibitorsList.setStatus(cursor.getString(20));
+            	exhibitorsList.setAttendee_featured(cursor.getString(21));
+            	exhibitorsList.setStall_number(cursor.getString(22));
+            	exhibitorsList.setExhibitor_website(cursor.getString(23));
+            	exhibitorsList.setAttendee_image_1(cursor.getString(24));
+            	
+            	exhibitorsList.setAttendee_image_2(cursor.getString(25));
+            	exhibitorsList.setBrochure(cursor.getString(26));
+            	exhibitorsList.setAttendee_mobile_number(cursor.getString(27));
+            	
+                attendeeList.add(exhibitorsList);
             } while (cursor.moveToNext());
         }
         db.close(); 
         return attendeeList;
     }
     
-  //get Attendee Details
+    //get Speaker List/ Details
+    public List<Attendees> getSpeakersDetails(){
+        String selectQuery = "select * from "+ATTENDEES_TABLE_NAME+" where "+ATTENDEE_TYPE+" =\'S\'";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Attendees> speakerList = new ArrayList<Attendees>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Attendees speakersList = new Attendees();
+            	speakersList.setAttendee_id(cursor.getString(0));
+            	speakersList.setAttendee_first_name(cursor.getString(1));
+            	speakersList.setAttendee_last_name(cursor.getString(2));
+            	speakersList.setAttendee_type(cursor.getString(3));
+            	speakersList.setAttendee_industry(cursor.getString(4));
+            	
+            	speakersList.setAttendee_functionality(cursor.getString(5));
+            	speakersList.setAttendee_email(cursor.getString(6));
+            	speakersList.setAttendee_company_name(cursor.getString(7));
+            	speakersList.setAttendee_designation(cursor.getString(8));
+            	speakersList.setAttendee_phone_number(cursor.getString(9));
+            	
+            	speakersList.setAttendee_image(cursor.getString(10));
+            	speakersList.setAttendee_location(cursor.getString(11));
+            	speakersList.setAttendee_city(cursor.getString(12));
+            	speakersList.setAttendee_country(cursor.getString(13));
+            	speakersList.setAttendee_description(cursor.getString(14));
+            	
+            	speakersList.setAttendee_linkedin_id(cursor.getString(15));
+            	speakersList.setAttendee_facebook_id(cursor.getString(16));
+            	speakersList.setAttendee_passcode(cursor.getString(17));
+            	speakersList.setAttendee_gcm_registration_id(cursor.getString(18));
+            	speakersList.setAttendee_mobile_os(cursor.getString(19));
+            	
+            	speakersList.setStatus(cursor.getString(20));
+            	speakersList.setAttendee_featured(cursor.getString(21));
+            	speakersList.setStall_number(cursor.getString(22));
+            	speakersList.setExhibitor_website(cursor.getString(23));
+            	speakersList.setAttendee_image_1(cursor.getString(24));
+            	
+            	speakersList.setAttendee_image_2(cursor.getString(25));
+            	speakersList.setBrochure(cursor.getString(26));
+            	speakersList.setAttendee_mobile_number(cursor.getString(27));
+            	
+            	speakerList.add(speakersList);
+            } while (cursor.moveToNext());
+        }
+        db.close(); 
+        return speakerList;
+    }
+    
+  //get Event Details
     public List<Events> getEventInfo(){
         String selectQuery = "select * from "+EVENTS_TABLE_NAME;
         
@@ -1450,17 +1552,19 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     
   //Get Wall Notification List
-    public List<Notifications> getWallNotifications(){
+    public List<WallNotifications> getWallNotifications(){
         String selectQuery = "select "+WALL_NOTIFICATION_FIRST_NAME+", "+WALL_NOTIFICATION_LAST_NAME+", "+WALL_NOTIFICATION_DESIGNATION+", "+
         					WALL_NOTIFICATION_COMPANY_NAME+", "+WALL_NOTIFICATION_TYPE+", "+WALL_RECEIVER_FIRST_NAME+", "+WALL_RECEIVER_LAST_NAME+", "+
-        					WALL_RECEIVER_DESIGNATION+", "+WALL_RECEIVER_COMPANY_NAME+" from "+WALL_NOTIFICATION_TABLE_NAME;
+        					WALL_RECEIVER_DESIGNATION+", "+WALL_RECEIVER_COMPANY_NAME+", "+WALL_NOTIFICATION_ORGANIZER_NAME+", "+
+        					WALL_NOTIFICATION_CONTENT+", "+WALL_NOTIFICATION_OBJECT_TYPE+", "+WALL_NOTIFICATION_ORGANIZER_PHOTO+", "+
+        					WALL_NOTIFICATION_PHOTO+" from "+WALL_NOTIFICATION_TABLE_NAME;
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        List<Notifications> wallNotificationList = new ArrayList<Notifications>();
+        List<WallNotifications> wallNotificationList = new ArrayList<WallNotifications>();
         if (cursor.moveToFirst()) {
             do {
-            	Notifications wallNotificationsList = new Notifications();
+            	WallNotifications wallNotificationsList = new WallNotifications();
             	wallNotificationsList.setFirst_name(cursor.getString(0));
             	wallNotificationsList.setLast_name(cursor.getString(1));
             	wallNotificationsList.setDesignation(cursor.getString(2));
@@ -1470,6 +1574,11 @@ public class DBHelper extends SQLiteOpenHelper {
             	wallNotificationsList.setReceiver_last_name(cursor.getString(6));
             	wallNotificationsList.setReceiver_designation(cursor.getString(7));
             	wallNotificationsList.setReceiver_company_name(cursor.getString(8));
+            	wallNotificationsList.setOrganizer_name(cursor.getString(9));
+            	wallNotificationsList.setNotification_content(cursor.getString(10));
+            	wallNotificationsList.setObject_type(cursor.getString(11));
+            	wallNotificationsList.setOrganizer_photo(cursor.getString(12));
+            	wallNotificationsList.setPhoto(cursor.getString(13));
             	
             	wallNotificationList.add(wallNotificationsList);
             } while (cursor.moveToNext());

@@ -1,12 +1,8 @@
 package com.procialize.customClasses;
 
-public class Notifications {
+public class UserNotifications {
 
-	//User Notification
-	private String approve = "";
-	private String start_time = "";
-	private String end_time = "";
-	//Wall Notification
+	//User Sender Data
 	private String notification_id = "";
 	private String notification_type = "";
 	private String subject_id = "";
@@ -27,11 +23,14 @@ public class Notifications {
 	private String designation = "";
 	private String phone = "";
 	private String photo;
+	private String approve = "";
+	private String start_time = "";
+	private String end_time = "";
 	private String event_name = "";
 	private String attendee_id = "";
 	private String attendee_name = "";
 	private String organizer_name = "";
-	//Receiver Data
+	//User Receiver Data
 	private String receiver_user_id = "";
 	private String receiver_first_name = "";
 	private String receiver_last_name = "";
@@ -43,7 +42,6 @@ public class Notifications {
 	private String receiver_attendee_id = "";
 	private String receiver_attendee_type = "";
 	
-	//Wall Notification
 	public String getNotification_id() {
 		return notification_id;
 	}
@@ -164,6 +162,24 @@ public class Notifications {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+	public String getApprove() {
+		return approve;
+	}
+	public void setApprove(String approve) {
+		this.approve = approve;
+	}
+	public String getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+	public String getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
+	}
 	public String getEvent_name() {
 		return event_name;
 	}
@@ -188,7 +204,6 @@ public class Notifications {
 	public void setOrganizer_name(String organizer_name) {
 		this.organizer_name = organizer_name;
 	}
-	//Receiver Data
 	public String getReceiver_user_id() {
 		return receiver_user_id;
 	}
@@ -249,23 +264,5 @@ public class Notifications {
 	public void setReceiver_attendee_type(String receiver_attendee_type) {
 		this.receiver_attendee_type = receiver_attendee_type;
 	}
-	//User Notification
-	public String getApprove() {
-		return approve;
-	}
-	public void setApprove(String approve) {
-		this.approve = approve;
-	}
-	public String getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(String start_time) {
-		this.start_time = start_time;
-	}
-	public String getEnd_time() {
-		return end_time;
-	}
-	public void setEnd_time(String end_time) {
-		this.end_time = end_time;
-	}
+	
 }

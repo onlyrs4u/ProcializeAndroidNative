@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.procialize.customClasses.Notifications;
+import com.procialize.customClasses.WallNotifications;
 
 public class WallNotificationsParser {
 
@@ -20,13 +20,13 @@ public class WallNotificationsParser {
  
     // JSONArray
     JSONArray wall_notification_list = null;
-    ArrayList<Notifications> wallNotificationsList;
-    Notifications wallNotifications;
+    ArrayList<WallNotifications> wallNotificationsList;
+    WallNotifications wallNotifications;
     
-	public ArrayList<Notifications> wallNotification_Parser(String jsonStr) {
+	public ArrayList<WallNotifications> wallNotification_Parser(String jsonStr) {
 		// TODO Auto-generated constructor stub
 		
-		wallNotificationsList = new ArrayList<Notifications>();
+		wallNotificationsList = new ArrayList<WallNotifications>();
 		
 		if (jsonStr != null) {
 			try {
@@ -39,7 +39,7 @@ public class WallNotificationsParser {
 				
 				for (int i = 0; i < wall_notification_list.length(); i++) {
 					jsonWallNotification = wall_notification_list.getJSONObject(i);
-					wallNotifications = new Notifications();
+					wallNotifications = new WallNotifications();
 					
 					String notificationId = jsonWallNotification.getString("notification_id");
 					if(!(notificationId.equalsIgnoreCase("") || notificationId.equalsIgnoreCase(null)))
@@ -71,30 +71,20 @@ public class WallNotificationsParser {
 					{
 						wallNotifications.setObject_type(objectType);
 					}
-					String read = jsonWallNotification.getString("read");
-					if(!(read.equalsIgnoreCase("") || read.equalsIgnoreCase(null)))
-					{
-						wallNotifications.setRead(read);
-					}
 					String notificationContent = jsonWallNotification.getString("notification_content");
 					if(!(notificationContent.equalsIgnoreCase("") || notificationContent.equalsIgnoreCase(null)))
 					{
 						wallNotifications.setNotification_content(notificationContent);
 					}
-					String meetingId = jsonWallNotification.getString("meeting_id");
-					if(!(meetingId.equalsIgnoreCase("") || meetingId.equalsIgnoreCase(null)))
-					{
-						wallNotifications.setMeeting_id(meetingId);
-					}
-					String messageId = jsonWallNotification.getString("message_id");
-					if(!(messageId.equalsIgnoreCase("") || messageId.equalsIgnoreCase(null)))
-					{
-						wallNotifications.setMessage_id(messageId);
-					}
 					String eventId = jsonWallNotification.getString("event_id");
 					if(!(eventId.equalsIgnoreCase("") || eventId.equalsIgnoreCase(null)))
 					{
 						wallNotifications.setEvent_id(eventId);
+					}
+					String announcementId = jsonWallNotification.getString("announcement_id");
+					if(!(announcementId.equalsIgnoreCase("") || announcementId.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setAnnouncement_id(announcementId);
 					}
 					String notificationDate = jsonWallNotification.getString("notification_date");
 					if(!(notificationDate.equalsIgnoreCase("") || notificationDate.equalsIgnoreCase(null)))
@@ -156,6 +146,11 @@ public class WallNotificationsParser {
 					{
 						wallNotifications.setAttendee_name(attendeeName);
 					}
+					String organizerPhoto = jsonWallNotification.getString("organizer_photo");
+					if(!(organizerPhoto.equalsIgnoreCase("") || organizerPhoto.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setOrganizer_photo(organizerPhoto);
+					}
 					String organizerName = jsonWallNotification.getString("organizer_name");
 					if(!(organizerName.equalsIgnoreCase("") || organizerName.equalsIgnoreCase(null)))
 					{
@@ -164,74 +159,45 @@ public class WallNotificationsParser {
 					//Receiver Data
 					jsonReceiverData = jsonWallNotification.getJSONObject(TAG_WALL_RECEIVER_DATA);
 					
+					String receiverUserID = jsonReceiverData.getString("user_id");
+					if(!(receiverUserID.equalsIgnoreCase("") || receiverUserID.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_user_id(receiverUserID);
+					}
+					String receiverFirstName = jsonReceiverData.getString("first_name");
+					if(!(receiverFirstName.equalsIgnoreCase("") || receiverFirstName.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_first_name(receiverFirstName);
+					}
+					String receiverLastName = jsonReceiverData.getString("last_name");
+					if(!(receiverLastName.equalsIgnoreCase("") || receiverLastName.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_last_name(receiverLastName);
+					}
 					String receiverTypeOfUser = jsonReceiverData.getString("type_of_user");
 					if(!(receiverTypeOfUser.equalsIgnoreCase("") || receiverTypeOfUser.equalsIgnoreCase(null)))
 					{
 						wallNotifications.setReceiver_type_of_user(receiverTypeOfUser);
 					}
-					if(receiverTypeOfUser.equalsIgnoreCase("O"))
+					String receiverCompanyName = jsonReceiverData.getString("company_name");
+					if(!(receiverCompanyName.equalsIgnoreCase("") || receiverCompanyName.equalsIgnoreCase(null)))
 					{
-						String receiverUserID = jsonReceiverData.getString("user_id");
-						if(!(receiverUserID.equalsIgnoreCase("") || receiverUserID.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_user_id(receiverUserID);
-						}
-						String receiverFirstName = jsonReceiverData.getString("first_name");
-						if(!(receiverFirstName.equalsIgnoreCase("") || receiverFirstName.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_first_name(receiverFirstName);
-						}
-						String receiverLastName = jsonReceiverData.getString("last_name");
-						if(!(receiverLastName.equalsIgnoreCase("") || receiverLastName.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_last_name(receiverLastName);
-						}
-					}else{
-						String receiverUserID = jsonReceiverData.getString("user_id");
-						if(!(receiverUserID.equalsIgnoreCase("") || receiverUserID.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_user_id(receiverUserID);
-						}
-						String receiverFirstName = jsonReceiverData.getString("first_name");
-						if(!(receiverFirstName.equalsIgnoreCase("") || receiverFirstName.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_first_name(receiverFirstName);
-						}
-						String receiverLastName = jsonReceiverData.getString("last_name");
-						if(!(receiverLastName.equalsIgnoreCase("") || receiverLastName.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_last_name(receiverLastName);
-						}
-						String receiverCompanyName = jsonReceiverData.getString("company_name");
-						if(!(receiverCompanyName.equalsIgnoreCase("") || receiverCompanyName.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_company_name(receiverCompanyName);
-						}
-						String receiverDesignation = jsonReceiverData.getString("designation");
-						if(!(receiverDesignation.equalsIgnoreCase("") || receiverDesignation.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_designation(receiverDesignation);
-						}
-						String receiverPhone = jsonReceiverData.getString("phone");
-						if(!(receiverPhone.equalsIgnoreCase("") || receiverPhone.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_phone(receiverPhone);
-						}
-						String receiverPhoto = jsonReceiverData.getString("photo");
-						if(!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_photo(receiverPhoto);
-						}
-						String receiverAttendeeID = jsonReceiverData.getString("attendee_id");
-						if(!(receiverAttendeeID.equalsIgnoreCase("") || receiverAttendeeID.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_attendee_id(receiverAttendeeID);
-						}
-						String receiverAttendeeType = jsonReceiverData.getString("attendee_type");
-						if(!(receiverAttendeeType.equalsIgnoreCase("") || receiverAttendeeType.equalsIgnoreCase(null)))
-						{
-							wallNotifications.setReceiver_attendee_type(receiverAttendeeType);
-						}
+						wallNotifications.setReceiver_company_name(receiverCompanyName);
+					}
+					String receiverDesignation = jsonReceiverData.getString("designation");
+					if(!(receiverDesignation.equalsIgnoreCase("") || receiverDesignation.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_designation(receiverDesignation);
+					}
+					String receiverAttendeeID = jsonReceiverData.getString("attendee_id");
+					if(!(receiverAttendeeID.equalsIgnoreCase("") || receiverAttendeeID.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_attendee_id(receiverAttendeeID);
+					}
+					String receiverAttendeeType = jsonReceiverData.getString("attendee_type");
+					if(!(receiverAttendeeType.equalsIgnoreCase("") || receiverAttendeeType.equalsIgnoreCase(null)))
+					{
+						wallNotifications.setReceiver_attendee_type(receiverAttendeeType);
 					}
 					
 					wallNotificationsList.add(wallNotifications);

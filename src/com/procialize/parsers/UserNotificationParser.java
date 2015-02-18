@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.procialize.customClasses.Notifications;
+import com.procialize.customClasses.UserNotifications;
 
 public class UserNotificationParser {
 	JSONObject jsonObj = null;
@@ -19,13 +19,13 @@ public class UserNotificationParser {
  
     // JSONArray
     JSONArray user_notification_list = null;
-    ArrayList<Notifications> userNotificationsList;
-    Notifications userNotifications;
+    ArrayList<UserNotifications> userNotificationsList;
+    UserNotifications userNotifications;
     
-	public ArrayList<Notifications> userNotification_Parser(String jsonStr) {
+	public ArrayList<UserNotifications> userNotification_Parser(String jsonStr) {
 		// TODO Auto-generated constructor stub
 		
-		userNotificationsList = new ArrayList<Notifications>();
+		userNotificationsList = new ArrayList<UserNotifications>();
 		
 		if (jsonStr != null) {
 			try {
@@ -38,7 +38,7 @@ public class UserNotificationParser {
 				
 				for (int i = 0; i < user_notification_list.length(); i++) {
 					jsonUserNotification = user_notification_list.getJSONObject(i);
-					userNotifications = new Notifications();
+					userNotifications = new UserNotifications();
 					
 					String notificationId = jsonUserNotification.getString("notification_id");
 					if(!(notificationId.equalsIgnoreCase("") || notificationId.equalsIgnoreCase(null)))
@@ -245,7 +245,7 @@ public class UserNotificationParser {
 						if(!(receiverAttendeeType.equalsIgnoreCase("") || receiverAttendeeType.equalsIgnoreCase(null)))
 						{
 							userNotifications.setReceiver_attendee_type(receiverAttendeeType);
-						}
+						}	
 					}
 					
 					userNotificationsList.add(userNotifications);
@@ -254,7 +254,7 @@ public class UserNotificationParser {
 				e.printStackTrace();
 			}
 		} else {
-				Log.e("ServiceHandler", "Couldn't get any data from the url");
+			Log.e("ServiceHandler", "Couldn't get any data from the url");
 		}
 		return userNotificationsList;
 	}

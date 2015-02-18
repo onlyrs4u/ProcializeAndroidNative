@@ -44,7 +44,7 @@ public class AttendeesListFragment extends SherlockFragment {
 	    attendeesDBList = new ArrayList<Attendees>();
 	    
 	    attendeesList = (ListView)getActivity().findViewById(R.id.attendees_list);
-	    attendeesDBList = dbHelper.getAttendeesList();
+	    attendeesDBList = dbHelper.getAttendeeDetails();
 	    
 	    adapter = new AttendeesListAdapter(getActivity(), attendeesDBList);
 	    attendeesList.setAdapter(adapter);
@@ -57,10 +57,7 @@ public class AttendeesListFragment extends SherlockFragment {
 				Attendees specificAttendee = adapter.getAttendeeFromList(position);
 				
 				Intent attendeeDetail = new Intent(getActivity(), AttendeeDetailPage.class);
-				attendeeDetail.putExtra("AttendeeName", specificAttendee.getAttendee_first_name()+" "+specificAttendee.getAttendee_last_name());
-				attendeeDetail.putExtra("AttendeeDesignation", specificAttendee.getAttendee_designation());
-				attendeeDetail.putExtra("AttendeeCompany", specificAttendee.getAttendee_company_name());
-				attendeeDetail.putExtra("AttendeeCity", specificAttendee.getAttendee_city());
+				attendeeDetail.putExtra("SpecificAttendee", specificAttendee);
 				getActivity().startActivity(attendeeDetail);
 			}
 		});

@@ -11,6 +11,9 @@ import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +24,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.procialize.adapters.WallNotificationListAdapter;
 import com.procialize.customClasses.Attendees;
 import com.procialize.customClasses.Events;
-import com.procialize.customClasses.Notifications;
+import com.procialize.customClasses.UserNotifications;
+import com.procialize.customClasses.WallNotifications;
 import com.procialize.customClasses.Profile;
 import com.procialize.database.DBHelper;
 import com.procialize.network.ServiceHandler;
@@ -32,9 +36,11 @@ import com.procialize.parsers.UserProfileParser;
 import com.procialize.parsers.WallNotificationsParser;
 
 
-public class WallFragment_POST extends SherlockFragment {
+public class WallFragment_POST extends SherlockFragment implements OnRefreshListener  {
 	
 	private ProgressDialog pDialog;
+	
+	SwipeRefreshLayout swipeLayout; 
     
     JSONArray event_list = null;
     JSONArray attendees_list = null;
@@ -42,7 +48,8 @@ public class WallFragment_POST extends SherlockFragment {
     ArrayList<Events> eventsList;
     ArrayList<Attendees> attendeesList;
     ArrayList<Profile> userData;
-    ArrayList<Notifications> wallNotificationList, userNotificationList;
+    ArrayList<WallNotifications> wallNotificationList;
+    ArrayList<UserNotifications> userNotificationList;
     
     String url_ = "";
     String app_username_ = "";
@@ -66,7 +73,7 @@ public class WallFragment_POST extends SherlockFragment {
 	private WallNotificationsParser wallNotificationParser;
 	private UserNotificationParser userNotificationParser;
 	
-	private List<Notifications> wallNotificationDBList;
+	private List<WallNotifications> wallNotificationDBList;
 	private ListView wallNotificationListView;
 	private WallNotificationListAdapter adapter;
 	
@@ -86,6 +93,10 @@ public class WallFragment_POST extends SherlockFragment {
 	    long maxMemory = rt.maxMemory();
 	    Log.v("onCreate", "maxMemory:" + Long.toString(maxMemory));
 	    
+	    swipeLayout = (SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_container);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+	    
 	    url_ = getArguments().getString("url_to_create");
 	    app_username_ = getArguments().getString("app_username");
 	    app_password_ = getArguments().getString("app_password");
@@ -103,8 +114,8 @@ public class WallFragment_POST extends SherlockFragment {
 	    eventsList = new ArrayList<Events>();
 	    attendeesList = new ArrayList<Attendees>();
 	    userData = new ArrayList<Profile>();
-	    wallNotificationList = new ArrayList<Notifications>();
-	    userNotificationList = new ArrayList<Notifications>();
+	    wallNotificationList = new ArrayList<WallNotifications>();
+	    userNotificationList = new ArrayList<UserNotifications>();
 	    
 	    procializeDB = new DBHelper(getActivity());
 		db = procializeDB.getWritableDatabase();
@@ -117,7 +128,15 @@ public class WallFragment_POST extends SherlockFragment {
 	    
 	    new GetEventDetails().execute();
 	}
-	
+	@Override
+    public void onRefresh() {
+        // TODO Auto-generated method stub
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+            }
+        }, 5000);
+    }
 	/**
 	 * Async task class to get json by making HTTP call
 	 * */

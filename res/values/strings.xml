@@ -2,7 +2,6 @@
 
     <string name="app_name">Procialize Android Native</string>
     <string name="menu_settings">Settings</string>
-    <string name="blank_text">  </string>
     
     <!-- Social Media Login -->
 	<string name="facebook">facebook</string>
@@ -84,7 +83,7 @@
 	<string name="wall_notification_shared">shared profile of</string><!-- Sh -->
 	<string name="wall_notification_saved">saved profile of</string><!-- Sav -->
 	<string name="wall_notification_notification">has posted the following notification</string><!-- N -->
-	<string name="wall_notification_download_brochure">downloaded the brochure</string><!-- Download Brochure -->
+	<string name="wall_notification_download_brochure">downloaded the brochure of</string><!-- Download Brochure -->
 	<string name="wall_notification_sender_full_name">Sender Full Name </string>
 	<string name="wall_notification_sender_designation">Sender Designation </string>
 	<string name="wall_notification_sender_company_name">Sender Company Name </string>
@@ -92,7 +91,6 @@
 	<string name="wall_notification_receiver_full_name">Receiver Full Name </string>
 	<string name="wall_notification_receiver_designation">Receiver Designation </string>
 	<string name="wall_notification_receiver_company_name">Receiver Company Name </string>
-	
 	
 	<string name="action_settings">Settings</string>
     <string name="drawer_open">Open drawer</string>

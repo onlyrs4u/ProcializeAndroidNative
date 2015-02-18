@@ -1,7 +1,13 @@
 package com.procialize.customClasses;
 
-public class Attendees {
+import java.io.Serializable;
 
+public class Attendees implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String attendee_id;
 	private String attendee_first_name = "";
 	private String attendee_last_name = "";
