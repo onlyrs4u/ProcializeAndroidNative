@@ -65,13 +65,15 @@ public class Fragment1 extends SherlockFragment {
 		// Locate fragment1.xml to create FragmentTabHost
 		mTabHost.setup(getSherlockActivity(), getChildFragmentManager(), R.layout.fragment1);
 		// Create Tab 1
-		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("Event Wall"), WallFragment_POST.class, wallArgs);
+		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("", getResources().getDrawable(R.drawable.wall_selector)), WallFragment_POST.class, wallArgs);
 		// Create Tab 2
-		mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("Agenda"), AgendaFragment.class, null);
+		mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("", getResources().getDrawable(R.drawable.agenda_selector)), AgendaFragment.class, null);
 		// Create Tab 3
-		mTabHost.addTab(mTabHost.newTabSpec("tab3").setIndicator("Attendees"), AttendeesListFragment.class, null);
+		mTabHost.addTab(mTabHost.newTabSpec("tab3").setIndicator("", getResources().getDrawable(R.drawable.attendees_selector)), AttendeesListFragment.class, null);
 		// Create Tab 4
-		mTabHost.addTab(mTabHost.newTabSpec("tab4").setIndicator("Exhibitors"), ExhibitorsListFragment.class, null);
+		mTabHost.addTab(mTabHost.newTabSpec("tab4").setIndicator("", getResources().getDrawable(R.drawable.exhibitors_selector)), ExhibitorsListFragment.class, null);
+		
+//		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("", getResources().getDrawable(R.drawable.tab1)), FragmentTab1.class, null);
 		
 		return mTabHost;
 	}

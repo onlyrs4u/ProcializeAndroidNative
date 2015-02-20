@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,8 +42,9 @@ public class SocialMediaLogin extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.social_media_login_screen);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		//Declaring elements

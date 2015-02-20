@@ -24,7 +24,8 @@
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="@string/single_list_row_full_name"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/titlebackgroundcolor" />
 
     <!-- Designation -->
 
