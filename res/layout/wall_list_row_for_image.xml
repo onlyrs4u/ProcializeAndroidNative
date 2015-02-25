@@ -7,10 +7,10 @@
 
     <!-- Thumbnail Image -->
 
-    <ImageView
+    <com.procialize.libraries.MLRoundedImageView
         android:id="@+id/wall_sender_thumbnail"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="8dp"
         android:src="@drawable/ic_launcher" />
@@ -25,13 +25,18 @@
         <!-- Sender Name -->
 
         <TextView
-            android:id="@+id/wall_notification_text"
+            android:id="@+id/wall_notification_sender_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dip"
-            android:text="@string/wall_notification_sender_full_name"
-            android:textStyle="bold" />
-
+            android:text="@string/wall_notification_sender_full_name" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/wall_notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wall_sender_thumbnail"
+        android:layout_marginTop="10dip"
+        android:text="@string/wall_notification_data" />
 
 </RelativeLayout>

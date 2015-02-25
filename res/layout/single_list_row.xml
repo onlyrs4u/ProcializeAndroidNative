@@ -7,7 +7,7 @@
 
     <!-- Thumbnail Image -->
 
-    <ImageView
+    <com.procialize.libraries.MLRoundedImageView
         android:id="@+id/thumbnail"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -24,8 +24,8 @@
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="@string/single_list_row_full_name"
-        android:textStyle="bold"
-        android:textColor="@color/titlebackgroundcolor" />
+        android:textColor="@color/titlebackgroundcolor"
+        android:textSize="20sp" />
 
     <!-- Designation -->
 
@@ -36,7 +36,8 @@
         android:layout_below="@id/name"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="@string/single_list_row_designation" />
+        android:text="@string/single_list_row_designation"
+        android:textSize="13sp" />
 
     <!-- Company Name -->
 
@@ -47,7 +48,8 @@
         android:layout_below="@id/designation"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="@string/single_list_row_company_name" />
+        android:text="@string/single_list_row_company_name"
+        android:textSize="13sp" />
 
     <!-- City -->
 
@@ -58,6 +60,7 @@
         android:layout_below="@id/comp_name"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="@string/single_list_row_city_name" />
+        android:text="@string/single_list_row_city_name"
+        android:textSize="13sp" />
 
 </RelativeLayout>

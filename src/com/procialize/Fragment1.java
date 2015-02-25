@@ -73,11 +73,9 @@ public class Fragment1 extends SherlockFragment {
 		// Create Tab 4
 		mTabHost.addTab(mTabHost.newTabSpec("tab4").setIndicator("", getResources().getDrawable(R.drawable.exhibitors_selector)), ExhibitorsListFragment.class, null);
 		
-//		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("", getResources().getDrawable(R.drawable.tab1)), FragmentTab1.class, null);
-		
 		return mTabHost;
 	}
-	
+
 	// Detach FragmentTabHost
 	@Override
 	public void onDetach() {

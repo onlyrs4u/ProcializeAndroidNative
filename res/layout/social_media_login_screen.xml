@@ -13,7 +13,7 @@
         android:layout_marginTop="25dp"
         android:text="@string/already_account_text"
         android:autoLink="web"
-        android:textStyle="bold" />
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/app_username"
@@ -50,7 +50,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/create_new"
-        android:autoLink="web"  />
+        android:autoLink="web"
+        android:textColor="@android:color/black"  />
 
     <Button
         android:id="@+id/login_button"

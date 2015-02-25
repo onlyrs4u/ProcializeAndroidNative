@@ -16,12 +16,19 @@
 	<string name="sign_up_text">Sign Up</string>
 	<string name="email_hint">Email</string>
 	<string name="password_hint">Password</string>
-	<string name="name_hint">Full Name</string>
+	<string name="first_name_hint">First Name</string>
+	<string name="last_name_hint">Last Name</string>
 	<string name="city_hint">City</string>
 	<string name="mandate_text">** All fields are mandatory **</string>
 	<string name="save_button">Save</string>
 	
 	<!-- Attendees Detail -->
+	<string name="attendee_thumbnail_cd">Attendee Thumbnail</string>
+	<string name="attendee_save_cd">Save Attendee</string>
+	<string name="attendee_share_cd">Share Attendee</string>
+	<string name="attendee_send_msg_cd">Send Message</string>
+	<string name="attendee_set_meeting_cd">Set Meeting</string>
+	<string name="attendee_profile_header">Attendee Profile</string>
 	<string name="attendees_detail_full_name">Full Name</string>
 	<string name="attendees_detail_designation">Designation</string>
 	<string name="attendees_detail_company_name">Company Name</string>
@@ -80,10 +87,11 @@
 	
 	<!-- Wall Notification List Constants -->
 	<string name="wall_notification_type">default notification type </string><!-- Sh -->
-	<string name="wall_notification_shared">shared profile of</string><!-- Sh -->
-	<string name="wall_notification_saved">saved profile of</string><!-- Sav -->
-	<string name="wall_notification_notification">has posted the following notification</string><!-- N -->
-	<string name="wall_notification_download_brochure">downloaded the brochure of</string><!-- Download Brochure -->
+	<string name="wall_notification_shared">I have shared profile of</string><!-- Sh -->
+	<string name="wall_notification_saved">I have saved profile of</string><!-- Sav -->
+	<!-- <string name="wall_notification_notification">has posted the following notification</string> --><!-- N -->
+	<string name="wall_notification_notification"></string><!-- N -->
+	<string name="wall_notification_download_brochure">I have downloaded the brochure of</string><!-- Download Brochure -->
 	<string name="wall_notification_sender_full_name">Sender Full Name </string>
 	<string name="wall_notification_sender_designation">Sender Designation </string>
 	<string name="wall_notification_sender_company_name">Sender Company Name </string>
@@ -91,6 +99,7 @@
 	<string name="wall_notification_receiver_full_name">Receiver Full Name </string>
 	<string name="wall_notification_receiver_designation">Receiver Designation </string>
 	<string name="wall_notification_receiver_company_name">Receiver Company Name </string>
+	<string name="wall_notification_data">Remaining Data </string>
 	
 	<string name="action_settings">Settings</string>
     <string name="drawer_open">Open drawer</string>

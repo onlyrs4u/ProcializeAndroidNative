@@ -22,6 +22,7 @@ public class Profile {
 	private String functionality = "";
 	private String mobile_number;
 	private String phone_number;
+	private String password = "";
 	
 	public String getProfile_attendee_id() {
 		return profile_attendee_id;
@@ -143,5 +144,12 @@ public class Profile {
 	public void setMobile_number(String mobile_number) {
 		this.mobile_number = mobile_number;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	
 }

@@ -15,13 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.R;
 import com.procialize.customClasses.WallNotifications;
 import com.procialize.libraries.ImageLoader;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.utility.Constants;
 
 public class WallNotificationListAdapter extends BaseAdapter{
@@ -67,8 +67,9 @@ public class WallNotificationListAdapter extends BaseAdapter{
         if (convertView == null)
             convertView = inflater.inflate(R.layout.wall_list_row_for_image, null);
         
-        ImageView wall_thumbnail = (ImageView) convertView.findViewById(R.id.wall_sender_thumbnail);
-        TextView wallNotificationTextview = (TextView) convertView.findViewById(R.id.wall_notification_text);
+        MLRoundedImageView wall_thumbnail = (MLRoundedImageView) convertView.findViewById(R.id.wall_sender_thumbnail);
+        TextView wallNotificationSenderName = (TextView) convertView.findViewById(R.id.wall_notification_sender_name);
+        TextView wallNotificationText = (TextView) convertView.findViewById(R.id.wall_notification_text);
  
         WallNotifications wallNotifications = wallNotificationList.get(position);
 
@@ -91,10 +92,12 @@ public class WallNotificationListAdapter extends BaseAdapter{
         	imgLoader.DisplayImage(image_url, loader, wall_thumbnail);
 //        }
         
-        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+        SpannableStringBuilder senderNameStringBuilder = new SpannableStringBuilder();
+        SpannableStringBuilder notificationDataStringBuilder = new SpannableStringBuilder();
         String senderFullName = wallNotifications.getFirst_name()+ " "+ wallNotifications.getLast_name();        
         String senderDesignation = wallNotifications.getDesignation();
         String senderCompanyName = wallNotifications.getCompany_name();
+        String finalSenderName = "";
         String notificationType = "";
         if(wallNotifications.getNotification_type().equalsIgnoreCase("Sh"))
         	notificationType = activity.getResources().getString(R.string.wall_notification_shared);
@@ -108,65 +111,64 @@ public class WallNotificationListAdapter extends BaseAdapter{
    		String receiverFullName = wallNotifications.getReceiver_first_name()+ " "+ wallNotifications.getReceiver_last_name();
    		String receiverDesignation = wallNotifications.getReceiver_designation();
    		String receiverCompanyName = wallNotifications.getReceiver_company_name();
-   		String finalString = "";
+   		String finalDataString = "";
    		if(wallNotifications.getNotification_type().equalsIgnoreCase("Sh") || wallNotifications.getNotification_type().equalsIgnoreCase("Sav")){
-   			finalString = senderFullName+", "+senderDesignation+", "+senderCompanyName+" "+notificationType+" "+receiverFullName+", "+receiverDesignation+", "+receiverCompanyName;
+   			finalSenderName = senderFullName+", "+senderDesignation+", "+senderCompanyName; 
+   			finalDataString = notificationType+" "+receiverFullName+", "+receiverDesignation+", "+receiverCompanyName;
    		}else if(wallNotifications.getNotification_type().equalsIgnoreCase("download_exe_map")){
+   			finalSenderName = senderFullName+", "+senderDesignation+", "+senderCompanyName;
    			receiverFullName = wallNotifications.getReceiver_first_name();
-   			finalString = senderFullName+", "+senderDesignation+", "+senderCompanyName+" "+notificationType+" "+receiverFullName;
+   			finalDataString = notificationType+" "+receiverFullName;
    		}else if(wallNotifications.getNotification_type().equalsIgnoreCase("N")){
-   			String organizerName = wallNotifications.getOrganizer_name();
+   			finalSenderName = wallNotifications.getOrganizer_name();
    			String notificationContent = wallNotifications.getNotification_content();
-   			finalString = organizerName+" "+notificationType+" "+notificationContent;
+   			finalDataString = notificationType+" "+notificationContent;
    		}
-   			
-   		String senderName = "";
+
    		String receiverName = "";
    		String strTrailingEnd = "";
    		
    		if(notificationType.equalsIgnoreCase(activity.getResources().getString(R.string.wall_notification_shared)))
    		{
-   			senderName = finalString.substring(0, finalString.indexOf("shared"));
-   			receiverName = finalString.substring(finalString.lastIndexOf("of")+3);
-   			strTrailingEnd = finalString.substring(0, (finalString.indexOf(receiverName)));
+   			receiverName = finalDataString.substring(finalDataString.lastIndexOf("of")+3);
+   			strTrailingEnd = finalDataString.substring(0, (finalDataString.indexOf(receiverName)));
    		}
    		else if(notificationType.equalsIgnoreCase(activity.getResources().getString(R.string.wall_notification_saved)))
    		{
-   			senderName = finalString.substring(0, finalString.indexOf("saved"));
-   			receiverName = finalString.substring(finalString.lastIndexOf("of")+3);
-   			strTrailingEnd = finalString.substring(0, (finalString.indexOf(receiverName)));
+   			receiverName = finalDataString.substring(finalDataString.lastIndexOf("of")+3);
+   			strTrailingEnd = finalDataString.substring(0, (finalDataString.indexOf(receiverName)));
    		}
    		else if(notificationType.equalsIgnoreCase(activity.getResources().getString(R.string.wall_notification_notification)))
    		{
-   			senderName = finalString.substring(0, finalString.indexOf("has"));
-   			receiverName = finalString.substring(finalString.lastIndexOf("notification")+13);
-   			strTrailingEnd = finalString.substring(0, (finalString.indexOf(receiverName)));
+//   			receiverName = finalDataString.substring(finalDataString.lastIndexOf("notification")+13);
+   			receiverName = finalDataString.substring(0, (finalDataString.indexOf(receiverName)));
+   			strTrailingEnd = finalDataString.substring(0, (finalDataString.indexOf(receiverName)));
    		}
    		else if(notificationType.equalsIgnoreCase(activity.getResources().getString(R.string.wall_notification_download_brochure)))
    		{
-   			senderName = finalString.substring(0, finalString.indexOf("downloaded"));
-   			receiverName = finalString.substring(finalString.lastIndexOf("of")+3);
-   			strTrailingEnd = finalString.substring(0, (finalString.indexOf(receiverName)));
+   			receiverName = finalDataString.substring(finalDataString.lastIndexOf("of")+3);
+   			strTrailingEnd = finalDataString.substring(0, (finalDataString.indexOf(receiverName)));
    		}
    		
-   		stringBuilder.append(finalString);
-   		
-   		stringBuilder.setSpan(new NonUnderlinedClickableSpan() {
+   		senderNameStringBuilder.append(finalSenderName);
+   		senderNameStringBuilder.setSpan(new NonUnderlinedClickableSpan() {
 			@Override
 			public void onClick(View widget) {
 				Toast.makeText(activity, "Clicked senderName", Toast.LENGTH_LONG).show();
 			}
-		},0, senderName.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		},0, finalSenderName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+   		wallNotificationSenderName.setText(senderNameStringBuilder);
+   		wallNotificationSenderName.setMovementMethod(LinkMovementMethod.getInstance());
    		
-   		stringBuilder.setSpan(new NonUnderlinedClickableSpan() {
+   		notificationDataStringBuilder.append(finalDataString);
+   		notificationDataStringBuilder.setSpan(new NonUnderlinedClickableSpan() {
 			@Override
 			public void onClick(View widget) {
 				Toast.makeText(activity, "Clicked receiverName", Toast.LENGTH_LONG).show();
 			}
 		}, strTrailingEnd.length(), strTrailingEnd.length() + receiverName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-   		
-   		wallNotificationTextview.setText(stringBuilder);
-   		wallNotificationTextview.setMovementMethod(LinkMovementMethod.getInstance());
+   		wallNotificationText.setText(notificationDataStringBuilder);
+   		wallNotificationText.setMovementMethod(LinkMovementMethod.getInstance());
    		
         return convertView;
     }

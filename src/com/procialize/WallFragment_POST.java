@@ -165,6 +165,7 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 				nameValuePair.add(new BasicNameValuePair("last_name", last_name_));
 				nameValuePair.add(new BasicNameValuePair("profile_pic", profile_image_));
 				nameValuePair.add(new BasicNameValuePair("fb_id", validate_id_));
+				nameValuePair.add(new BasicNameValuePair("public_profile_url", ""));
 			}
 			else if(provider_name_.equalsIgnoreCase("linkedin"))
 			{

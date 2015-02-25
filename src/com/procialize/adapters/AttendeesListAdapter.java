@@ -4,16 +4,17 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.procialize.R;
 import com.procialize.customClasses.Attendees;
 import com.procialize.libraries.ImageLoader;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.utility.Constants;
 
 public class AttendeesListAdapter extends BaseAdapter{
@@ -58,8 +59,10 @@ public class AttendeesListAdapter extends BaseAdapter{
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
             convertView = inflater.inflate(R.layout.single_list_row, null);
- 
-        ImageView attendee_thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+        
+        Typeface typeFace = Typeface.createFromAsset(activity.getAssets(),"fonts/HERO.ttf");
+        
+        MLRoundedImageView attendee_thumbnail = (MLRoundedImageView) convertView.findViewById(R.id.thumbnail);
         TextView attendee_name = (TextView) convertView.findViewById(R.id.name);
         TextView attendee_designation = (TextView) convertView.findViewById(R.id.designation);
         TextView attendee_comp_name = (TextView) convertView.findViewById(R.id.comp_name);
@@ -69,7 +72,7 @@ public class AttendeesListAdapter extends BaseAdapter{
  
         // Image url
         String image_url = "";
-        if(!(attendees.getAttendee_image().equalsIgnoreCase("") || attendees.getAttendee_image().equalsIgnoreCase(null)))
+//        if(!(attendees.getAttendee_image().equalsIgnoreCase("") || attendees.getAttendee_image().equalsIgnoreCase(null)))
         		image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL + attendees.getAttendee_image();
         
         ImageLoader imgLoader = new ImageLoader(activity);
@@ -82,12 +85,16 @@ public class AttendeesListAdapter extends BaseAdapter{
         imgLoader.DisplayImage(image_url, loader, attendee_thumbnail);
          
         attendee_name.setText(attendees.getAttendee_first_name()+ " "+ attendees.getAttendee_last_name());
+        attendee_name.setTypeface(typeFace);
          
         attendee_designation.setText(attendees.getAttendee_designation());
+        attendee_designation.setTypeface(typeFace);
         
         attendee_comp_name.setText(attendees.getAttendee_company_name());
+        attendee_comp_name.setTypeface(typeFace);
          
         attendee_city.setText(attendees.getAttendee_city());
+        attendee_city.setTypeface(typeFace);
         
         return convertView;
     }

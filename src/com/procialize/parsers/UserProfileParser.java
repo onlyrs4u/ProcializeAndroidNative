@@ -130,6 +130,11 @@ public class UserProfileParser {
 				{
 					userProfile.setMobile_number(userMobile);	
 				}
+				String userPassword = user.getString("password");
+				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
+				{
+					userProfile.setPassword(userPassword);	
+				}
 				
 				userData.add(userProfile);
 				

@@ -11,24 +11,32 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.procialize.customClasses.Profile;
 import com.procialize.network.ServiceHandler;
+import com.procialize.parsers.UserProfileParser;
 import com.procialize.utility.Constants;
 
 public class AppSignUp extends Activity implements OnClickListener{
 
+	private TextView signupLabel;
+	private TextView mandateTextLabel;
 	private EditText emailEdit;
 	private EditText passwordEdit;
-	private EditText nameEdit;
+	private EditText firstNameEdit;
+	private EditText lastNameEdit;
 	private EditText cityEdit;
 	private Button saveBtn;
 	private ImageView settingsBtn;
@@ -37,21 +45,40 @@ public class AppSignUp extends Activity implements OnClickListener{
 	String user_registration_url = "";
 	Constants constant;
 	
+	private UserProfileParser userParser;
+	ArrayList<Profile> userData;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.app_sign_up_screen);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+		
+		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		
 		constant = new Constants();
 		user_registration_url = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.NEW_REGISTRATION;
+		userData = new ArrayList<Profile>();
 		
 		//Declaring elements
+		signupLabel = (TextView)findViewById(R.id.signup);
+		signupLabel.setTypeface(typeFace);
+		mandateTextLabel = (TextView)findViewById(R.id.mandate_text);
+		mandateTextLabel.setTypeface(typeFace);
 		emailEdit = (EditText)findViewById(R.id.email_edittext);
+		emailEdit.setTypeface(typeFace);
 		passwordEdit = (EditText)findViewById(R.id.password_edittext);
-		nameEdit = (EditText)findViewById(R.id.full_name_edittext);
+		passwordEdit.setTypeface(typeFace);
+		firstNameEdit = (EditText)findViewById(R.id.first_name_edittext);
+		firstNameEdit.setTypeface(typeFace);
+		lastNameEdit = (EditText)findViewById(R.id.last_name_edittext);
+		lastNameEdit.setTypeface(typeFace);
 		cityEdit = (EditText)findViewById(R.id.city_edittext);
+		cityEdit.setTypeface(typeFace);
 		saveBtn = (Button)findViewById(R.id.save_button);
+		saveBtn.setTypeface(typeFace);
 		settingsBtn = (ImageView)findViewById(R.id.settings);
 		
 		//Applying listener to the elements
@@ -64,8 +91,7 @@ public class AppSignUp extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		if(view == saveBtn)
 		{
-			if(emailEdit.length() == 0 || passwordEdit.length() == 0 ||
-					nameEdit.length() == 0 || cityEdit.length() == 0)
+			if(emailEdit.length() == 0 || passwordEdit.length() == 0 || firstNameEdit.length() == 0 || lastNameEdit.length() == 0 || cityEdit.length() == 0)
 			{
 				Toast.makeText(AppSignUp.this, "Please enter data in all the fields", Toast.LENGTH_SHORT).show();
 			}
@@ -98,7 +124,6 @@ public class AppSignUp extends Activity implements OnClickListener{
 			pDialog.setMessage("Please wait...");
 			pDialog.setCancelable(false);
 			pDialog.show();
-
 		}
 
 		@Override
@@ -109,7 +134,8 @@ public class AppSignUp extends Activity implements OnClickListener{
 			
 			nameValuePair.add(new BasicNameValuePair("email", emailEdit.getText().toString()));
 			nameValuePair.add(new BasicNameValuePair("password", passwordEdit.getText().toString()));
-			nameValuePair.add(new BasicNameValuePair("full_name", nameEdit.getText().toString()));
+			nameValuePair.add(new BasicNameValuePair("first_name", firstNameEdit.getText().toString()));
+			nameValuePair.add(new BasicNameValuePair("last_name", lastNameEdit.getText().toString()));
 			nameValuePair.add(new BasicNameValuePair("city", cityEdit.getText().toString()));
 			
 			// Making a request to url and getting response
@@ -122,42 +148,12 @@ public class AppSignUp extends Activity implements OnClickListener{
 					jsonObj = new JSONObject(jsonStr);
 					err = jsonObj.getString("error");
 					message = jsonObj.getString("msg");
-//					error  = jsonObj.getJSONObject("error");
-//					jsonObj.getString("error");
-//					msg = jsonObj.getJSONObject("msg");
-					
-					/*
-					// Getting JSON Array node
-					contacts = jsonObj.getJSONArray(TAG_CONTACTS);
-
-					// looping through All Contacts
-					for (int i = 0; i < contacts.length(); i++) {
-						JSONObject c = contacts.getJSONObject(i);
-						
-						String id = c.getString(TAG_ID);
-						String name = c.getString(TAG_NAME);
-						String email = c.getString(TAG_EMAIL);
-						String address = c.getString(TAG_ADDRESS);
-						String gender = c.getString(TAG_GENDER);
-
-						// Phone node is JSON Object
-						JSONObject phone = c.getJSONObject(TAG_PHONE);
-						String mobile = phone.getString(TAG_PHONE_MOBILE);
-						String home = phone.getString(TAG_PHONE_HOME);
-						String office = phone.getString(TAG_PHONE_OFFICE);
-
-						// tmp hashmap for single contact
-						HashMap<String, String> contact = new HashMap<String, String>();
-
-						// adding each child node to HashMap key => value
-						contact.put(TAG_ID, id);
-						contact.put(TAG_NAME, name);
-						contact.put(TAG_EMAIL, email);
-						contact.put(TAG_PHONE_MOBILE, mobile);
-
-						// adding contact to contact list
-						contactList.add(contact);
-					}*/
+					if(err.equalsIgnoreCase("success"))
+					{
+						//User Profile Parser
+						userParser = new UserProfileParser();
+						userData = userParser.UserData_Parser(jsonStr);
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -171,25 +167,30 @@ public class AppSignUp extends Activity implements OnClickListener{
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+			String userEmail = "";
+			String userPassword = "";
+			
 			// Dismiss the progress dialog
 			if (pDialog.isShowing())
 				pDialog.dismiss();
-			/**
-			 * Updating parsed JSON data into ListView
-			 * */
-//			ListAdapter adapter = new SimpleAdapter(
-//					getActivity(), contactList,
-//					R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL,
-//							TAG_PHONE_MOBILE }, new int[] { R.id.name,
-//							R.id.email, R.id.mobile });
+			
 			Log.d("Created URL : ", ">>>>> " + user_registration_url);
+			
+//			if(!(message.equalsIgnoreCase("")) || (message.equalsIgnoreCase(null)))
+			Toast.makeText(AppSignUp.this, ""+message, Toast.LENGTH_LONG).show();
+			
 			if(err.equalsIgnoreCase("success"))
-				Toast.makeText(AppSignUp.this, ""+message, Toast.LENGTH_LONG).show();
-			else
-				Toast.makeText(AppSignUp.this, "dfiuafj fjriufhaiu", Toast.LENGTH_LONG).show();
-//			list.setAdapter(adapter);
+			{
+				for (int i = 0; i < userData.size(); i++) {
+					userEmail = userData.get(i).getEmail();
+					userPassword = userData.get(i).getPassword();
+				}
+				Intent intent = new Intent(AppSignUp.this, MainActivity.class);
+				intent.putExtra("appUsername", userEmail);
+				intent.putExtra("appPassword", userPassword);
+				intent.putExtra("provider", "manual_login");
+				startActivity(intent);
+			}
 		}
-
 	}
-
 }

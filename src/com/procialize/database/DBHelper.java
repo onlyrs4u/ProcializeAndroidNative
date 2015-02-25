@@ -113,6 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String PROFILE_FUNCTIONALITY = "PROFILE_FUNCTIONALITY";
 	public static final String PROFILE_PHONE_NUMBER = "PROFILE_PHONE_NUMBER";
 	public static final String PROFILE_MOBILE_NUMBER = "PROFILE_MOBILE_NUMBER";
+	public static final String PROFILE_PASSWORD = "PROFILE_PASSWORD";
 	
 	// Wall Notification Table
 	public static final String WALL_NOTIFICATION_TABLE_NAME = "WALL_NOTIFICATIONS";
@@ -227,7 +228,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ PROFILE_MOBILE_OS+" text, "+PROFILE_FIRST_NAME+" text, "+PROFILE_LAST_NAME+" text, "+PROFILE_LINKEDIN+" text, "+PROFILE_FACEBOOK+" text, "
 				+ PROFILE_COMPANY_NAME+" text, "+PROFILE_DESIGNATION+" text, "+PROFILE_IMAGE+" text, "+PROFILE_DESCRIPTION+" text, "+PROFILE_CITY+" text, "
 				+ PROFILE_COUNRTY+" text, "+PROFILE_INDUSTRY+" text, "+PROFILE_FUNCTIONALITY+" text, "+PROFILE_PHONE_NUMBER+" text, "
-				+ PROFILE_MOBILE_NUMBER+" text)");
+				+ PROFILE_MOBILE_NUMBER+" text, "+PROFILE_PASSWORD+" text)");
 		
 		// Creating wall notification table
 		db.execSQL("create table " + WALL_NOTIFICATION_TABLE_NAME 
@@ -889,10 +890,10 @@ public class DBHelper extends SQLiteOpenHelper {
 					contentValues.put(PROFILE_DESIGNATION, designation);
 				}
 				String photo = userDataList.get(i).getProfile_image();
-				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null)))
-				{
+//				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null)))
+//				{
 					contentValues.put(PROFILE_IMAGE, photo);
-				}
+//				}
 				String description = userDataList.get(i).getDescription();
 				if(!(description.equalsIgnoreCase("") || description.equalsIgnoreCase(null)))
 				{
@@ -918,16 +919,21 @@ public class DBHelper extends SQLiteOpenHelper {
 				{
 					contentValues.put(PROFILE_FUNCTIONALITY, userFunctionality);
 				}
-				/*String userPhone = userDataList.get(i).getPhone_number();
-				if(!(userPhone.equalsIgnoreCase("") || userPhone.equalsIgnoreCase(null) || userPhone.equalsIgnoreCase("null")))
+				String userPhone = userDataList.get(i).getPhone_number();
+				if(!(userPhone.equalsIgnoreCase("") || userPhone.equalsIgnoreCase(null)))
 				{
 					contentValues.put(PROFILE_PHONE_NUMBER, userPhone);
-				}*/
-				/*String userMobile = userDataList.get(i).getMobile_number();
-				if(!(userMobile.equalsIgnoreCase("") || userMobile.equalsIgnoreCase(null) || userMobile.equalsIgnoreCase("null")))
+				}
+				String userMobile = userDataList.get(i).getMobile_number();
+				if(!(userMobile.equalsIgnoreCase("") || userMobile.equalsIgnoreCase(null)))
 				{
 					contentValues.put(PROFILE_MOBILE_NUMBER, userMobile);
-				}*/
+				}
+				String userPassword = userDataList.get(i).getPassword();
+				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
+				{
+					contentValues.put(PROFILE_PASSWORD, userPassword);
+				}
 			
 				db.insert(PROFILE_TABLE_NAME, null, contentValues);
 			}
@@ -1015,9 +1021,9 @@ public class DBHelper extends SQLiteOpenHelper {
 					contentValues.put(WALL_NOTIFICATION_PHONE_NUMBER, phone); 
 				}
 				String photo = wallNotificationsList.get(i).getPhoto();
-				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null))){	
+//				if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null))){	
 					contentValues.put(WALL_NOTIFICATION_PHOTO, photo); 
-				}
+//				}
 				String eventName = wallNotificationsList.get(i).getEvent_name();
 				if (!(eventName.equalsIgnoreCase("") || eventName.equalsIgnoreCase(null))) {
 					contentValues.put(WALL_NOTIFICATION_EVENT_NAME, eventName);
@@ -1241,9 +1247,9 @@ public class DBHelper extends SQLiteOpenHelper {
 						contentValues.put(USER_RECEIVER_PHONE, receiverPhone);
 					}
 					String receiverPhoto = userNotificationsList.get(i).getReceiver_photo();
-					if (!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null))) {
+//					if (!(receiverPhoto.equalsIgnoreCase("") || receiverPhoto.equalsIgnoreCase(null))) {
 						contentValues.put(USER_RECEIVER_PHOTO, receiverPhoto);
-					}
+//					}
 					String receiverAttendeeId = userNotificationsList.get(i).getReceiver_attendee_id();
 					if (!(receiverAttendeeId.equalsIgnoreCase("") || receiverAttendeeId.equalsIgnoreCase(null))) {
 						contentValues.put(USER_RECEIVER_ATTENDEE_ID, receiverAttendeeId);

@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.procialize.R;
 import com.procialize.customClasses.Attendees;
 import com.procialize.libraries.ImageLoader;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.utility.Constants;
 
 public class SpeakersListAdapter extends BaseAdapter{
@@ -59,7 +59,7 @@ public class SpeakersListAdapter extends BaseAdapter{
         if (convertView == null)
             convertView = inflater.inflate(R.layout.single_list_row, null);
 
-        ImageView attendee_thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+        MLRoundedImageView attendee_thumbnail = (MLRoundedImageView) convertView.findViewById(R.id.thumbnail);
         TextView attendee_name = (TextView) convertView.findViewById(R.id.name);
         TextView attendee_designation = (TextView) convertView.findViewById(R.id.designation);
         TextView attendee_comp_name = (TextView) convertView.findViewById(R.id.comp_name);
@@ -69,7 +69,7 @@ public class SpeakersListAdapter extends BaseAdapter{
  
 //        Image url
         String image_url = "";
-        if(!(speakers.getAttendee_image().equalsIgnoreCase("") || speakers.getAttendee_image().equalsIgnoreCase(null)))
+//        if(!(speakers.getAttendee_image().equalsIgnoreCase("") || speakers.getAttendee_image().equalsIgnoreCase(null)))
         		image_url = constant.WEBSERVICE_URL + constant.SPEAKER_IMAGE_URL + speakers.getAttendee_image();
         
         ImageLoader imgLoader = new ImageLoader(activity);

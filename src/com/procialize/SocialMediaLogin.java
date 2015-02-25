@@ -49,13 +49,18 @@ public class SocialMediaLogin extends Activity implements OnClickListener{
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		//Declaring elements
 		facebookLoginBtn = (Button)findViewById(R.id.fb_login);
+		facebookLoginBtn.setTypeface(typeFace);
 		linkedInLoginBtn = (Button)findViewById(R.id.linkedin_login);
+		linkedInLoginBtn.setTypeface(typeFace);
 		alreadyHaveAccount = (TextView)findViewById(R.id.already_account_text);
 		alreadyHaveAccount.setTypeface(typeFace);
 		
 		appUsername = (EditText)findViewById(R.id.app_username);
+		appUsername.setTypeface(typeFace);
 		appPassword = (EditText)findViewById(R.id.app_password);
+		appPassword.setTypeface(typeFace);
 		loginBtn = (Button)findViewById(R.id.login_button);
+		loginBtn.setTypeface(typeFace);
 		createNewAccount = (TextView)findViewById(R.id.create_new_account);
 		createNewAccount.setTypeface(typeFace);
 		

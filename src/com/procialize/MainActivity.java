@@ -127,6 +127,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		// Enable ActionBar app icon to behave as action to toggle nav drawer
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.titlebackgroundcolor));
 		getSupportActionBar().setCustomView(R.layout.custom_title);
 
@@ -148,7 +149,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			selectItem(0);
+			selectItem(0);	
 		}
 	}
 
@@ -177,7 +178,11 @@ public class MainActivity extends SherlockFragmentActivity {
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			selectItem(position);
+			if (dataList.get(position).isSpinner()) {
+				selectItem(-1);	
+			}else{
+				selectItem(position);
+			}
 		}
 	}
 	
@@ -187,6 +192,9 @@ public class MainActivity extends SherlockFragmentActivity {
 		Bundle args = new Bundle();
 		// Locate Position
 		switch (position) {
+		case -1:
+			Toast.makeText(MainActivity.this, "Coding sucks", Toast.LENGTH_SHORT).show();
+			break;
 		case 0:
 			args.putString("url_to_create", url_to_create);
 			args.putString("provider_name", provider_name);
