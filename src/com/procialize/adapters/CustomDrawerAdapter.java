@@ -9,15 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.procialize.R;
 import com.procialize.customClasses.DrawerItem;
-import com.procialize.customClasses.SpinnerItem;
+import com.procialize.customClasses.Profile;
 
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
@@ -31,7 +34,6 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 		this.context = context;
 		this.drawerItemList = listItems;
 		this.layoutResID = layoutResourceID;
-
 	}
 
 	@Override
@@ -76,29 +78,38 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 			drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
 			drawerHolder.spinnerLayout.setVisibility(LinearLayout.VISIBLE);
 
-			List<SpinnerItem> userList = new ArrayList<SpinnerItem>();
+			List<Profile> userList = new ArrayList<Profile>();
 			
-			userList.add(new SpinnerItem(R.drawable.user1, "Loggedin username", "user designation", "company name"));
+			userList.add(new Profile(R.drawable.user1, "Loggedin fname", "Loggedin lname", "user designation", "company name"));
 			
-			//userList.add(new SpinnerItem(R.drawable.user2, "Brain Jekob", "brain.j@gmail.com"));
+//			userList.add(new SpinnerItem(R.drawable.user2, "Brain Jekob", "brain.j@gmail.com", "dsjgfdugsdgadsuy"));
 
 			CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(context, R.layout.custom_spinner_item, userList);
 			drawerHolder.spinner.setAdapter(adapter);
 
+			drawerHolder.spinner.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					Toast.makeText(context, "User Changed", Toast.LENGTH_SHORT).show();
+				}
+			});
 			/*drawerHolder.spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-						@Override
-						public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-							// TODO Auto-generated method stub
-							Toast.makeText(context, "User Changed", Toast.LENGTH_SHORT).show();
-						}
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					Toast.makeText(context, "User Changed", Toast.LENGTH_SHORT).show();
+				}
 
-						@Override
-						public void onNothingSelected(AdapterView<?> arg0) {
-							// TODO Auto-generated method stub
-
-						}
-					});*/
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});*/
 			
 		} else if (dItem.getTitle() != null && dItem.getTitleImgResId() != 0) {
 			drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);

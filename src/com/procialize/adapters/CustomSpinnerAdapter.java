@@ -12,30 +12,42 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.procialize.R;
-import com.procialize.customClasses.SpinnerItem;
+import com.procialize.customClasses.Profile;
 
-public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
+public class CustomSpinnerAdapter extends ArrayAdapter<Profile>{
 
+	Context context;
+	int layoutResID;
+//	List<Profile> spinnerData;
+	List<Profile> profileData;
+//	public ListView myCustomItem;
 	
-	public CustomSpinnerAdapter(Context context, int layoutResourceID, int textViewResourceId, List<SpinnerItem> spinnerDataList) {
+	public CustomSpinnerAdapter(Context context, int layoutResourceID, int textViewResourceId, List<Profile> spinnerDataList) {
 		super(context, layoutResourceID, textViewResourceId, spinnerDataList);
 		
 		this.context = context;
 		this.layoutResID = layoutResourceID;
-		this.spinnerData = spinnerDataList;
+		this.profileData = spinnerDataList;
 		
 	}
-
-	Context context;
-	int layoutResID;
-	List<SpinnerItem> spinnerData;
 	
-	public CustomSpinnerAdapter(Context context, int layoutResourceID, List<SpinnerItem> spinnerDataList) {
+	/*public CustomSpinnerAdapter(Context context, int layoutResourceID, List<Profile> spinnerDataList, ListView drawerItem0) {
+		super(context, layoutResourceID, spinnerDataList);
+		
+		myCustomItem = new ListView(context);
+		this.context = context;
+		this.layoutResID = layoutResourceID;
+		this.profileData = spinnerDataList;
+		this.myCustomItem = drawerItem0;
+	}*/
+	
+	public CustomSpinnerAdapter(Context context, int layoutResourceID, List<Profile> spinnerDataList) {
 		super(context, layoutResourceID, spinnerDataList);
 		
 		this.context = context;
 		this.layoutResID = layoutResourceID;
-		this.spinnerData = spinnerDataList;
+		this.profileData = spinnerDataList;
+		
 	}
 
 	@Override
@@ -62,7 +74,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
 			
 			holder.userImage = (ImageView)row.findViewById(R.id.left_pic);
 			holder.name = (TextView)row.findViewById(R.id.text_main_name);
-			holder.email = (TextView)row.findViewById(R.id.sub_text_email);
+			holder.designation = (TextView)row.findViewById(R.id.sub_text_email);
 			holder.company = (TextView)row.findViewById(R.id.sub_text_company);
 			
 			row.setTag(holder);
@@ -71,12 +83,12 @@ public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
 			holder=(SpinnerHolder)row.getTag();
 		}
 		
-		SpinnerItem spinnerItem = spinnerData.get(position);
+		Profile spinnerItem = profileData.get(position);
 		
-		holder.userImage.setImageDrawable(row.getResources().getDrawable(spinnerItem.getDrawableResID()));
-		holder.name.setText(spinnerItem.getName());
-		holder.email.setText(spinnerItem.getEmail());
-		holder.company.setText(spinnerItem.getCompany());
+//		holder.userImage.setImageDrawable(row.getResources().getDrawable(spinnerItem.getDrawableResID()));
+		holder.name.setText(spinnerItem.getFirst_name()+" "+spinnerItem.getLast_name());
+		holder.designation.setText(spinnerItem.getDesignation());
+		holder.company.setText(spinnerItem.getCompany_name());
 		
 		return row;
 		
@@ -85,7 +97,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
 	private static class SpinnerHolder
 	{
 		ImageView userImage;
-		TextView  name,email,company;
+		TextView  name, designation, company;
 		
 	}
 

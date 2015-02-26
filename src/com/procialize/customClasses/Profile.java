@@ -2,12 +2,16 @@ package com.procialize.customClasses;
 
 public class Profile {
 	
+	private int drawableResID;
+	
 	private String profile_attendee_id = "";
 	private String api_access_token = "";
 	private String email = "";
 	private String status = "";
+	private String password = "";
 	private String gcm_reg_id = "";
 	private String mobile_os = "";
+	private String user_ID = "";
 	private String first_name = "";
 	private String last_name = "";
 	private String linkedin_= "";
@@ -22,8 +26,20 @@ public class Profile {
 	private String functionality = "";
 	private String mobile_number;
 	private String phone_number;
-	private String password = "";
 	
+	public Profile(int drawableResID, String fname, String lname, String designation, String company) {
+		super();
+		this.drawableResID = drawableResID;
+		this.first_name = fname;
+		this.last_name = lname;
+		this.designation = designation;
+		this.company_name = company;
+	}
+	
+	public Profile() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getProfile_attendee_id() {
 		return profile_attendee_id;
 	}
@@ -48,6 +64,12 @@ public class Profile {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getGcm_reg_id() {
 		return gcm_reg_id;
 	}
@@ -59,6 +81,12 @@ public class Profile {
 	}
 	public void setMobile_os(String mobile_os) {
 		this.mobile_os = mobile_os;
+	}
+	public String getUser_ID() {
+		return user_ID;
+	}
+	public void setUser_ID(String user_ID) {
+		this.user_ID = user_ID;
 	}
 	public String getFirst_name() {
 		return first_name;
@@ -144,12 +172,6 @@ public class Profile {
 	public void setMobile_number(String mobile_number) {
 		this.mobile_number = mobile_number;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 	
 }

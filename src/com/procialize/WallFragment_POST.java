@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -21,12 +22,13 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.procialize.adapters.CustomSpinnerAdapter;
 import com.procialize.adapters.WallNotificationListAdapter;
 import com.procialize.customClasses.Attendees;
 import com.procialize.customClasses.Events;
+import com.procialize.customClasses.Profile;
 import com.procialize.customClasses.UserNotifications;
 import com.procialize.customClasses.WallNotifications;
-import com.procialize.customClasses.Profile;
 import com.procialize.database.DBHelper;
 import com.procialize.network.ServiceHandler;
 import com.procialize.parsers.AttendeesParser;
@@ -74,8 +76,10 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	private UserNotificationParser userNotificationParser;
 	
 	private List<WallNotifications> wallNotificationDBList;
+	public List<Profile> userProfileDBList;
 	private ListView wallNotificationListView;
-	private WallNotificationListAdapter adapter;
+	private WallNotificationListAdapter WallNotificationAdapter;
+	private CustomSpinnerAdapter userProfileAdapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -121,10 +125,6 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 		db = procializeDB.getWritableDatabase();
 		
 		wallNotificationListView = (ListView)getActivity().findViewById(R.id.wall_list);
-//		wallNotificationDBList = procializeDB.getWallNotifications();
-		
-//		adapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
-//		wallNotificationListView.setAdapter(adapter);
 	    
 	    new GetEventDetails().execute();
 	}
@@ -222,11 +222,20 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 			 * Updating parsed JSON data into ListView
 			 * */
 			wallNotificationDBList = procializeDB.getWallNotifications();
-			adapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
-			wallNotificationListView.setAdapter(adapter);
+			WallNotificationAdapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
+			wallNotificationListView.setAdapter(WallNotificationAdapter);
+			
+			userProfileDBList = procializeDB.getUserProfile();
+			userProfileAdapter = new CustomSpinnerAdapter(getActivity(), 0, userProfileDBList);
+//			userProfileAdapter.myCustomItem.setAdapter(userProfileAdapter);
 			
 			Log.d("Created URL : ", ">>>>> " + url_);
 		}
+	}
+	
+	public List<Profile> returnUserProfileToFragment()
+	{
+		return userProfileDBList;
 	}
 	
 	private void fireSqliteQueries() {
@@ -242,5 +251,22 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 		
 		procializeDB.close();
 	}
+	
+	public interface shareUserProfileListener {
+//        public void onSharingUserProfile ();
+
+		public void onSharingUserProfile(List<Profile> userProfileDBList);
+    }
+	
+	@Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+        	shareUserProfileListener mListener = (shareUserProfileListener) activity;
+        	mListener.onSharingUserProfile(userProfileDBList);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
 	
 }

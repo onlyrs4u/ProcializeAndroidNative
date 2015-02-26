@@ -97,8 +97,10 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String PROFILE_API_ACCESS_TOKEN = "PROFILE_API_ACCESS_TOKEN";
 	public static final String PROFILE_EMAIL = "PROFILE_EMAIL";
 	public static final String PROFILE_STATUS = "PROFILE_STATUS";
+	public static final String PROFILE_PASSWORD = "PROFILE_PASSWORD";
 	public static final String PROFILE_GCM_REGISTRATION_ID = "PROFILE_GCM_REGISTRATION_ID";
 	public static final String PROFILE_MOBILE_OS = "PROFILE_MOBILE_OS";
+	public static final String PROFILE_USER_ID = "PROFILE_USER_ID";	
 	public static final String PROFILE_FIRST_NAME = "PROFILE_FIRST_NAME";
 	public static final String PROFILE_LAST_NAME = "PROFILE_LAST_NAME";
 	public static final String PROFILE_LINKEDIN = "PROFILE_LINKEDIN";
@@ -113,7 +115,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String PROFILE_FUNCTIONALITY = "PROFILE_FUNCTIONALITY";
 	public static final String PROFILE_PHONE_NUMBER = "PROFILE_PHONE_NUMBER";
 	public static final String PROFILE_MOBILE_NUMBER = "PROFILE_MOBILE_NUMBER";
-	public static final String PROFILE_PASSWORD = "PROFILE_PASSWORD";
 	
 	// Wall Notification Table
 	public static final String WALL_NOTIFICATION_TABLE_NAME = "WALL_NOTIFICATIONS";
@@ -224,11 +225,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		// Creating profile table		
 		db.execSQL("create table " + PROFILE_TABLE_NAME  
 				+ "("
-				+ PROFILE_ATTENDEE_ID+" text, "+PROFILE_API_ACCESS_TOKEN+" text, "+PROFILE_EMAIL+" text, "+PROFILE_STATUS+" text, "+PROFILE_GCM_REGISTRATION_ID+" text, " 
-				+ PROFILE_MOBILE_OS+" text, "+PROFILE_FIRST_NAME+" text, "+PROFILE_LAST_NAME+" text, "+PROFILE_LINKEDIN+" text, "+PROFILE_FACEBOOK+" text, "
-				+ PROFILE_COMPANY_NAME+" text, "+PROFILE_DESIGNATION+" text, "+PROFILE_IMAGE+" text, "+PROFILE_DESCRIPTION+" text, "+PROFILE_CITY+" text, "
-				+ PROFILE_COUNRTY+" text, "+PROFILE_INDUSTRY+" text, "+PROFILE_FUNCTIONALITY+" text, "+PROFILE_PHONE_NUMBER+" text, "
-				+ PROFILE_MOBILE_NUMBER+" text, "+PROFILE_PASSWORD+" text)");
+				+ PROFILE_ATTENDEE_ID+" text, "+PROFILE_API_ACCESS_TOKEN+" text, "+PROFILE_EMAIL+" text, "+PROFILE_STATUS+" text, "+PROFILE_PASSWORD+" text, "
+				+ PROFILE_GCM_REGISTRATION_ID+" text, "+PROFILE_MOBILE_OS+" text, "+PROFILE_USER_ID+" text, "+PROFILE_FIRST_NAME+" text, "
+				+ PROFILE_LAST_NAME+" text, "+PROFILE_LINKEDIN+" text, "+PROFILE_FACEBOOK+" text, "+PROFILE_COMPANY_NAME+" text, "+PROFILE_DESIGNATION+" text, "
+				+ PROFILE_IMAGE+" text, "+PROFILE_DESCRIPTION+" text, "+PROFILE_CITY+" text, "+PROFILE_COUNRTY+" text, "+PROFILE_INDUSTRY+" text, "
+				+ PROFILE_FUNCTIONALITY+" text, "+PROFILE_PHONE_NUMBER+" text, "+ PROFILE_MOBILE_NUMBER+" text)");
 		
 		// Creating wall notification table
 		db.execSQL("create table " + WALL_NOTIFICATION_TABLE_NAME 
@@ -849,6 +850,11 @@ public class DBHelper extends SQLiteOpenHelper {
 				{
 					contentValues.put(PROFILE_STATUS, userStatus);
 				}
+				String userPassword = userDataList.get(i).getPassword();
+				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
+				{
+					contentValues.put(PROFILE_PASSWORD, userPassword);
+				}
 				String userGCM = userDataList.get(i).getGcm_reg_id();
 				if(!(userGCM.equalsIgnoreCase("") || userGCM.equalsIgnoreCase(null)))
 				{
@@ -858,6 +864,11 @@ public class DBHelper extends SQLiteOpenHelper {
 				if(!(mobileOS.equalsIgnoreCase("") || mobileOS.equalsIgnoreCase(null)))
 				{
 					contentValues.put(PROFILE_MOBILE_OS, mobileOS);
+				}
+				String userID = userDataList.get(i).getUser_ID();
+				if(!(userID.equalsIgnoreCase("") || userID.equalsIgnoreCase(null)))
+				{
+					contentValues.put(PROFILE_USER_ID, userID);
 				}
 				String firstName = userDataList.get(i).getFirst_name();
 				if(!(firstName.equalsIgnoreCase("") || firstName.equalsIgnoreCase(null)))
@@ -928,11 +939,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				if(!(userMobile.equalsIgnoreCase("") || userMobile.equalsIgnoreCase(null)))
 				{
 					contentValues.put(PROFILE_MOBILE_NUMBER, userMobile);
-				}
-				String userPassword = userDataList.get(i).getPassword();
-				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
-				{
-					contentValues.put(PROFILE_PASSWORD, userPassword);
 				}
 			
 				db.insert(PROFILE_TABLE_NAME, null, contentValues);
@@ -1557,7 +1563,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return eventInfo;
     }
     
-  //Get Wall Notification List
+    //Get Wall Notification List
     public List<WallNotifications> getWallNotifications(){
         String selectQuery = "select "+WALL_NOTIFICATION_FIRST_NAME+", "+WALL_NOTIFICATION_LAST_NAME+", "+WALL_NOTIFICATION_DESIGNATION+", "+
         					WALL_NOTIFICATION_COMPANY_NAME+", "+WALL_NOTIFICATION_TYPE+", "+WALL_RECEIVER_FIRST_NAME+", "+WALL_RECEIVER_LAST_NAME+", "+
@@ -1591,6 +1597,46 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return wallNotificationList;
+    }
+    
+    //Get User Profile List
+    public List<Profile> getUserProfile(){
+        String selectQuery = "select * from "+PROFILE_TABLE_NAME;
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Profile> userProfile = new ArrayList<Profile>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Profile profileData = new Profile();
+            	profileData.setProfile_attendee_id(cursor.getString(0));
+            	profileData.setApi_access_token(cursor.getString(1));
+            	profileData.setEmail(cursor.getString(2));
+            	profileData.setStatus(cursor.getString(3));
+            	profileData.setPassword(cursor.getString(4));
+            	profileData.setGcm_reg_id(cursor.getString(5));
+            	profileData.setMobile_os(cursor.getString(6));
+            	profileData.setUser_ID(cursor.getString(7));
+            	profileData.setFirst_name(cursor.getString(8));
+            	profileData.setLast_name(cursor.getString(9));
+            	profileData.setLinkedin_(cursor.getString(10));
+            	profileData.setFacebook(cursor.getString(11));
+            	profileData.setCompany_name(cursor.getString(12));
+            	profileData.setDesignation(cursor.getString(13));
+            	profileData.setProfile_image(cursor.getString(14));
+            	profileData.setDescription(cursor.getString(15));
+            	profileData.setCity(cursor.getString(16));
+            	profileData.setCountry(cursor.getString(17));
+            	profileData.setIndustry(cursor.getString(18));
+            	profileData.setFunctionality(cursor.getString(19));
+            	profileData.setPhone_number(cursor.getString(20));
+            	profileData.setMobile_number(cursor.getString(21));
+
+            	userProfile.add(profileData);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return userProfile;
     }
     
 
