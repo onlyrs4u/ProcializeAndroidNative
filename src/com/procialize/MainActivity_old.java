@@ -71,7 +71,7 @@ public class MainActivity_old extends Activity {
 		dataList.add(new DrawerItem(R.drawable.ic_action_video, "Speakers")); // adding a header to the list
 		dataList.add(new DrawerItem(R.drawable.ic_drawer, "Sponsors")); // adding a header to the list
 
-		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item, dataList);
+		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item, dataList, null);
 
 		mDrawerList.setAdapter(adapter);
 

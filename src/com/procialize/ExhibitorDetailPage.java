@@ -11,33 +11,36 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.customClasses.Attendees;
 import com.procialize.libraries.ImageLoader;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.network.ServiceHandler;
 import com.procialize.utility.Constants;
 
 public class ExhibitorDetailPage extends Activity implements OnClickListener {
 	
-	ImageView exhibitor_thumbnail;
+	MLRoundedImageView exhibitor_thumbnail;
+	TextView exhibitor_detail_header;
 	TextView exhibitor_name;
     TextView exhibitor_designation;
     TextView exhibitor_comp_name;
     TextView exhibitor_city;
     
-    Button sendMessage;
-    Button setMeeting;
-    Button saveAttendee;
-    Button shareAttendee;
+    ImageView sendMessage;
+    ImageView setMeeting;
+    MLRoundedImageView saveAttendee;
+    MLRoundedImageView shareAttendee;
     
 //  Loader image - will be shown before loading image
     int loader = R.drawable.ic_launcher;
@@ -57,13 +60,16 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.exhibitors_detail);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
 		specificExhibitor = new Attendees();
 		specificExhibitor = (Attendees)getIntent().getSerializableExtra("SpecificExhibitor");
-        Toast.makeText(ExhibitorDetailPage.this, ""+specificExhibitor.toString(), Toast.LENGTH_LONG).show();
+		
+		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
         
-        exhibitor_thumbnail = (ImageView) findViewById(R.id.exhibitor_detail_thumbnail);
+		exhibitor_thumbnail = (MLRoundedImageView) findViewById(R.id.exhibitor_detail_thumbnail);
         
         // Image url
         String image_url = "";
@@ -77,18 +83,25 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
         // loader - loader image, will be displayed before getting image
         // image - ImageView 
         imgLoader.DisplayImage(image_url, loader, exhibitor_thumbnail);
+        
+        exhibitor_detail_header = (TextView) findViewById(R.id.exhibitor_detail_header);
+        exhibitor_detail_header.setTypeface(typeFace);
 		
 		exhibitor_name = (TextView) findViewById(R.id.exhibitor_detail_name);
 		exhibitor_name.setText(specificExhibitor.getAttendee_first_name()+" "+specificExhibitor.getAttendee_last_name());
+		exhibitor_name.setTypeface(typeFace);
         
 		exhibitor_designation = (TextView) findViewById(R.id.exhibitor_detail_designation);
 		exhibitor_designation.setText(specificExhibitor.getAttendee_designation());
+		exhibitor_designation.setTypeface(typeFace);
         
 		exhibitor_comp_name = (TextView) findViewById(R.id.exhibitor_detail_comp_name);
 		exhibitor_comp_name.setText(specificExhibitor.getAttendee_company_name());
+		exhibitor_comp_name.setTypeface(typeFace);
         
 		exhibitor_city = (TextView) findViewById(R.id.exhibitor_detail_city);
 		exhibitor_city.setText(specificExhibitor.getAttendee_city());
+		exhibitor_city.setTypeface(typeFace);
 		
 		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.SAVE_SHARE_SOCIAL;
         api_access_token_ = constant.API_ACCESS_TOKEN;
@@ -98,10 +111,10 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
 //        type_ = ""; //Share - Sh, Save - Sav
         transaction_type_ = "Social";// Other option - delete
         
-        sendMessage = (Button) findViewById(R.id.exhibitor_detail_send_message);
-        setMeeting = (Button) findViewById(R.id.exhibitor_detail_set_meeting);
-        saveAttendee = (Button) findViewById(R.id.exhibitor_detail_save_attendee);
-        shareAttendee = (Button) findViewById(R.id.exhibitor_detail_share_attendee);
+        sendMessage = (ImageView) findViewById(R.id.exhibitor_detail_send_message);
+        setMeeting = (ImageView) findViewById(R.id.exhibitor_detail_set_meeting);
+        saveAttendee = (MLRoundedImageView) findViewById(R.id.exhibitor_detail_save_attendee);
+        shareAttendee = (MLRoundedImageView) findViewById(R.id.exhibitor_detail_share_attendee);
         
         sendMessage.setOnClickListener(this);
         setMeeting.setOnClickListener(this);

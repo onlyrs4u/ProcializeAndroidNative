@@ -20,13 +20,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.procialize.adapters.CustomSpinnerAdapter;
 import com.procialize.adapters.WallNotificationListAdapter;
 import com.procialize.customClasses.Attendees;
 import com.procialize.customClasses.Events;
-import com.procialize.customClasses.Profile;
+import com.procialize.customClasses.UserProfile;
 import com.procialize.customClasses.UserNotifications;
 import com.procialize.customClasses.WallNotifications;
 import com.procialize.database.DBHelper;
@@ -36,6 +37,7 @@ import com.procialize.parsers.EventInfoParser;
 import com.procialize.parsers.UserNotificationParser;
 import com.procialize.parsers.UserProfileParser;
 import com.procialize.parsers.WallNotificationsParser;
+import com.procialize.utility.Constants;
 
 
 public class WallFragment_POST extends SherlockFragment implements OnRefreshListener  {
@@ -43,13 +45,14 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	private ProgressDialog pDialog;
 	
 	SwipeRefreshLayout swipeLayout; 
+	Constants constant;
     
     JSONArray event_list = null;
     JSONArray attendees_list = null;
     
     ArrayList<Events> eventsList;
     ArrayList<Attendees> attendeesList;
-    ArrayList<Profile> userData;
+    ArrayList<UserProfile> userData;
     ArrayList<WallNotifications> wallNotificationList;
     ArrayList<UserNotifications> userNotificationList;
     
@@ -76,7 +79,7 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	private UserNotificationParser userNotificationParser;
 	
 	private List<WallNotifications> wallNotificationDBList;
-	public List<Profile> userProfileDBList;
+	private ArrayList<UserProfile> userProfileDBList;
 	private ListView wallNotificationListView;
 	private WallNotificationListAdapter WallNotificationAdapter;
 	private CustomSpinnerAdapter userProfileAdapter;
@@ -85,9 +88,12 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View rootView = inflater.inflate(R.layout.wall_fragment, container, false);
+		shareUserProfileListener mListener = (shareUserProfileListener) getActivity();
+    	mListener.onSharingUserProfile(userProfileDBList);
 		return rootView;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 	    // TODO Auto-generated method stub
@@ -100,6 +106,8 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	    swipeLayout = (SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_container);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        
+        constant = new Constants();
 	    
 	    url_ = getArguments().getString("url_to_create");
 	    app_username_ = getArguments().getString("app_username");
@@ -117,7 +125,7 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	    
 	    eventsList = new ArrayList<Events>();
 	    attendeesList = new ArrayList<Attendees>();
-	    userData = new ArrayList<Profile>();
+	    userData = new ArrayList<UserProfile>();
 	    wallNotificationList = new ArrayList<WallNotifications>();
 	    userNotificationList = new ArrayList<UserNotifications>();
 	    
@@ -126,16 +134,29 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 		
 		wallNotificationListView = (ListView)getActivity().findViewById(R.id.wall_list);
 	    
-	    new GetEventDetails().execute();
+		if(url_.contains(constant.INDEPENDENT_WALL_NOTIFICATION_URL)){
+			procializeDB.clearWallNotifcationTable();
+			new FetchWallNotification().execute();
+		}else{
+			new GetEventDetails().execute();
+		}
+	    
+	    
 	}
 	@Override
     public void onRefresh() {
         // TODO Auto-generated method stub
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override public void run() {
-                swipeLayout.setRefreshing(false);
+            	procializeDB.clearWallNotifcationTable();
+    			new FetchWallNotification().execute();
             }
-        }, 5000);
+        }, 5000);*/
+		
+		
+		procializeDB.clearWallNotifcationTable();
+		new FetchWallNotification().execute();
+        
     }
 	/**
 	 * Async task class to get json by making HTTP call
@@ -233,11 +254,70 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 		}
 	}
 	
-	public List<Profile> returnUserProfileToFragment()
-	{
-		return userProfileDBList;
+	/**
+	 * Async task class to get json by making HTTP call
+	 * */
+	private class FetchWallNotification extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			// Showing progress dialog
+			pDialog = new ProgressDialog(getActivity());
+			pDialog.setMessage("Please wait...");
+			pDialog.setCancelable(false);
+			pDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			// Creating service handler class instance
+			ServiceHandler sh = new ServiceHandler();
+			
+			// Making a request to url and getting response
+			String jsonStr = sh.makeServiceCall(url_, ServiceHandler.POST);
+			Log.d("Response: ", "> " + jsonStr);
+			
+			//Wall Notification Parser
+			wallNotificationParser = new WallNotificationsParser();
+			wallNotificationList = wallNotificationParser.wallNotification_Parser(jsonStr);
+						
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			// Dismiss the progress dialog
+
+			procializeDB.insertWallNotificationData(wallNotificationList, db);
+			
+			if (pDialog.isShowing())
+				pDialog.dismiss();
+			
+			/**
+			 * Updating parsed JSON data into ListView
+			 * */
+			wallNotificationDBList = procializeDB.getWallNotifications();
+			WallNotificationAdapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
+			wallNotificationListView.setAdapter(WallNotificationAdapter);
+			
+			userProfileDBList = procializeDB.getUserProfile();
+			userProfileAdapter = new CustomSpinnerAdapter(getActivity(), 0, userProfileDBList);
+//			userProfileAdapter.myCustomItem.setAdapter(userProfileAdapter);
+			
+			Log.d("Created Wall Notification URL : ", ">>>>> " + url_);
+			Toast.makeText(getActivity(), "Bakwas", Toast.LENGTH_LONG).show();
+			
+			new Handler().postDelayed(new Runnable() {
+	            @Override public void run() {
+	            	swipeLayout.setRefreshing(false);
+	            }
+	        }, 3000);
+			
+		}
 	}
-	
+		
 	private void fireSqliteQueries() {
 		// TODO Auto-generated method stub
 		
@@ -255,18 +335,18 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	public interface shareUserProfileListener {
 //        public void onSharingUserProfile ();
 
-		public void onSharingUserProfile(List<Profile> userProfileDBList);
+		public void onSharingUserProfile(ArrayList<UserProfile> userProfileDBList);
     }
 	
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
+        /*try {
         	shareUserProfileListener mListener = (shareUserProfileListener) activity;
         	mListener.onSharingUserProfile(userProfileDBList);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
-        }
+        }*/
     }
 	
 }

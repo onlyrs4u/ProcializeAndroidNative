@@ -12,24 +12,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.procialize.R;
-import com.procialize.customClasses.Profile;
+import com.procialize.customClasses.UserProfile;
+import com.procialize.utility.Constants;
 
-public class CustomSpinnerAdapter extends ArrayAdapter<Profile>{
+public class CustomSpinnerAdapter extends ArrayAdapter<UserProfile>{
 
 	Context context;
 	int layoutResID;
 //	List<Profile> spinnerData;
-	List<Profile> profileData;
+	List<UserProfile> profileData;
 //	public ListView myCustomItem;
+	Constants constant = new Constants();
 	
-	public CustomSpinnerAdapter(Context context, int layoutResourceID, int textViewResourceId, List<Profile> spinnerDataList) {
+	/*public CustomSpinnerAdapter(Context context, int layoutResourceID, int textViewResourceId, List<Profile> spinnerDataList) {
 		super(context, layoutResourceID, textViewResourceId, spinnerDataList);
 		
 		this.context = context;
 		this.layoutResID = layoutResourceID;
 		this.profileData = spinnerDataList;
 		
-	}
+	}*/
 	
 	/*public CustomSpinnerAdapter(Context context, int layoutResourceID, List<Profile> spinnerDataList, ListView drawerItem0) {
 		super(context, layoutResourceID, spinnerDataList);
@@ -41,7 +43,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Profile>{
 		this.myCustomItem = drawerItem0;
 	}*/
 	
-	public CustomSpinnerAdapter(Context context, int layoutResourceID, List<Profile> spinnerDataList) {
+	public CustomSpinnerAdapter(Context context, int layoutResourceID, List<UserProfile> spinnerDataList) {
 		super(context, layoutResourceID, spinnerDataList);
 		
 		this.context = context;
@@ -82,8 +84,11 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Profile>{
 		else {
 			holder=(SpinnerHolder)row.getTag();
 		}
-		
-		Profile spinnerItem = profileData.get(position);
+		UserProfile spinnerItem = null;
+		if(!constant.USER_PROFILE_DB_LIST.isEmpty())
+			spinnerItem = constant.USER_PROFILE_DB_LIST.get(position);
+		else
+			spinnerItem = profileData.get(position);
 		
 //		holder.userImage.setImageDrawable(row.getResources().getDrawable(spinnerItem.getDrawableResID()));
 		holder.name.setText(spinnerItem.getFirst_name()+" "+spinnerItem.getLast_name());

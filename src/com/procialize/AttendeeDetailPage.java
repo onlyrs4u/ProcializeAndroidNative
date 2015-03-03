@@ -69,7 +69,6 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 		
 		specificAttendee = new Attendees();
 		specificAttendee = (Attendees)getIntent().getSerializableExtra("SpecificAttendee");
-        Toast.makeText(AttendeeDetailPage.this, ""+specificAttendee.toString(), Toast.LENGTH_LONG).show();
         
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		

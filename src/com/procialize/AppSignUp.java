@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.procialize.customClasses.Profile;
+import com.procialize.customClasses.UserProfile;
 import com.procialize.network.ServiceHandler;
 import com.procialize.parsers.UserProfileParser;
 import com.procialize.utility.Constants;
@@ -39,14 +39,14 @@ public class AppSignUp extends Activity implements OnClickListener{
 	private EditText lastNameEdit;
 	private EditText cityEdit;
 	private Button saveBtn;
-	private ImageView settingsBtn;
+//	private ImageView settingsBtn;
 	
 	private ProgressDialog pDialog;
 	String user_registration_url = "";
 	Constants constant;
 	
 	private UserProfileParser userParser;
-	ArrayList<Profile> userData;
+	ArrayList<UserProfile> userData;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class AppSignUp extends Activity implements OnClickListener{
 		
 		constant = new Constants();
 		user_registration_url = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.NEW_REGISTRATION;
-		userData = new ArrayList<Profile>();
+		userData = new ArrayList<UserProfile>();
 		
 		//Declaring elements
 		signupLabel = (TextView)findViewById(R.id.signup);
@@ -79,11 +79,11 @@ public class AppSignUp extends Activity implements OnClickListener{
 		cityEdit.setTypeface(typeFace);
 		saveBtn = (Button)findViewById(R.id.save_button);
 		saveBtn.setTypeface(typeFace);
-		settingsBtn = (ImageView)findViewById(R.id.settings);
+//		settingsBtn = (ImageView)findViewById(R.id.settings);
 		
 		//Applying listener to the elements
 		saveBtn.setOnClickListener(this);
-		settingsBtn.setOnClickListener(this);
+//		settingsBtn.setOnClickListener(this);
 	}
 	
 	@Override
@@ -100,11 +100,11 @@ public class AppSignUp extends Activity implements OnClickListener{
 				new userRegistration().execute();
 			}
 		}
-		else if(view == settingsBtn)
+		/*else if(view == settingsBtn)
 		{
 			Intent editProfile = new Intent(AppSignUp.this, EditProfileActivity.class);
 			startActivity(editProfile);
-		}
+		}*/
 	}
 	
 	/**

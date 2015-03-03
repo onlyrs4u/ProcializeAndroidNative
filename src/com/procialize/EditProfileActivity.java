@@ -1,5 +1,7 @@
 package com.procialize;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.procialize.customClasses.UserProfile;
 import com.procialize.utility.Constants;
 
 public class EditProfileActivity extends Activity implements OnClickListener{
@@ -40,6 +43,7 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 	private static int RESULT_LOAD_IMAGE = 1;
 	
 	private ProgressDialog pDialog;
+	private ArrayList<UserProfile> myProfile = new ArrayList<UserProfile>();
 	
 	/*static final String[] WORLDCUP2010 = new String[] {
 		"Algeria",  "Argentina", "Australia", 
@@ -54,6 +58,7 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		"South Korea",  "Spain", "Switzerland",    
 		"United States", "Uruguay" };*/
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -61,6 +66,8 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);		
 		setContentView(R.layout.edit_profile_screen);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+		
+		myProfile = (ArrayList<UserProfile>) getIntent().getExtras().getSerializable("userProfile_Array");
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		
@@ -93,12 +100,62 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		//Applying listener to the elements
 		chooseFileBtn.setOnClickListener(this);
 		
+		setRespectiveValues(myProfile);
+		
 //		industry_dropdown = (AutoCompleteTextView) findViewById(R.id.industry_dropdown);
 //		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, WORLDCUP2010);
 //		industry_dropdown.setAdapter(adapter);
 		
 	}
 
+	public void setRespectiveValues(ArrayList<UserProfile> profile)
+	{
+		for(int i=0; i<profile.size(); i++)
+		{
+			String fname = profile.get(i).getFirst_name();
+			String lname = profile.get(i).getLast_name();
+			String designation = profile.get(i).getDesignation();
+			String company_name = profile.get(i).getCompany_name();
+			String description = profile.get(i).getDescription();
+			String city = profile.get(i).getCity();
+			String mobile = profile.get(i).getMobile_number();
+			String phone = profile.get(i).getPhone_number();
+			
+			if(fname.equalsIgnoreCase("") || fname.equalsIgnoreCase(null))
+			{
+				firstNameEdit.setText(fname);
+			}
+			if(lname.equalsIgnoreCase("") || lname.equalsIgnoreCase(null))
+			{
+				lastNameEdit.setText(lname);
+			}
+			if(designation.equalsIgnoreCase("") || designation.equalsIgnoreCase(null))
+			{
+				designationEdit.setText(designation);
+			}
+			if(company_name.equalsIgnoreCase("") || company_name.equalsIgnoreCase(null))
+			{
+				companyNameEdit.setText(company_name);
+			}
+			if(description.equalsIgnoreCase("") || description.equalsIgnoreCase(null))
+			{
+				descriptionEdit.setText(description);
+			}
+			if(city.equalsIgnoreCase("") || city.equalsIgnoreCase(null))
+			{
+				cityEdit.setText(city);
+			}
+			if(mobile.equalsIgnoreCase("") || mobile.equalsIgnoreCase(null))
+			{
+				mobileEdit.setText(mobile);
+			}
+			if(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null))
+			{
+				phoneEdit.setText(phone);
+			}
+		}
+	}
+	
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub

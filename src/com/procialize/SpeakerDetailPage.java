@@ -11,33 +11,36 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.customClasses.Attendees;
 import com.procialize.libraries.ImageLoader;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.network.ServiceHandler;
 import com.procialize.utility.Constants;
 
 public class SpeakerDetailPage extends Activity implements OnClickListener {
 	
-	ImageView speaker_thumbnail;
+	MLRoundedImageView speaker_thumbnail;
+	TextView speaker_detail_header;
 	TextView speaker_name;
     TextView speaker_designation;
     TextView speaker_comp_name;
     TextView speaker_city;
     
-    Button sendMessage;
-    Button setMeeting;
-    Button saveAttendee;
-    Button shareAttendee;
+    ImageView sendMessage;
+    ImageView setMeeting;
+    MLRoundedImageView saveAttendee;
+    MLRoundedImageView shareAttendee;
     
 //  Loader image - will be shown before loading image
     int loader = R.drawable.ic_launcher;
@@ -57,38 +60,47 @@ public class SpeakerDetailPage extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.speakers_detail);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
 		specificSpeaker = new Attendees();
 		specificSpeaker = (Attendees)getIntent().getSerializableExtra("SpecificSpeaker");
-        Toast.makeText(SpeakerDetailPage.this, ""+specificSpeaker.toString(), Toast.LENGTH_LONG).show();
+		
+		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
         
-        speaker_thumbnail = (ImageView) findViewById(R.id.speaker_detail_thumbnail);
+        speaker_thumbnail = (MLRoundedImageView) findViewById(R.id.speaker_detail_thumbnail);
         
         // Image url
         String image_url = "";
         image_url = constant.WEBSERVICE_URL + constant.SPEAKER_IMAGE_URL + specificSpeaker.getAttendee_image();
         
         ImageLoader imgLoader = new ImageLoader(SpeakerDetailPage.this);
-        
         // whenever you want to load an image from url
         // call DisplayImage function
         // url - image url to load
         // loader - loader image, will be displayed before getting image
         // image - ImageView 
         imgLoader.DisplayImage(image_url, loader, speaker_thumbnail);
+        
+        speaker_detail_header = (TextView) findViewById(R.id.speaker_detail_header);
+        speaker_detail_header.setTypeface(typeFace);
 		
 		speaker_name = (TextView) findViewById(R.id.speaker_detail_name);
 		speaker_name.setText(specificSpeaker.getAttendee_first_name()+" "+specificSpeaker.getAttendee_last_name());
+		speaker_name.setTypeface(typeFace);
         
 		speaker_designation = (TextView) findViewById(R.id.speaker_detail_designation);
 		speaker_designation.setText(specificSpeaker.getAttendee_designation());
+		speaker_designation.setTypeface(typeFace);
         
 		speaker_comp_name = (TextView) findViewById(R.id.speaker_detail_comp_name);
 		speaker_comp_name.setText(specificSpeaker.getAttendee_company_name());
+		speaker_comp_name.setTypeface(typeFace);
         
 		speaker_city = (TextView) findViewById(R.id.speaker_detail_city);
 		speaker_city.setText(specificSpeaker.getAttendee_city());
+		speaker_city.setTypeface(typeFace);
 		
 		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.SAVE_SHARE_SOCIAL;
         api_access_token_ = constant.API_ACCESS_TOKEN;
@@ -98,10 +110,10 @@ public class SpeakerDetailPage extends Activity implements OnClickListener {
 //        type_ = ""; //Share - Sh, Save - Sav
         transaction_type_ = "Social";// Other option - delete
         
-        sendMessage = (Button) findViewById(R.id.speaker_detail_send_message);
-        setMeeting = (Button) findViewById(R.id.speaker_detail_set_meeting);
-        saveAttendee = (Button) findViewById(R.id.speaker_detail_save_attendee);
-        shareAttendee = (Button) findViewById(R.id.speaker_detail_share_attendee);
+        sendMessage = (ImageView) findViewById(R.id.speaker_detail_send_message);
+        setMeeting = (ImageView) findViewById(R.id.speaker_detail_set_meeting);
+        saveAttendee = (MLRoundedImageView) findViewById(R.id.speaker_detail_save_attendee);
+        shareAttendee = (MLRoundedImageView) findViewById(R.id.speaker_detail_share_attendee);
         
         sendMessage.setOnClickListener(this);
         setMeeting.setOnClickListener(this);

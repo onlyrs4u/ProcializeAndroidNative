@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.procialize.customClasses.Profile;
+import com.procialize.customClasses.UserProfile;
 import com.procialize.utility.Constants;
 
 public class UserProfileParser {
@@ -16,19 +16,19 @@ public class UserProfileParser {
 	// JSON Node names
     private static final String USER_PROFILE_LIST = "user_data";
  
-    ArrayList<Profile> userData;
+    ArrayList<UserProfile> userData;
     Constants constant = new Constants();
     
-	public ArrayList<Profile> UserData_Parser(String jsonStr) {
+	public ArrayList<UserProfile> UserData_Parser(String jsonStr) {
 		// TODO Auto-generated constructor stub
 		
-		userData = new ArrayList<Profile>();
+		userData = new ArrayList<UserProfile>();
 		
 		if (jsonStr != null) {
 			try {
 				userJsonObject = new JSONObject(jsonStr);
 				JSONObject user = userJsonObject.getJSONObject(USER_PROFILE_LIST);
-				Profile userProfile = new Profile();
+				UserProfile userProfile = new UserProfile();
 				String attendeeId = user.getString("attendee_id");
 				if(!(attendeeId.equalsIgnoreCase("") || attendeeId.equalsIgnoreCase(null)))
 				{
@@ -50,6 +50,11 @@ public class UserProfileParser {
 				{
 					userProfile.setStatus(userStatus);	
 				}
+				String userPassword = user.getString("password");
+				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
+				{
+					userProfile.setPassword(userPassword);	
+				}
 				String userGCM = user.getString("gcm_reg_id");
 				if(!(userGCM.equalsIgnoreCase("") || userGCM.equalsIgnoreCase(null)))
 				{
@@ -59,6 +64,11 @@ public class UserProfileParser {
 				if(!(mobileOS.equalsIgnoreCase("") || mobileOS.equalsIgnoreCase(null)))
 				{
 					userProfile.setMobile_os(mobileOS);	
+				}
+				String userID = user.getString("user_id");
+				if(!(userID.equalsIgnoreCase("") || userID.equalsIgnoreCase(null)))
+				{
+					userProfile.setUser_ID(userID);	
 				}
 				String firstName = user.getString("first_name");
 				if(!(firstName.equalsIgnoreCase("") || firstName.equalsIgnoreCase(null)))
@@ -130,11 +140,6 @@ public class UserProfileParser {
 				{
 					userProfile.setMobile_number(userMobile);	
 				}
-				String userPassword = user.getString("password");
-				if(!(userPassword.equalsIgnoreCase("") || userPassword.equalsIgnoreCase(null)))
-				{
-					userProfile.setPassword(userPassword);	
-				}
 				
 				userData.add(userProfile);
 				
@@ -144,6 +149,7 @@ public class UserProfileParser {
 		} else {
 				Log.e("ServiceHandler", "Couldn't get any data from the url");
 		}
+		constant.USER_PROFILE_DB_LIST = userData;
 		return userData;
 	}
 }

@@ -177,7 +177,7 @@ public class WallNotificationListAdapter extends BaseAdapter{
     	  
 		@Override
 		public void updateDrawState(TextPaint ds) {
-			ds.setColor(Color.MAGENTA);
+			ds.setColor(Color.parseColor("#007F8A"));
 			ds.setUnderlineText(false);
 			ds.setTypeface(Typeface.DEFAULT_BOLD);
 		}

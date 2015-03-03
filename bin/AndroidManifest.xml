@@ -41,7 +41,8 @@
             android:name=".ProfileActivity" >
         </activity>
         <activity 
-            android:name=".EditProfileActivity" >
+            android:name=".EditProfileActivity"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".EventWallAcitvity"
@@ -66,10 +67,27 @@
         </activity>
         <activity
             android:name=".ExhibitorDetailPage"
+            android:theme="@style/customTheme"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".SpeakerDetailPage"
+            android:theme="@style/customTheme"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SavedAttendeeDetailPage"
+            android:theme="@style/customTheme"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SavedExhibitorDetailPage"
+            android:theme="@style/customTheme"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SavedSpeakerDetailPage"
+            android:theme="@style/customTheme"
             android:label="@string/app_name" >
         </activity>
     </application>

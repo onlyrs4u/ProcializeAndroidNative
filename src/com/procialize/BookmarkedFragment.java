@@ -24,11 +24,11 @@ public class BookmarkedFragment extends SherlockFragment {
 		// Locate fragment1.xml to create FragmentTabHost
 		mBookmarkedTabHost.setup(getSherlockActivity(), getChildFragmentManager(), R.layout.bookmarked_fragment);
 		// Create Tab 1
-		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab1").setIndicator("Saved Exhibitors"), SavedExhibitorFragment.class, null);
+		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab1").setIndicator("Saved Attendees"), SavedAttendeeFragment.class, null);
 		// Create Tab 2
-		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab2").setIndicator("Saved Speakers"), SavedSpeakerFragment.class, null);
+		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab2").setIndicator("Saved Exhibitors"), SavedExhibitorFragment.class, null);
 		// Create Tab 3
-		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab3").setIndicator("Saved Attendees"), SavedAttendeeFragment.class, null);
+		mBookmarkedTabHost.addTab(mBookmarkedTabHost.newTabSpec("tab3").setIndicator("Saved Speakers"), SavedSpeakerFragment.class, null);
 		
 		return mBookmarkedTabHost;
 	}

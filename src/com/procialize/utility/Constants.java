@@ -1,8 +1,14 @@
 package com.procialize.utility;
 
+import java.util.ArrayList;
+
+import com.procialize.customClasses.UserProfile;
+
 public class Constants {
 	
 	public static String API_ACCESS_TOKEN = "";
+	
+	public static ArrayList<UserProfile> USER_PROFILE_DB_LIST = new ArrayList<UserProfile>();
 	
 	public String WEBSERVICE_URL = "http://procialize.in/test/";
 	
@@ -18,6 +24,8 @@ public class Constants {
 	
 	public String SAVE_SHARE_SOCIAL = "save_social/";
 	
+	public String INDEPENDENT_WALL_NOTIFICATION_URL = "wall_notification_list";
+	
 	public String ATTENDEE_IMAGE_URL = "uploads/attendee/";
 	
 	public String EXHIBITOR_IMAGE_URL = "uploads/exhibitor/";
@@ -27,4 +35,8 @@ public class Constants {
 	public String ORGANIZER_IMAGE_URL = "uploads/organizer/logo/";
 	
 	public String SPONSOR_IMAGE_URL = "uploads/sponsor/";
+	
+	public String BOOKMARK_URL = "get_saved_profile/bookmark/1/";
+	
+	
 }

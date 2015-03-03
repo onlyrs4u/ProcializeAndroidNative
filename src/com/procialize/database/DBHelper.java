@@ -13,10 +13,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.procialize.customClasses.Attendees;
+import com.procialize.customClasses.Bookmarked;
 import com.procialize.customClasses.Events;
 import com.procialize.customClasses.UserNotifications;
 import com.procialize.customClasses.WallNotifications;
-import com.procialize.customClasses.Profile;
+import com.procialize.customClasses.UserProfile;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -194,6 +195,50 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String USER_RECEIVER_ATTENDEE_ID = "USER_RECEIVER_ATTENDEE_ID";
 	public static final String USER_RECEIVER_ATTENDEE_TYPE = "USER_RECEIVER_ATTENDEE_TYPE";	
 	
+	//Bookmarked Attendees/ Exhibitors/ Speakers
+	public static final String BOOKMARKED_TABLE_NAME = "BOOKMARKED_USER";
+	
+	public static final String BOOKMARKED_NOTIFICATION_ID = "BOOKMARKED_NOTIFICATION_ID";
+	public static final String BOOKMARKED_NOTIFICATION_TYPE = "BOOKMARKED_NOTIFICATION_TYPE";
+	public static final String BOOKMARKED_SUBJECT_ID = "BOOKMARKED_SUBJECT_ID";
+	public static final String BOOKMARKED_SUBJECT_TYPE = "BOOKMARKED_SUBJECT_TYPE";
+	public static final String BOOKMARKED_OBJECT_ID = "BOOKMARKED_OBJECT_ID";
+	public static final String BOOKMARKED_OBJECT_TYPE = "BOOKMARKED_OBJECT_TYPE";
+	public static final String BOOKMARKED_READ = "BOOKMARKED_READ";
+	public static final String BOOKMARKED_NOTIFICATION_CONTENT = "BOOKMARKED_NOTIFICATION_CONTENT";
+	public static final String BOOKMARKED_MEETING_ID = "BOOKMARKED_MEETING_ID";
+	public static final String BOOKMARKED_MESSAGE_ID = "BOOKMARKED_MESSAGE_ID";
+	public static final String BOOKMARKED_EVENT_ID = "BOOKMARKED_EVENT_ID";
+	public static final String BOOKMARKED_NOTIFICATION_DATE = "BOOKMARKED_NOTIFICATION_DATE";
+	public static final String BOOKMARKED_USER_ID = "BOOKMARKED_USER_ID";
+	public static final String BOOKMARKED_FIRST_NAME = "BOOKMARKED_FIRST_NAME";
+	public static final String BOOKMARKED_LAST_NAME = "BOOKMARKED_LAST_NAME";
+	public static final String BOOKMARKED_TYPE_OF_USER = "BOOKMARKED_TYPE_OF_USER";
+	public static final String BOOKMARKED_COMPANY_NAME = "BOOKMARKED_COMPANY_NAME";
+	public static final String BOOKMARKED_DESIGNATION = "BOOKMARKED_DESIGNATION";
+	public static final String BOOKMARKED_PHONE_NUMBER = "BOOKMARKED_PHONE_NUMBER";
+	public static final String BOOKMARKED_FULL_NAME = "BOOKMARKED_FULL_NAME";
+	public static final String BOOKMARKED_EVENT_NAME = "BOOKMARKED_EVENT_NAME";
+	// Bookmarked Receiver Data
+	public static final String BOOKMARKED_RECEIVER_USER_ID = "BOOKMARKED_RECEIVER_USER_ID";
+	public static final String BOOKMARKED_RECEIVER_EXHIBITOR_EMAIL = "BOOKMARKED_RECEIVER_EXHIBITOR_EMAIL";
+	public static final String BOOKMARKED_RECEIVER_FIRST_NAME = "BOOKMARKED_RECEIVER_FIRST_NAME";
+	public static final String BOOKMARKED_RECEIVER_LAST_NAME = "BOOKMARKED_RECEIVER_LAST_NAME";
+	public static final String BOOKMARKED_RECEIVER_TYPE_OF_USER = "BOOKMARKED_RECEIVER_TYPE_OF_USER";
+	public static final String BOOKMARKED_RECEIVER_TARGET_ID = "BOOKMARKED_RECEIVER_TARGET_ID";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_TYPE = "BOOKMARKED_RECEIVER_ATTENDEE_TYPE";
+	public static final String BOOKMARKED_RECEIVER_FULL_NAME = "BOOKMARKED_RECEIVER_FULL_NAME";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_IMAGE = "BOOKMARKED_RECEIVER_ATTENDEE_IMAGE";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_LOCATION = "BOOKMARKED_RECEIVER_ATTENDEE_LOCATION";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_CITY = "BOOKMARKED_RECEIVER_ATTENDEE_CITY";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_COUNTRY = "BOOKMARKED_RECEIVER_ATTENDEE_COUNTRY";
+	public static final String BOOKMARKED_RECEIVER_COMPANY_NAME = "BOOKMARKED_RECEIVER_COMPANY_NAME";
+	public static final String BOOKMARKED_RECEIVER_DESIGNATION = "BOOKMARKED_RECEIVER_DESIGNATION";
+	public static final String BOOKMARKED_RECEIVER_PHONE = "BOOKMARKED_RECEIVER_PHONE";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_ID = "BOOKMARKED_RECEIVER_ATTENDEE_ID";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_INDUSTRY = "BOOKMARKED_RECEIVER_ATTENDEE_INDUSTRY";
+	public static final String BOOKMARKED_RECEIVER_ATTENDEE_FUNCTIONALITY = "BOOKMARKED_RECEIVER_ATTENDEE_FUNCTIONALITY";
+	
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		Log.d("DB", "DB Created");
@@ -258,7 +303,22 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ USER_RECEIVER_DESIGNATION+" text, "+USER_RECEIVER_PHONE+" text, "+USER_RECEIVER_PHOTO+" text, "+USER_RECEIVER_ATTENDEE_ID+" text, "
 				+ USER_RECEIVER_ATTENDEE_TYPE+" text)");
 		
-		Log.d("DB", "Database created with five tables");
+		db.execSQL("create table " + BOOKMARKED_TABLE_NAME 
+				+ "("
+				+ BOOKMARKED_NOTIFICATION_ID+" text, "+BOOKMARKED_NOTIFICATION_TYPE+" text, "+BOOKMARKED_SUBJECT_ID+" text, "+BOOKMARKED_SUBJECT_TYPE+" text, "
+				+ BOOKMARKED_OBJECT_ID+" text, "+BOOKMARKED_OBJECT_TYPE+" text, "+BOOKMARKED_READ+" text, "+BOOKMARKED_NOTIFICATION_CONTENT+" text, "
+				+ BOOKMARKED_MEETING_ID+" text, "+BOOKMARKED_MESSAGE_ID+" text, "+BOOKMARKED_EVENT_ID+" text, "+BOOKMARKED_NOTIFICATION_DATE+" text, "
+				+ BOOKMARKED_USER_ID+" text, "+BOOKMARKED_FIRST_NAME+" text, "+BOOKMARKED_LAST_NAME+" text, "+BOOKMARKED_TYPE_OF_USER+" text, "
+				+ BOOKMARKED_COMPANY_NAME+" text, "+BOOKMARKED_DESIGNATION+" text, "+BOOKMARKED_PHONE_NUMBER+" text, "+BOOKMARKED_FULL_NAME+" text, "
+				+ BOOKMARKED_EVENT_NAME+" text, "+BOOKMARKED_RECEIVER_USER_ID+" text, "+BOOKMARKED_RECEIVER_EXHIBITOR_EMAIL+" text, "
+				+ BOOKMARKED_RECEIVER_FIRST_NAME+" text, "+BOOKMARKED_RECEIVER_LAST_NAME+" text, "+BOOKMARKED_RECEIVER_TYPE_OF_USER+" text, "
+				+ BOOKMARKED_RECEIVER_TARGET_ID+" text, "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" text, "+ BOOKMARKED_RECEIVER_FULL_NAME+" text, "
+				+ BOOKMARKED_RECEIVER_ATTENDEE_IMAGE+" text, "+BOOKMARKED_RECEIVER_ATTENDEE_LOCATION+" text, "+BOOKMARKED_RECEIVER_ATTENDEE_CITY+" text, "
+				+ BOOKMARKED_RECEIVER_ATTENDEE_COUNTRY+" text, "+BOOKMARKED_RECEIVER_COMPANY_NAME+" text, "+BOOKMARKED_RECEIVER_DESIGNATION+" text, "
+				+ BOOKMARKED_RECEIVER_PHONE+" text, "+BOOKMARKED_RECEIVER_ATTENDEE_ID+" text, "+BOOKMARKED_RECEIVER_ATTENDEE_INDUSTRY+" text, "
+				+ BOOKMARKED_RECEIVER_ATTENDEE_FUNCTIONALITY+" text)");
+		
+		Log.d("DB", "Database created with six tables");
 	}
 
 	@Override
@@ -269,6 +329,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS "+PROFILE_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS "+WALL_NOTIFICATION_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS "+USER_NOTIFICATION_TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS "+BOOKMARKED_TABLE_NAME);
 
 		onCreate(db);
 	}
@@ -822,7 +883,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		return;
 	}
 	
-	public void insertUserData(ArrayList<Profile> userDataList, SQLiteDatabase db) {
+	public void insertUserData(ArrayList<UserProfile> userDataList, SQLiteDatabase db) {
 		db = this.getWritableDatabase();
 		ContentValues contentValues;
 
@@ -1274,6 +1335,181 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 		return;
 	}
+		
+	public void insertBookmarkedInfo(ArrayList<Bookmarked> bookmarksList, SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		db = this.getWritableDatabase();
+		ContentValues contentValues = null;
+
+		try {
+			for (int i = 0; i < bookmarksList.size(); i++) {
+				contentValues = new ContentValues();
+
+				String notificationId = bookmarksList.get(i).getNotification_id();
+				if (!(notificationId.equalsIgnoreCase("") || notificationId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_NOTIFICATION_ID, notificationId);
+				}
+				String notificationType = bookmarksList.get(i).getNotification_type();
+				if (!(notificationType.equalsIgnoreCase("") || notificationType.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_NOTIFICATION_TYPE, notificationType);
+				}
+				String subjectId = bookmarksList.get(i).getSubject_id();
+				if (!(subjectId.equalsIgnoreCase("") || subjectId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_SUBJECT_ID, subjectId);
+				}
+				String subjectType = bookmarksList.get(i).getSubject_type();
+				if (!(subjectType.equalsIgnoreCase("") || subjectType.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_SUBJECT_TYPE, subjectType);
+				}
+				String objectId = bookmarksList.get(i).getObject_id();
+				if (!(objectId.equalsIgnoreCase("") || objectId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_OBJECT_ID, objectId);
+				}
+				String objectType = bookmarksList.get(i).getObject_type();
+				if (!(objectType.equalsIgnoreCase("") || objectType.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_OBJECT_TYPE, objectType);
+				}
+				String read = bookmarksList.get(i).getRead();
+				if (!(read.equalsIgnoreCase("") || read.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_READ, read);
+				}
+				String notificationContent = bookmarksList.get(i).getNotification_content();
+				if (!(notificationContent.equalsIgnoreCase("") || notificationContent.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_NOTIFICATION_CONTENT, notificationContent);
+				}
+				String meetingId = bookmarksList.get(i).getMeeting_id();
+				if (!(meetingId.equalsIgnoreCase("") || meetingId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_MEETING_ID, meetingId);
+				}
+				String messageId = bookmarksList.get(i).getMessage_id();
+				if (!(messageId.equalsIgnoreCase("") || messageId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_MESSAGE_ID, messageId);
+				}
+				String eventId = bookmarksList.get(i).getEvent_id();
+				if (!(eventId.equalsIgnoreCase("") || eventId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_EVENT_ID, eventId);
+				}
+				String notificationDate = bookmarksList.get(i).getNotification_date();
+				if (!(notificationDate.equalsIgnoreCase("") || notificationDate.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_NOTIFICATION_DATE, notificationDate);
+				}
+				String userId = bookmarksList.get(i).getUser_id();
+				if (!(userId.equalsIgnoreCase("") || userId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_USER_ID, userId);
+				}
+				String firstName = bookmarksList.get(i).getFirst_name();
+				if (!(firstName.equalsIgnoreCase("") || firstName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_FIRST_NAME, firstName);
+				}
+				String lastName = bookmarksList.get(i).getLast_name();
+				if (!(lastName.equalsIgnoreCase("") || lastName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_LAST_NAME, lastName);
+				}
+				String typeOfUser = bookmarksList.get(i).getType_of_user();
+				if(!(typeOfUser.equalsIgnoreCase("") || typeOfUser.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_TYPE_OF_USER, typeOfUser); 
+				} 
+				String companyName = bookmarksList.get(i).getCompany_name();
+				if(!(companyName.equalsIgnoreCase("") || companyName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_COMPANY_NAME, companyName); 
+				} 
+				String designation = bookmarksList.get(i).getDesignation();
+				if(!(designation.equalsIgnoreCase("") || designation.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_DESIGNATION, designation); 
+				} 
+				String phone = bookmarksList.get(i).getPhone();
+				if(!(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_PHONE_NUMBER, phone); 
+				}
+				String name = bookmarksList.get(i).getFull_name();
+				if(!(name.equalsIgnoreCase("") || name.equalsIgnoreCase(null))) {	
+					contentValues.put(BOOKMARKED_FULL_NAME, name); 
+				}
+				String eventName = bookmarksList.get(i).getEvent_name();
+				if (!(eventName.equalsIgnoreCase("") || eventName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_EVENT_NAME, eventName);
+				}
+//				Receiver Data Insert
+				String receiver_userID = bookmarksList.get(i).getReceiver_user_id();
+				if(!(receiver_userID.equalsIgnoreCase("") || receiver_userID.equalsIgnoreCase(null))) {	
+					contentValues.put(BOOKMARKED_RECEIVER_USER_ID, receiver_userID); 
+				}
+				String receiver_exhibitorEmail = bookmarksList.get(i).getReceiver_exhibitor_email();
+				if (!(receiver_exhibitorEmail.equalsIgnoreCase("") || receiver_exhibitorEmail.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_EXHIBITOR_EMAIL, receiver_exhibitorEmail);
+				}
+				String receiver_firstName = bookmarksList.get(i).getReceiver_first_name();
+				if (!(receiver_firstName.equalsIgnoreCase("") || receiver_firstName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_FIRST_NAME, receiver_firstName);
+				}
+				String receiver_lastName = bookmarksList.get(i).getReceiver_last_name();
+				if (!(receiver_lastName.equalsIgnoreCase("") || receiver_lastName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_LAST_NAME, receiver_lastName);
+				}
+				String receiver_typeOfUser = bookmarksList.get(i).getReceiver_type_of_user();
+				if (!(receiver_typeOfUser.equalsIgnoreCase("") || receiver_typeOfUser.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_TYPE_OF_USER, receiver_typeOfUser);
+				}
+				String receiver_targetId = bookmarksList.get(i).getReceiver_target_id();
+				if (!(receiver_targetId.equalsIgnoreCase("") || receiver_targetId.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_TARGET_ID, receiver_targetId);
+				}
+				String receiver_attendeeType = bookmarksList.get(i).getReceiver_attendee_type();
+				if (!(receiver_attendeeType.equalsIgnoreCase("") || receiver_attendeeType.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_TYPE, receiver_attendeeType);
+				}
+				String receiver_fullName = bookmarksList.get(i).getReceiver_full_name();
+				if (!(receiver_fullName.equalsIgnoreCase("") || receiver_fullName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_FULL_NAME, receiver_fullName);
+				}
+				String receiver_attendeeImage = bookmarksList.get(i).getReceiver_attendee_image();
+				if (!(receiver_attendeeImage.equalsIgnoreCase("") || receiver_attendeeImage.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_IMAGE, receiver_attendeeImage);
+				}
+				String receiver_attendee_location = bookmarksList.get(i).getReceiver_attendee_location();
+				if (!(receiver_attendee_location.equalsIgnoreCase("") || receiver_attendee_location.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_LOCATION, receiver_attendee_location);
+				}
+				String receiver_attendeeCity = bookmarksList.get(i).getReceiver_attendee_city();
+				if (!(receiver_attendeeCity.equalsIgnoreCase("") || receiver_attendeeCity.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_CITY, receiver_attendeeCity);
+				}
+				String receiver_attendeeCountry = bookmarksList.get(i).getReceiver_attendee_country();
+				if (!(receiver_attendeeCountry.equalsIgnoreCase("") || receiver_attendeeCountry.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_COUNTRY, receiver_attendeeCountry);
+				}
+				String receiver_companyName = bookmarksList.get(i).getReceiver_company_name();
+				if (!(receiver_companyName.equalsIgnoreCase("") || receiver_companyName.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_COMPANY_NAME, receiver_companyName);
+				}
+				String receiver_designation = bookmarksList.get(i).getReceiver_designation();
+				if (!(receiver_designation.equalsIgnoreCase("") || receiver_designation.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_DESIGNATION, receiver_designation);
+				}
+				String receiver_phone = bookmarksList.get(i).getReceiver_phone();
+				if (!(receiver_phone.equalsIgnoreCase("") || receiver_phone.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_PHONE, receiver_phone);
+				}
+				String receiver_AttendeeID = bookmarksList.get(i).getReceiver_attendee_id();
+				if (!(receiver_AttendeeID.equalsIgnoreCase("") || receiver_AttendeeID.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_ID, receiver_AttendeeID);
+				}
+				String receiver_attendeeIndustry = bookmarksList.get(i).getReceiver_attendee_industry();
+				if (!(receiver_attendeeIndustry.equalsIgnoreCase("") || receiver_attendeeIndustry.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_INDUSTRY, receiver_attendeeIndustry);
+				}
+				String receiver_attendeeFunctionality = bookmarksList.get(i).getReceiver_attendee_functionality();
+				if (!(receiver_attendeeFunctionality.equalsIgnoreCase("") || receiver_attendeeFunctionality.equalsIgnoreCase(null))) {
+					contentValues.put(BOOKMARKED_RECEIVER_ATTENDEE_FUNCTIONALITY, receiver_attendeeFunctionality);
+				}
+				db.insert(BOOKMARKED_TABLE_NAME, null, contentValues);	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return;
+	}
 	
 	public Cursor getData(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -1513,7 +1749,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return speakerList;
     }
     
-  //get Event Details
+    //get Event Details
     public List<Events> getEventInfo(){
         String selectQuery = "select * from "+EVENTS_TABLE_NAME;
         
@@ -1600,15 +1836,15 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     
     //Get User Profile List
-    public List<Profile> getUserProfile(){
+    public ArrayList<UserProfile> getUserProfile(){
         String selectQuery = "select * from "+PROFILE_TABLE_NAME;
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        List<Profile> userProfile = new ArrayList<Profile>();
+        ArrayList<UserProfile> userProfile = new ArrayList<UserProfile>();
         if (cursor.moveToFirst()) {
             do {
-            	Profile profileData = new Profile();
+            	UserProfile profileData = new UserProfile();
             	profileData.setProfile_attendee_id(cursor.getString(0));
             	profileData.setApi_access_token(cursor.getString(1));
             	profileData.setEmail(cursor.getString(2));
@@ -1639,7 +1875,191 @@ public class DBHelper extends SQLiteOpenHelper {
         return userProfile;
     }
     
+    //get Saved Attendee Details
+    public List<Bookmarked> getSavedAttendeeList(){
+        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'A\'";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Bookmarked> savedAttendeeList = new ArrayList<Bookmarked>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Bookmarked savedAttendeeListing = new Bookmarked();
+            	savedAttendeeListing.setNotification_id(cursor.getString(0));
+            	savedAttendeeListing.setNotification_type(cursor.getString(1));
+            	savedAttendeeListing.setSubject_id(cursor.getString(2));
+            	savedAttendeeListing.setSubject_type(cursor.getString(3));
+            	savedAttendeeListing.setObject_id(cursor.getString(4));
+            	savedAttendeeListing.setObject_type(cursor.getString(5));
+            	savedAttendeeListing.setRead(cursor.getString(6));
+            	savedAttendeeListing.setNotification_content(cursor.getString(7));
+            	savedAttendeeListing.setMeeting_id(cursor.getString(8));
+            	savedAttendeeListing.setMessage_id(cursor.getString(9));
+            	savedAttendeeListing.setEvent_id(cursor.getString(10));
+            	savedAttendeeListing.setNotification_date(cursor.getString(11));
+            	savedAttendeeListing.setUser_id(cursor.getString(12));
+            	savedAttendeeListing.setFirst_name(cursor.getString(13));
+            	savedAttendeeListing.setLast_name(cursor.getString(14));
+            	savedAttendeeListing.setType_of_user(cursor.getString(15));
+            	savedAttendeeListing.setCompany_name(cursor.getString(16));
+            	savedAttendeeListing.setDesignation(cursor.getString(17));
+            	savedAttendeeListing.setPhone(cursor.getString(18));
+            	savedAttendeeListing.setFull_name(cursor.getString(19));
+            	savedAttendeeListing.setEvent_name(cursor.getString(20));
+            	savedAttendeeListing.setReceiver_user_id(cursor.getString(21));
+            	savedAttendeeListing.setReceiver_exhibitor_email(cursor.getString(22));
+            	savedAttendeeListing.setReceiver_first_name(cursor.getString(23));
+            	savedAttendeeListing.setReceiver_last_name(cursor.getString(24));
+            	savedAttendeeListing.setReceiver_type_of_user(cursor.getString(25));
+            	savedAttendeeListing.setReceiver_target_id(cursor.getString(26));
+            	savedAttendeeListing.setReceiver_attendee_type(cursor.getString(27));
+            	savedAttendeeListing.setReceiver_full_name(cursor.getString(28));
+            	savedAttendeeListing.setReceiver_attendee_image(cursor.getString(29));
+            	savedAttendeeListing.setReceiver_attendee_location(cursor.getString(30));
+            	savedAttendeeListing.setReceiver_attendee_city(cursor.getString(31));
+            	savedAttendeeListing.setReceiver_attendee_country(cursor.getString(32));
+            	savedAttendeeListing.setReceiver_company_name(cursor.getString(33));
+            	savedAttendeeListing.setReceiver_designation(cursor.getString(34));
+            	savedAttendeeListing.setReceiver_phone(cursor.getString(35));
+            	savedAttendeeListing.setReceiver_attendee_id(cursor.getString(36));
+            	savedAttendeeListing.setReceiver_attendee_industry(cursor.getString(37));
+            	savedAttendeeListing.setReceiver_attendee_functionality(cursor.getString(38));
+            	
+            	savedAttendeeList.add(savedAttendeeListing);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return savedAttendeeList;
+    }
+    
+    //get Saved Exhibitor Details
+    public List<Bookmarked> getSavedExhibitorList(){
+        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'E\'";;
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Bookmarked> savedExhibitorList = new ArrayList<Bookmarked>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Bookmarked savedExhibitorListing = new Bookmarked();
+            	savedExhibitorListing.setNotification_id(cursor.getString(0));
+            	savedExhibitorListing.setNotification_type(cursor.getString(1));
+            	savedExhibitorListing.setSubject_id(cursor.getString(2));
+            	savedExhibitorListing.setSubject_type(cursor.getString(3));
+            	savedExhibitorListing.setObject_id(cursor.getString(4));
+            	savedExhibitorListing.setObject_type(cursor.getString(5));
+            	savedExhibitorListing.setRead(cursor.getString(6));
+            	savedExhibitorListing.setNotification_content(cursor.getString(7));
+            	savedExhibitorListing.setMeeting_id(cursor.getString(8));
+            	savedExhibitorListing.setMessage_id(cursor.getString(9));
+            	savedExhibitorListing.setEvent_id(cursor.getString(10));
+            	savedExhibitorListing.setNotification_date(cursor.getString(11));
+            	savedExhibitorListing.setUser_id(cursor.getString(12));
+            	savedExhibitorListing.setFirst_name(cursor.getString(13));
+            	savedExhibitorListing.setLast_name(cursor.getString(14));
+            	savedExhibitorListing.setType_of_user(cursor.getString(15));
+            	savedExhibitorListing.setCompany_name(cursor.getString(16));
+            	savedExhibitorListing.setDesignation(cursor.getString(17));
+            	savedExhibitorListing.setPhone(cursor.getString(18));
+            	savedExhibitorListing.setFull_name(cursor.getString(19));
+            	savedExhibitorListing.setEvent_name(cursor.getString(20));
+            	savedExhibitorListing.setReceiver_user_id(cursor.getString(21));
+            	savedExhibitorListing.setReceiver_exhibitor_email(cursor.getString(22));
+            	savedExhibitorListing.setReceiver_first_name(cursor.getString(23));
+            	savedExhibitorListing.setReceiver_last_name(cursor.getString(24));
+            	savedExhibitorListing.setReceiver_type_of_user(cursor.getString(25));
+            	savedExhibitorListing.setReceiver_target_id(cursor.getString(26));
+            	savedExhibitorListing.setReceiver_attendee_type(cursor.getString(27));
+            	savedExhibitorListing.setReceiver_full_name(cursor.getString(28));
+            	savedExhibitorListing.setReceiver_attendee_image(cursor.getString(29));
+            	savedExhibitorListing.setReceiver_attendee_location(cursor.getString(30));
+            	savedExhibitorListing.setReceiver_attendee_city(cursor.getString(31));
+            	savedExhibitorListing.setReceiver_attendee_country(cursor.getString(32));
+            	savedExhibitorListing.setReceiver_company_name(cursor.getString(33));
+            	savedExhibitorListing.setReceiver_designation(cursor.getString(34));
+            	savedExhibitorListing.setReceiver_phone(cursor.getString(35));
+            	savedExhibitorListing.setReceiver_attendee_id(cursor.getString(36));
+            	savedExhibitorListing.setReceiver_attendee_industry(cursor.getString(37));
+            	savedExhibitorListing.setReceiver_attendee_functionality(cursor.getString(38));
+            	
+            	savedExhibitorList.add(savedExhibitorListing);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return savedExhibitorList;
+    }
+    
+    //get Saved Speakers Details
+    public List<Bookmarked> getSavedSpeakersList(){
+        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'S\'";;
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<Bookmarked> savedSpeakerList = new ArrayList<Bookmarked>();
+        if (cursor.moveToFirst()) {
+            do {
+            	Bookmarked savedSpeakerListing = new Bookmarked();
+            	savedSpeakerListing.setNotification_id(cursor.getString(0));
+            	savedSpeakerListing.setNotification_type(cursor.getString(1));
+            	savedSpeakerListing.setSubject_id(cursor.getString(2));
+            	savedSpeakerListing.setSubject_type(cursor.getString(3));
+            	savedSpeakerListing.setObject_id(cursor.getString(4));
+            	savedSpeakerListing.setObject_type(cursor.getString(5));
+            	savedSpeakerListing.setRead(cursor.getString(6));
+            	savedSpeakerListing.setNotification_content(cursor.getString(7));
+            	savedSpeakerListing.setMeeting_id(cursor.getString(8));
+            	savedSpeakerListing.setMessage_id(cursor.getString(9));
+            	savedSpeakerListing.setEvent_id(cursor.getString(10));
+            	savedSpeakerListing.setNotification_date(cursor.getString(11));
+            	savedSpeakerListing.setUser_id(cursor.getString(12));
+            	savedSpeakerListing.setFirst_name(cursor.getString(13));
+            	savedSpeakerListing.setLast_name(cursor.getString(14));
+            	savedSpeakerListing.setType_of_user(cursor.getString(15));
+            	savedSpeakerListing.setCompany_name(cursor.getString(16));
+            	savedSpeakerListing.setDesignation(cursor.getString(17));
+            	savedSpeakerListing.setPhone(cursor.getString(18));
+            	savedSpeakerListing.setFull_name(cursor.getString(19));
+            	savedSpeakerListing.setEvent_name(cursor.getString(20));
+            	savedSpeakerListing.setReceiver_user_id(cursor.getString(21));
+            	savedSpeakerListing.setReceiver_exhibitor_email(cursor.getString(22));
+            	savedSpeakerListing.setReceiver_first_name(cursor.getString(23));
+            	savedSpeakerListing.setReceiver_last_name(cursor.getString(24));
+            	savedSpeakerListing.setReceiver_type_of_user(cursor.getString(25));
+            	savedSpeakerListing.setReceiver_target_id(cursor.getString(26));
+            	savedSpeakerListing.setReceiver_attendee_type(cursor.getString(27));
+            	savedSpeakerListing.setReceiver_full_name(cursor.getString(28));
+            	savedSpeakerListing.setReceiver_attendee_image(cursor.getString(29));
+            	savedSpeakerListing.setReceiver_attendee_location(cursor.getString(30));
+            	savedSpeakerListing.setReceiver_attendee_city(cursor.getString(31));
+            	savedSpeakerListing.setReceiver_attendee_country(cursor.getString(32));
+            	savedSpeakerListing.setReceiver_company_name(cursor.getString(33));
+            	savedSpeakerListing.setReceiver_designation(cursor.getString(34));
+            	savedSpeakerListing.setReceiver_phone(cursor.getString(35));
+            	savedSpeakerListing.setReceiver_attendee_id(cursor.getString(36));
+            	savedSpeakerListing.setReceiver_attendee_industry(cursor.getString(37));
+            	savedSpeakerListing.setReceiver_attendee_functionality(cursor.getString(38));
+            	
+            	savedSpeakerList.add(savedSpeakerListing);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return savedSpeakerList;
+    }
 
+    public void clearWallNotifcationTable(){
+    	SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + WALL_NOTIFICATION_TABLE_NAME);
+    }
+    
+    public void clearAllTables(){
+    	SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DELETE FROM " + EVENTS_TABLE_NAME);
+		db.execSQL("DELETE FROM " + ATTENDEES_TABLE_NAME);
+		db.execSQL("DELETE FROM " + PROFILE_TABLE_NAME);
+		db.execSQL("DELETE FROM " + WALL_NOTIFICATION_TABLE_NAME);
+		db.execSQL("DELETE FROM " + USER_NOTIFICATION_TABLE_NAME);
+		db.execSQL("DELETE FROM " + BOOKMARKED_TABLE_NAME);
+    }
 	/*
 	 * public boolean updateContact (Integer id, String name, String phone,
 	 * String email, String street,String place) { SQLiteDatabase db =

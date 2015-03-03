@@ -1,12 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#888888" >
 
-    <ImageView
+    <com.procialize.libraries.MLRoundedImageView
         android:id="@+id/left_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="7dp"
+        android:contentDescription="@string/custom_spinner_profile_image_cd"
         android:src="@drawable/ic_launcher" />
 
     <TextView
@@ -14,13 +18,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/left_pic"
         android:padding="0dp"
         android:text="@string/custom_spinner_item_full_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#1d97dd"
-        android:textStyle="bold" />
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/sub_text_email"
@@ -31,7 +35,8 @@
         android:layout_toRightOf="@+id/left_pic"
         android:text="@string/custom_spinner_item_designation"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#777777" />
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/sub_text_company"
@@ -39,9 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sub_text_email"
         android:layout_marginLeft="5dip"
+        android:layout_marginBottom="5dip"
         android:layout_toRightOf="@+id/left_pic"
         android:text="@string/custom_spinner_item_company_name"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#777777" />
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
 
 </RelativeLayout>

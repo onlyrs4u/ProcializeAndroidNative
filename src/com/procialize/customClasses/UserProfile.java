@@ -1,6 +1,6 @@
 package com.procialize.customClasses;
 
-public class Profile {
+public class UserProfile {
 	
 	private int drawableResID;
 	
@@ -27,7 +27,7 @@ public class Profile {
 	private String mobile_number;
 	private String phone_number;
 	
-	public Profile(int drawableResID, String fname, String lname, String designation, String company) {
+	public UserProfile(int drawableResID, String fname, String lname, String designation, String company) {
 		super();
 		this.drawableResID = drawableResID;
 		this.first_name = fname;
@@ -36,7 +36,7 @@ public class Profile {
 		this.company_name = company;
 	}
 	
-	public Profile() {
+	public UserProfile() {
 		// TODO Auto-generated constructor stub
 	}
 

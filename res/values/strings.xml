@@ -39,6 +39,7 @@
 	<string name="attendees_detail_share_attendee">Share Attendee</string>
 	
 	<!-- Custom Spinner Item -->
+	<string name="custom_spinner_profile_image_cd">Profile Image</string>
 	<string name="custom_spinner_item_full_name">Full Name</string>
 	<string name="custom_spinner_item_designation">Designation</string>
 	<string name="custom_spinner_item_company_name">Company Name</string>
@@ -60,14 +61,20 @@
 	<string name="edit_profile_save_button">Save Profile</string>
 	
 	<!-- Exhibitor Detail -->
+	<string name="exhibitor_thumbnail_cd">Exhibitor Thumbnail</string>
+	<string name="exhibitor_save_cd">Save Exhibitor</string>
+	<string name="exhibitor_share_cd">Share Exhibitor</string>
+	<string name="exhibitor_send_msg_cd">Send Message</string>
+	<string name="exhibitor_set_meeting_cd">Set Meeting</string>
+	<string name="exhibitor_profile_header">Exhibitor Profile</string>
 	<string name="exhibitors_detail_full_name">Full Name</string>
 	<string name="exhibitors_detail_designation">Designation</string>
 	<string name="exhibitors_detail_company_name">Company Name</string>
 	<string name="exhibitors_detail_city_name">City Name</string>
 	<string name="exhibitors_detail_send_message">Send Message</string>
 	<string name="exhibitors_detail_set_meeting">  Set Meeting  </string>
-	<string name="exhibitors_detail_save_attendee">Save Attendee</string>
-	<string name="exhibitors_detail_share_attendee">Share Attendee</string>
+	<string name="exhibitors_detail_save_attendee">Save Exhibitor</string>
+	<string name="exhibitors_detail_share_attendee">Share Exhibitor</string>
 	
 	<!-- Single List Row -->
 	<string name="single_list_row_full_name">Full Name</string>
@@ -76,14 +83,20 @@
 	<string name="single_list_row_city_name">City Name</string>
 
 	<!-- Speaker Detail -->
+	<string name="speaker_thumbnail_cd">Speaker Thumbnail</string>
+	<string name="speaker_save_cd">Save Speaker</string>
+	<string name="speaker_share_cd">Share Speaker</string>
+	<string name="speaker_send_msg_cd">Send Message</string>
+	<string name="speaker_set_meeting_cd">Set Meeting</string>
+	<string name="speaker_profile_header">Speaker Profile</string>
 	<string name="speakers_detail_full_name">Full Name</string>
 	<string name="speakers_detail_designation">Designation</string>
 	<string name="speakers_detail_company_name">Company Name</string>
 	<string name="speakers_detail_city_name">City Name</string>
 	<string name="speakers_detail_send_message">Send Message</string>
 	<string name="speakers_detail_set_meeting">  Set Meeting  </string>
-	<string name="speakers_detail_save_attendee">Save Attendee</string>
-	<string name="speakers_detail_share_attendee">Share Attendee</string>
+	<string name="speakers_detail_save_attendee">Save Speaker</string>
+	<string name="speakers_detail_share_attendee">Share Speaker</string>
 	
 	<!-- Wall Notification List Constants -->
 	<string name="wall_notification_type">default notification type </string><!-- Sh -->

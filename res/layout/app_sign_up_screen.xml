@@ -15,7 +15,7 @@
         android:textSize="20sp"
         android:textColor="@android:color/black" />
     
-    <ImageView 
+    <!-- <ImageView 
         android:id="@+id/settings"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:contentDescription="@android:string/untitled" 
         android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp" /> -->
 
     <EditText
         android:id="@+id/email_edittext"
