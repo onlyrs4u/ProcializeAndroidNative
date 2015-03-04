@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme"
-        android:logo="@drawable/native_app_logo" >
+        android:logo="@drawable/procialize_logo" >
         <activity
             android:name=".SocialMediaLogin"
             android:theme="@style/customTheme"

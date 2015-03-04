@@ -2,20 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screenbackground" >
+    android:background="@drawable/signup_bg" >
+
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/logo_cd"
+        android:src="@drawable/procialize_logo" />
 
     <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/app_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="20dp"
         android:text="@string/sign_up_text"
-        android:textSize="20sp"
-        android:textColor="@android:color/black" />
-    
-    <!-- <ImageView 
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+ 
+    <!--
+         <ImageView 
         android:id="@+id/settings"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -24,7 +34,8 @@
         android:contentDescription="@android:string/untitled" 
         android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp" /> -->
+        android:layout_marginTop="10dp" />
+    -->
 
     <EditText
         android:id="@+id/email_edittext"
@@ -34,8 +45,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
+        android:singleLine="true"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress" />
 
@@ -47,7 +59,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword" />
@@ -60,11 +73,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
         android:ems="10"
         android:hint="@string/first_name_hint"
         android:inputType="textPersonName" />
-    
+
     <EditText
         android:id="@+id/last_name_edittext"
         android:layout_width="match_parent"
@@ -73,7 +87,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/last_name_hint"
         android:inputType="textPersonName" />
@@ -86,10 +101,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
         android:ems="10"
         android:hint="@string/city_hint" />
-    
+
     <TextView
         android:id="@+id/mandate_text"
         android:layout_width="wrap_content"
@@ -98,20 +114,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:text="@string/mandate_text"
-        android:textSize="15sp"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
-    <Button
+    <com.procialize.libraries.MLRoundedImageView
         android:id="@+id/save_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mandate_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:text="@string/save_button" />
+        android:background="#007F8A"
+        android:contentDescription="@string/save_button"
+        android:src="@drawable/share_icon" />
 
 </RelativeLayout>

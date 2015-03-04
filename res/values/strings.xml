@@ -4,16 +4,22 @@
     <string name="menu_settings">Settings</string>
     
     <!-- Social Media Login -->
-	<string name="facebook">facebook</string>
-	<string name="linkedIn">LinkedIn</string>
+	<string name="facebook_cd">facebook</string>
+	<string name="linkedIn_cd">LinkedIn</string>
 	<string name="already_account_text">Already have an account with Procialize</string>
 	<string name="username">Username</string>
 	<string name="password">Password</string>
 	<string name="login_button">Login</string>
+	<string name="sign_up_button">Sign up</string>
+	<string name="cancel_button">Cancel</string>
+	<string name="submit_button">Submit</string>
 	<string name="create_new">Create New Account</string>
+	<string name="logo_cd">App Logo</string>
+	<string name="event_name">Event App Name</string>
+	<string name="event_date">Event Date</string>
 	
 	<!-- App Sign up -->
-	<string name="sign_up_text">Sign Up</string>
+	<string name="sign_up_text">SIGN UP</string>
 	<string name="email_hint">Email</string>
 	<string name="password_hint">Password</string>
 	<string name="first_name_hint">First Name</string>

@@ -307,7 +307,6 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 //			userProfileAdapter.myCustomItem.setAdapter(userProfileAdapter);
 			
 			Log.d("Created Wall Notification URL : ", ">>>>> " + url_);
-			Toast.makeText(getActivity(), "Bakwas", Toast.LENGTH_LONG).show();
 			
 			new Handler().postDelayed(new Runnable() {
 	            @Override public void run() {

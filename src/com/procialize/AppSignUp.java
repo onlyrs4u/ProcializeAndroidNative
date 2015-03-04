@@ -16,15 +16,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.customClasses.UserProfile;
+import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.network.ServiceHandler;
 import com.procialize.parsers.UserProfileParser;
 import com.procialize.utility.Constants;
@@ -38,7 +37,7 @@ public class AppSignUp extends Activity implements OnClickListener{
 	private EditText firstNameEdit;
 	private EditText lastNameEdit;
 	private EditText cityEdit;
-	private Button saveBtn;
+	private MLRoundedImageView saveBtn;
 //	private ImageView settingsBtn;
 	
 	private ProgressDialog pDialog;
@@ -52,9 +51,9 @@ public class AppSignUp extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.app_sign_up_screen);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		
@@ -77,8 +76,7 @@ public class AppSignUp extends Activity implements OnClickListener{
 		lastNameEdit.setTypeface(typeFace);
 		cityEdit = (EditText)findViewById(R.id.city_edittext);
 		cityEdit.setTypeface(typeFace);
-		saveBtn = (Button)findViewById(R.id.save_button);
-		saveBtn.setTypeface(typeFace);
+		saveBtn = (MLRoundedImageView)findViewById(R.id.save_button);
 //		settingsBtn = (ImageView)findViewById(R.id.settings);
 		
 		//Applying listener to the elements
