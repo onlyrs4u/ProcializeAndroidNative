@@ -87,6 +87,12 @@
 	<string name="single_list_row_designation">Designation</string>
 	<string name="single_list_row_company_name">Company Name</string>
 	<string name="single_list_row_city_name">City Name</string>
+	
+	<!-- Message Single List Row -->
+	<string name="message_list_row_content">Notification Content</string>
+	<string name="message_list_row_date">Notification Date</string>
+	<string name="message_list_row_sender_name">Sender Name</string>
+	<string name="message_list_row_reply">Reply</string>
 
 	<!-- Speaker Detail -->
 	<string name="speaker_thumbnail_cd">Speaker Thumbnail</string>

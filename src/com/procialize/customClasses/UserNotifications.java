@@ -22,7 +22,7 @@ public class UserNotifications {
 	private String company_name = "";
 	private String designation = "";
 	private String phone = "";
-	private String photo;
+//	private String photo;
 	private String approve = "";
 	private String start_time = "";
 	private String end_time = "";
@@ -156,12 +156,12 @@ public class UserNotifications {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getPhoto() {
+	/*public String getPhoto() {
 		return photo;
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}
+	}*/
 	public String getApprove() {
 		return approve;
 	}

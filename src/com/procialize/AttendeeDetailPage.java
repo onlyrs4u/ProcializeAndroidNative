@@ -45,9 +45,9 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
     MLRoundedImageView shareAttendee;
 	
 //  Loader image - will be shown before loading image
-    int loader = R.drawable.ic_launcher;
+    int loader = R.drawable.ic_launcher; 
     Constants constant = new Constants();
-    Attendees specificAttendee;
+    Attendees specificAttendee; 
     private ProgressDialog pDialog;
     
     String url_ = "";

@@ -135,11 +135,11 @@ public class UserNotificationParser {
 					{
 						userNotifications.setPhone(phone);	
 					}
-					String photo = jsonUserNotification.getString("photo");
+					/*String photo = jsonUserNotification.getString("photo");
 					if(!(photo.equalsIgnoreCase("") || photo.equalsIgnoreCase(null)))
 					{
 						userNotifications.setPhoto(photo);	
-					}
+					}*/
 		            String approve = jsonUserNotification.getString("approve");
 					if(!(approve.equalsIgnoreCase("") || approve.equalsIgnoreCase(null)))
 					{

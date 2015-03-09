@@ -26,11 +26,11 @@ public class NotificationFragment extends SherlockFragment {
 		// Create Tab 1
 		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab1").setIndicator("Messages"), MessagesFragment.class, null);
 		// Create Tab 2
-		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab2").setIndicator("Alerts"), AgendaFragment.class, null);
+//		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab2").setIndicator("Alerts"), AgendaFragment.class, null);
 		// Create Tab 3
 		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab3").setIndicator("Meeting Requests"), MeetingRequestsFragment.class, null);
 		// Create Tab 4
-		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab4").setIndicator("Reminders"), ReminderFragment.class, null);
+//		mNotificationTabHost.addTab(mNotificationTabHost.newTabSpec("tab4").setIndicator("Reminders"), ReminderFragment.class, null);
 		
 		return mNotificationTabHost;
 	}

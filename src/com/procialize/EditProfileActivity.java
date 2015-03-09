@@ -1,6 +1,12 @@
 package com.procialize;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,8 +15,10 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -18,8 +26,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.procialize.customClasses.DataWrapper;
 import com.procialize.customClasses.UserProfile;
+import com.procialize.database.DBHelper;
+import com.procialize.network.ServiceHandler;
+import com.procialize.parsers.UserProfileParser;
 import com.procialize.utility.Constants;
 
 public class EditProfileActivity extends Activity implements OnClickListener{
@@ -35,6 +48,7 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 	private EditText cityEdit;
 	private EditText mobileEdit;
 	private EditText phoneEdit;
+	private Button SaveBtn;
 	
 	String api_access_token_ = "";
 	String user_registration_url = "";
@@ -45,18 +59,18 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 	private ProgressDialog pDialog;
 	private ArrayList<UserProfile> myProfile = new ArrayList<UserProfile>();
 	
-	/*static final String[] WORLDCUP2010 = new String[] {
-		"Algeria",  "Argentina", "Australia", 
-		"Brazil", "Cote d'Ivoire", "Cameroon", 
-		"Chile", "Costa Rica", "Denmark", 
-		"England", "France", "Germany",
-		"Ghana",  "Greece", "Honduras",
-		"Italy",  "Japan", "Netherlands",
-		"New Zealand", "Nigeria", "North Korea",
-		"Paraguay", "Portugal","Serbia",
-		"Slovakia", "Slovenia", "South Africa",  
-		"South Korea",  "Spain", "Switzerland",    
-		"United States", "Uruguay" };*/
+	String fname = "";
+	String lname = "";
+	String designation = "";
+	String company_name = "";
+	String description = "";
+	String city = "";
+	String mobile = "";
+	String phone = "";
+	
+	DBHelper helper;
+	private UserProfileParser userParser;
+	ArrayList<UserProfile> userData;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -67,7 +81,11 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.edit_profile_screen);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
-		myProfile = (ArrayList<UserProfile>) getIntent().getExtras().getSerializable("userProfile_Array");
+//		myProfile = (ArrayList<UserProfile>) getIntent().getExtras().getSerializable("userProfile_Array");
+		DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("userProfile_Array");
+		myProfile = dw.getUserData();
+		
+		helper = new DBHelper(this);
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
 		
@@ -95,16 +113,20 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		mobileEdit.setTypeface(typeFace);
 		phoneEdit = (EditText) findViewById(R.id.edit_phone_edittext);
 		phoneEdit.setTypeface(typeFace);
+		SaveBtn = (Button)findViewById(R.id.save_button);
+		SaveBtn.setTypeface(typeFace);
 		
 		api_access_token_ = constant.API_ACCESS_TOKEN;
 		//Applying listener to the elements
 		chooseFileBtn.setOnClickListener(this);
+		SaveBtn.setOnClickListener(this);
 		
 		setRespectiveValues(myProfile);
 		
 //		industry_dropdown = (AutoCompleteTextView) findViewById(R.id.industry_dropdown);
 //		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, WORLDCUP2010);
 //		industry_dropdown.setAdapter(adapter);
+		userData = new ArrayList<UserProfile>();
 		
 	}
 
@@ -112,44 +134,44 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 	{
 		for(int i=0; i<profile.size(); i++)
 		{
-			String fname = profile.get(i).getFirst_name();
-			String lname = profile.get(i).getLast_name();
-			String designation = profile.get(i).getDesignation();
-			String company_name = profile.get(i).getCompany_name();
-			String description = profile.get(i).getDescription();
-			String city = profile.get(i).getCity();
-			String mobile = profile.get(i).getMobile_number();
-			String phone = profile.get(i).getPhone_number();
+			fname = profile.get(i).getFirst_name();
+			lname = profile.get(i).getLast_name();
+			designation = profile.get(i).getDesignation();
+			company_name = profile.get(i).getCompany_name();
+			description = profile.get(i).getDescription();
+			city = profile.get(i).getCity();
+			mobile = profile.get(i).getMobile_number();
+			phone = profile.get(i).getPhone_number();
 			
-			if(fname.equalsIgnoreCase("") || fname.equalsIgnoreCase(null))
+			if(!(fname.equalsIgnoreCase("") || fname.equalsIgnoreCase(null)))
 			{
 				firstNameEdit.setText(fname);
 			}
-			if(lname.equalsIgnoreCase("") || lname.equalsIgnoreCase(null))
+			if(!(lname.equalsIgnoreCase("") || lname.equalsIgnoreCase(null)))
 			{
 				lastNameEdit.setText(lname);
 			}
-			if(designation.equalsIgnoreCase("") || designation.equalsIgnoreCase(null))
+			if(!(designation.equalsIgnoreCase("") || designation.equalsIgnoreCase(null)))
 			{
 				designationEdit.setText(designation);
 			}
-			if(company_name.equalsIgnoreCase("") || company_name.equalsIgnoreCase(null))
+			if(!(company_name.equalsIgnoreCase("") || company_name.equalsIgnoreCase(null)))
 			{
 				companyNameEdit.setText(company_name);
 			}
-			if(description.equalsIgnoreCase("") || description.equalsIgnoreCase(null))
+			if(!(description.equalsIgnoreCase("") || description.equalsIgnoreCase(null)))
 			{
 				descriptionEdit.setText(description);
 			}
-			if(city.equalsIgnoreCase("") || city.equalsIgnoreCase(null))
+			if(!(city.equalsIgnoreCase("") || city.equalsIgnoreCase(null)))
 			{
 				cityEdit.setText(city);
 			}
-			if(mobile.equalsIgnoreCase("") || mobile.equalsIgnoreCase(null))
+			if(!(mobile.equalsIgnoreCase("") || mobile.equalsIgnoreCase(null)))
 			{
 				mobileEdit.setText(mobile);
 			}
-			if(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null))
+			if(!(phone.equalsIgnoreCase("") || phone.equalsIgnoreCase(null)))
 			{
 				phoneEdit.setText(phone);
 			}
@@ -163,6 +185,9 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		{
 			Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(i, RESULT_LOAD_IMAGE);
+		}else if(view == SaveBtn)
+		{
+			new editRegisterUser().execute();
 		}
 	}
 		
@@ -189,7 +214,7 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 	/**
 	 * Async task class to get json by making HTTP call
 	 * */
-	/*private class editRegisterUser extends AsyncTask<Void, Void, Void> {
+	private class editRegisterUser extends AsyncTask<Void, Void, Void> {
 			
 		JSONObject jsonObj = null;
 		String err = "";
@@ -248,8 +273,8 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			String userEmail = "";
-			String userFunctionality = "";
+			
+			helper.clearUserProfileTable();
 				
 			// Dismiss the progress dialog
 			if (pDialog.isShowing())
@@ -257,20 +282,12 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 				
 			Log.d("Created URL : ", ">>>>> " + user_registration_url);
 			Toast.makeText(EditProfileActivity.this, ""+message, Toast.LENGTH_LONG).show();
-			for (int i = 0; i < userData.size(); i++) {
-				userEmail = userData.get(i).getEmail();
-//				userFunctionality = userData.get(i).getFunctionality();
-			}
 				
-			if(err.equalsIgnoreCase("success"))
+			/*if(err.equalsIgnoreCase("success"))
 			{
-				Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
-				intent.putExtra("appUsername", userEmail);
-				intent.putExtra("appPassword", passwordEdit.getText().toString());//use userFunctionality
-				intent.putExtra("provider", "manual_login");
-				startActivity(intent);
-			}
+				Toast.makeText(EditProfileActivity.this, ""+err, Toast.LENGTH_LONG).show();
+			}*/
 		}
-	}*/
+	}
 
 }

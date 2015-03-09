@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/single_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
+
+    <!-- Notification Content -->
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_list_row_content"
+        android:textColor="@color/titlebackgroundcolor"
+        android:textSize="20sp" />
+
+    <!-- Notification Date -->
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content"
+        android:layout_marginTop="1dip"
+        android:text="@string/message_list_row_date"
+        android:textSize="13sp" />
+
+    <!-- Sender Name -->
+
+    <TextView
+        android:id="@+id/sender_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_marginTop="5dp"
+        android:text="@string/message_list_row_sender_name"
+        android:textSize="13sp" />
+    
+    <!-- Reply Button -->
+    
+    <Button 
+        android:id="@+id/reply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_list_row_reply"
+        android:layout_below="@+id/sender_name"
+        android:layout_marginTop="5dp" />
+
+    <!-- City -->
+
+    <!--
+         <TextView
+        android:id="@+id/city"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comp_name"
+        android:layout_marginTop="5dp"
+        android:text="@string/single_list_row_city_name"
+        android:textSize="13sp" />
+    -->
+
+
+</RelativeLayout>

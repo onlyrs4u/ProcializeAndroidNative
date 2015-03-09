@@ -1,7 +1,13 @@
 package com.procialize.customClasses;
 
-public class UserProfile {
-	
+import java.io.Serializable;
+
+public class UserProfile implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int drawableResID;
 	
 	private String profile_attendee_id = "";

@@ -64,22 +64,23 @@ public final class R {
         public static final int notification_icon=0x7f02002e;
         public static final int procialize_logo=0x7f02002f;
         public static final int save_icon=0x7f020030;
-        public static final int send_message_icon=0x7f020031;
-        public static final int settings_icon=0x7f020032;
-        public static final int setup_meeting_icon=0x7f020033;
-        public static final int share_icon=0x7f020034;
-        public static final int signup_bg=0x7f020035;
-        public static final int speaker_icon=0x7f020036;
-        public static final int sponsors_icon=0x7f020037;
-        public static final int user1=0x7f020038;
-        public static final int user2=0x7f020039;
-        public static final int wall_selector=0x7f02003a;
+        public static final int save_icon_old=0x7f020031;
+        public static final int send_message_icon=0x7f020032;
+        public static final int settings_icon=0x7f020033;
+        public static final int setup_meeting_icon=0x7f020034;
+        public static final int share_icon=0x7f020035;
+        public static final int signup_bg=0x7f020036;
+        public static final int speaker_icon=0x7f020037;
+        public static final int sponsors_icon=0x7f020038;
+        public static final int user1=0x7f020039;
+        public static final int user2=0x7f02003a;
+        public static final int wall_selector=0x7f02003b;
     }
     public static final class id {
-        public static final int action_settings=0x7f080095;
+        public static final int action_settings=0x7f08009a;
         public static final int app_logo=0x7f08000a;
-        public static final int app_password=0x7f080076;
-        public static final int app_username=0x7f080075;
+        public static final int app_password=0x7f08007b;
+        public static final int app_username=0x7f08007a;
         public static final int attendee_detail=0x7f080013;
         public static final int attendee_detail_bank=0x7f08001c;
         public static final int attendee_detail_city=0x7f08001e;
@@ -95,15 +96,17 @@ public final class R {
         public static final int attendee_detail_share_attendee=0x7f080018;
         public static final int attendee_detail_thumbnail=0x7f080015;
         public static final int attendees_list=0x7f080022;
-        public static final int cancel_btn=0x7f080078;
+        public static final int cancel_btn=0x7f08007d;
         public static final int choose_file_button=0x7f080038;
-        public static final int city=0x7f08006c;
+        public static final int city=0x7f080071;
         public static final int city_edittext=0x7f080010;
-        public static final int comp_name=0x7f08006b;
+        public static final int comp_name=0x7f080070;
+        public static final int content=0x7f080060;
         public static final int content_frame=0x7f080005;
-        public static final int country=0x7f080064;
-        public static final int designation=0x7f08006a;
-        public static final int displayName=0x7f080060;
+        public static final int country=0x7f08006a;
+        public static final int date=0x7f080061;
+        public static final int designation=0x7f08006f;
+        public static final int displayName=0x7f080066;
         public static final int drawerIcon=0x7f080026;
         public static final int drawerSpinner=0x7f080024;
         public static final int drawerTitle=0x7f080027;
@@ -122,8 +125,8 @@ public final class R {
         public static final int email=0x7f08005c;
         public static final int email_edittext=0x7f08000c;
         public static final int email_label=0x7f080008;
-        public static final int event_date=0x7f08006e;
-        public static final int event_name=0x7f08006d;
+        public static final int event_date=0x7f080073;
+        public static final int event_name=0x7f080072;
         public static final int exhibitor_detail=0x7f080042;
         public static final int exhibitor_detail_bank=0x7f08004a;
         public static final int exhibitor_detail_city=0x7f08004c;
@@ -139,7 +142,7 @@ public final class R {
         public static final int exhibitor_detail_share_attendee=0x7f080047;
         public static final int exhibitor_detail_thumbnail=0x7f080044;
         public static final int exhibitors_list=0x7f080050;
-        public static final int fb_login=0x7f080073;
+        public static final int fb_login=0x7f080078;
         public static final int first_name_edittext=0x7f08000e;
         public static final int frag11_icon=0x7f080057;
         public static final int frag11_text=0x7f080058;
@@ -151,81 +154,84 @@ public final class R {
         public static final int frag6_text=0x7f080056;
         public static final int frag7_icon=0x7f080053;
         public static final int frag7_text=0x7f080054;
-        public static final int gender=0x7f080062;
+        public static final int gender=0x7f080068;
         public static final int headerLayout=0x7f080025;
         public static final int icon=0x7f080030;
-        public static final int imgView=0x7f08005e;
+        public static final int imgView=0x7f080064;
         public static final int itemLayout=0x7f080028;
-        public static final int language=0x7f080063;
+        public static final int language=0x7f080069;
         public static final int last_name_edittext=0x7f08000f;
         public static final int lay1=0x7f08001a;
         public static final int left_drawer=0x7f080006;
         public static final int left_pic=0x7f08002b;
-        public static final int linkedin_login=0x7f080072;
-        public static final int location=0x7f080061;
-        public static final int login_btn=0x7f080070;
-        public static final int login_sign_up_layout=0x7f08006f;
+        public static final int linkedin_login=0x7f080077;
+        public static final int location=0x7f080067;
+        public static final int login_btn=0x7f080075;
+        public static final int login_sign_up_layout=0x7f080074;
         public static final int mandate_text=0x7f080011;
-        public static final int manual_login_layout=0x7f080074;
-        public static final int menu_settings=0x7f080094;
+        public static final int manual_login_layout=0x7f080079;
+        public static final int menu_settings=0x7f080099;
+        public static final int messages_list=0x7f08005e;
         public static final int mobile=0x7f08005d;
         public static final int mobile_label=0x7f080009;
         public static final int myTitle=0x7f08002f;
         public static final int name=0x7f08005b;
         public static final int name_label=0x7f080007;
         public static final int password_edittext=0x7f08000d;
-        public static final int profile=0x7f08005f;
+        public static final int profile=0x7f080065;
+        public static final int reply_button=0x7f080063;
         public static final int save_button=0x7f080012;
         public static final int save_layout=0x7f080034;
-        public static final int saved_attendees_list=0x7f080065;
-        public static final int saved_exhibitors_list=0x7f080066;
-        public static final int saved_speakers_list=0x7f080067;
+        public static final int saved_attendees_list=0x7f08006b;
+        public static final int saved_exhibitors_list=0x7f08006c;
+        public static final int saved_speakers_list=0x7f08006d;
         public static final int scrollview1=0x7f080035;
         public static final int select_image_layout=0x7f080036;
         public static final int selected_image=0x7f080037;
-        public static final int sign_up_btn=0x7f080071;
+        public static final int sender_name=0x7f080062;
+        public static final int sign_up_btn=0x7f080076;
         public static final int signup=0x7f08000b;
-        public static final int single_relative_layout=0x7f080068;
-        public static final int speaker_detail=0x7f080079;
-        public static final int speaker_detail_bank=0x7f080081;
-        public static final int speaker_detail_city=0x7f080083;
-        public static final int speaker_detail_comp_name=0x7f080082;
-        public static final int speaker_detail_designation=0x7f080080;
-        public static final int speaker_detail_header=0x7f08007a;
-        public static final int speaker_detail_msg_meet_layout=0x7f080084;
-        public static final int speaker_detail_name=0x7f08007f;
-        public static final int speaker_detail_save_attendee=0x7f08007d;
-        public static final int speaker_detail_save_share_layout=0x7f08007c;
-        public static final int speaker_detail_send_message=0x7f080085;
-        public static final int speaker_detail_set_meeting=0x7f080086;
-        public static final int speaker_detail_share_attendee=0x7f08007e;
-        public static final int speaker_detail_thumbnail=0x7f08007b;
-        public static final int speakers_list=0x7f080087;
+        public static final int single_relative_layout=0x7f08005f;
+        public static final int speaker_detail=0x7f08007e;
+        public static final int speaker_detail_bank=0x7f080086;
+        public static final int speaker_detail_city=0x7f080088;
+        public static final int speaker_detail_comp_name=0x7f080087;
+        public static final int speaker_detail_designation=0x7f080085;
+        public static final int speaker_detail_header=0x7f08007f;
+        public static final int speaker_detail_msg_meet_layout=0x7f080089;
+        public static final int speaker_detail_name=0x7f080084;
+        public static final int speaker_detail_save_attendee=0x7f080082;
+        public static final int speaker_detail_save_share_layout=0x7f080081;
+        public static final int speaker_detail_send_message=0x7f08008a;
+        public static final int speaker_detail_set_meeting=0x7f08008b;
+        public static final int speaker_detail_share_attendee=0x7f080083;
+        public static final int speaker_detail_thumbnail=0x7f080080;
+        public static final int speakers_list=0x7f08008c;
         public static final int spinnerLayout=0x7f080023;
         public static final int sub_text_company=0x7f08002e;
         public static final int sub_text_email=0x7f08002d;
-        public static final int submit_btn=0x7f080077;
+        public static final int submit_btn=0x7f08007c;
         public static final int subtitle=0x7f080032;
-        public static final int swipe_container=0x7f080088;
+        public static final int swipe_container=0x7f08008d;
         public static final int tab1=0x7f080002;
         public static final int tab2=0x7f080003;
         public static final int tab3=0x7f080004;
         public static final int tab_host=0x7f080001;
         public static final int text1=0x7f080041;
         public static final int text_main_name=0x7f08002c;
-        public static final int thumbnail=0x7f080069;
+        public static final int thumbnail=0x7f08006e;
         public static final int title=0x7f080031;
-        public static final int wall_list=0x7f080089;
-        public static final int wall_notification_sender_name=0x7f08008b;
-        public static final int wall_notification_text=0x7f08008c;
-        public static final int wall_notification_type=0x7f080090;
-        public static final int wall_receiver_company_name=0x7f080093;
-        public static final int wall_receiver_designation=0x7f080092;
-        public static final int wall_receiver_name=0x7f080091;
-        public static final int wall_sender_company_name=0x7f08008f;
-        public static final int wall_sender_designation=0x7f08008e;
-        public static final int wall_sender_name=0x7f08008d;
-        public static final int wall_sender_thumbnail=0x7f08008a;
+        public static final int wall_list=0x7f08008e;
+        public static final int wall_notification_sender_name=0x7f080090;
+        public static final int wall_notification_text=0x7f080091;
+        public static final int wall_notification_type=0x7f080095;
+        public static final int wall_receiver_company_name=0x7f080098;
+        public static final int wall_receiver_designation=0x7f080097;
+        public static final int wall_receiver_name=0x7f080096;
+        public static final int wall_sender_company_name=0x7f080094;
+        public static final int wall_sender_designation=0x7f080093;
+        public static final int wall_sender_name=0x7f080092;
+        public static final int wall_sender_thumbnail=0x7f08008f;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -256,29 +262,30 @@ public final class R {
         public static final int list_item=0x7f030019;
         public static final int meeting_requests_fragment=0x7f03001a;
         public static final int messages_fragment=0x7f03001b;
-        public static final int notification_fragment=0x7f03001c;
-        public static final int profile=0x7f03001d;
-        public static final int reminders_fragment=0x7f03001e;
-        public static final int sample=0x7f03001f;
-        public static final int saved_attendees_fragment=0x7f030020;
-        public static final int saved_exhibitors_fragment=0x7f030021;
-        public static final int saved_speakers_fragment=0x7f030022;
-        public static final int single_list_row=0x7f030023;
-        public static final int social_media_login_screen=0x7f030024;
-        public static final int speakers_detail=0x7f030025;
-        public static final int speakers_fragment=0x7f030026;
-        public static final int wall_fragment=0x7f030027;
-        public static final int wall_list_row_for_image=0x7f030028;
-        public static final int wall_list_row_for_text=0x7f030029;
+        public static final int messages_single_item=0x7f03001c;
+        public static final int notification_fragment=0x7f03001d;
+        public static final int profile=0x7f03001e;
+        public static final int reminders_fragment=0x7f03001f;
+        public static final int sample=0x7f030020;
+        public static final int saved_attendees_fragment=0x7f030021;
+        public static final int saved_exhibitors_fragment=0x7f030022;
+        public static final int saved_speakers_fragment=0x7f030023;
+        public static final int single_list_row=0x7f030024;
+        public static final int social_media_login_screen=0x7f030025;
+        public static final int speakers_detail=0x7f030026;
+        public static final int speakers_fragment=0x7f030027;
+        public static final int wall_fragment=0x7f030028;
+        public static final int wall_list_row_for_image=0x7f030029;
+        public static final int wall_list_row_for_text=0x7f03002a;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
         public static final int main=0x7f070001;
     }
     public static final class string {
-        public static final int action_settings=0x7f050064;
-        public static final int agenda_fragment_tab=0x7f050067;
-        public static final int alerts_fragment_tab=0x7f05006c;
+        public static final int action_settings=0x7f050068;
+        public static final int agenda_fragment_tab=0x7f05006b;
+        public static final int alerts_fragment_tab=0x7f050070;
         public static final int already_account_text=0x7f050004;
         public static final int app_name=0x7f050000;
         public static final int attendee_profile_header=0x7f05001c;
@@ -297,7 +304,7 @@ public final class R {
         public static final int attendees_detail_send_message=0x7f050021;
         public static final int attendees_detail_set_meeting=0x7f050022;
         public static final int attendees_detail_share_attendee=0x7f050024;
-        public static final int attendees_fragment_tab=0x7f050068;
+        public static final int attendees_fragment_tab=0x7f05006c;
         public static final int cancel_button=0x7f050009;
         public static final int choose_file=0x7f05002a;
         public static final int city_hint=0x7f050014;
@@ -308,8 +315,8 @@ public final class R {
         /**  Custom Spinner Item 
          */
         public static final int custom_spinner_profile_image_cd=0x7f050025;
-        public static final int drawer_close=0x7f050066;
-        public static final int drawer_open=0x7f050065;
+        public static final int drawer_close=0x7f05006a;
+        public static final int drawer_open=0x7f050069;
         public static final int edit_profile_city_hint=0x7f050033;
         public static final int edit_profile_company_hint=0x7f05002e;
         public static final int edit_profile_country_hint=0x7f050032;
@@ -344,7 +351,7 @@ public final class R {
         public static final int exhibitors_detail_send_message=0x7f050041;
         public static final int exhibitors_detail_set_meeting=0x7f050042;
         public static final int exhibitors_detail_share_attendee=0x7f050044;
-        public static final int exhibitors_fragment_tab=0x7f050069;
+        public static final int exhibitors_fragment_tab=0x7f05006d;
         /**  Social Media Login 
          */
         public static final int facebook_cd=0x7f050002;
@@ -354,16 +361,22 @@ public final class R {
         public static final int login_button=0x7f050007;
         public static final int logo_cd=0x7f05000c;
         public static final int mandate_text=0x7f050015;
-        public static final int meeting_requests_fragment_tab=0x7f05006d;
+        public static final int meeting_requests_fragment_tab=0x7f050071;
         public static final int menu_settings=0x7f050001;
-        public static final int messages_fragment_tab=0x7f05006b;
+        /**  Message Single List Row 
+         */
+        public static final int message_list_row_content=0x7f050049;
+        public static final int message_list_row_date=0x7f05004a;
+        public static final int message_list_row_reply=0x7f05004c;
+        public static final int message_list_row_sender_name=0x7f05004b;
+        public static final int messages_fragment_tab=0x7f05006f;
         public static final int password=0x7f050006;
         public static final int password_hint=0x7f050011;
-        public static final int reminders_fragment_tab=0x7f05006e;
+        public static final int reminders_fragment_tab=0x7f050072;
         public static final int save_button=0x7f050016;
-        public static final int saved_attendees_fragment_tab=0x7f050071;
-        public static final int saved_exhibitors_fragment_tab=0x7f05006f;
-        public static final int saved_speakers_fragment_tab=0x7f050070;
+        public static final int saved_attendees_fragment_tab=0x7f050075;
+        public static final int saved_exhibitors_fragment_tab=0x7f050073;
+        public static final int saved_speakers_fragment_tab=0x7f050074;
         public static final int sign_up_button=0x7f050008;
         /**  App Sign up 
          */
@@ -374,52 +387,52 @@ public final class R {
         /**  Single List Row 
          */
         public static final int single_list_row_full_name=0x7f050045;
-        public static final int speaker_profile_header=0x7f05004e;
-        public static final int speaker_save_cd=0x7f05004a;
-        public static final int speaker_send_msg_cd=0x7f05004c;
-        public static final int speaker_set_meeting_cd=0x7f05004d;
-        public static final int speaker_share_cd=0x7f05004b;
+        public static final int speaker_profile_header=0x7f050052;
+        public static final int speaker_save_cd=0x7f05004e;
+        public static final int speaker_send_msg_cd=0x7f050050;
+        public static final int speaker_set_meeting_cd=0x7f050051;
+        public static final int speaker_share_cd=0x7f05004f;
         /**  Speaker Detail 
          */
-        public static final int speaker_thumbnail_cd=0x7f050049;
-        public static final int speakers_detail_city_name=0x7f050052;
-        public static final int speakers_detail_company_name=0x7f050051;
-        public static final int speakers_detail_designation=0x7f050050;
-        public static final int speakers_detail_full_name=0x7f05004f;
-        public static final int speakers_detail_save_attendee=0x7f050055;
-        public static final int speakers_detail_send_message=0x7f050053;
-        public static final int speakers_detail_set_meeting=0x7f050054;
-        public static final int speakers_detail_share_attendee=0x7f050056;
+        public static final int speaker_thumbnail_cd=0x7f05004d;
+        public static final int speakers_detail_city_name=0x7f050056;
+        public static final int speakers_detail_company_name=0x7f050055;
+        public static final int speakers_detail_designation=0x7f050054;
+        public static final int speakers_detail_full_name=0x7f050053;
+        public static final int speakers_detail_save_attendee=0x7f050059;
+        public static final int speakers_detail_send_message=0x7f050057;
+        public static final int speakers_detail_set_meeting=0x7f050058;
+        public static final int speakers_detail_share_attendee=0x7f05005a;
         public static final int submit_button=0x7f05000a;
         public static final int username=0x7f050005;
-        public static final int wall_fragment_tab=0x7f05006a;
-        public static final int wall_notification_data=0x7f050063;
+        public static final int wall_fragment_tab=0x7f05006e;
+        public static final int wall_notification_data=0x7f050067;
         /**  N 
          */
-        public static final int wall_notification_download_brochure=0x7f05005b;
+        public static final int wall_notification_download_brochure=0x7f05005f;
         /**  Sav 
  <string name="wall_notification_notification">has posted the following notification</string> 
  N 
          */
-        public static final int wall_notification_notification=0x7f05005a;
-        public static final int wall_notification_notification_date_time=0x7f05005f;
-        public static final int wall_notification_receiver_company_name=0x7f050062;
-        public static final int wall_notification_receiver_designation=0x7f050061;
-        public static final int wall_notification_receiver_full_name=0x7f050060;
+        public static final int wall_notification_notification=0x7f05005e;
+        public static final int wall_notification_notification_date_time=0x7f050063;
+        public static final int wall_notification_receiver_company_name=0x7f050066;
+        public static final int wall_notification_receiver_designation=0x7f050065;
+        public static final int wall_notification_receiver_full_name=0x7f050064;
         /**  Sh 
          */
-        public static final int wall_notification_saved=0x7f050059;
-        public static final int wall_notification_sender_company_name=0x7f05005e;
-        public static final int wall_notification_sender_designation=0x7f05005d;
+        public static final int wall_notification_saved=0x7f05005d;
+        public static final int wall_notification_sender_company_name=0x7f050062;
+        public static final int wall_notification_sender_designation=0x7f050061;
         /**  Download Brochure 
          */
-        public static final int wall_notification_sender_full_name=0x7f05005c;
+        public static final int wall_notification_sender_full_name=0x7f050060;
         /**  Sh 
          */
-        public static final int wall_notification_shared=0x7f050058;
+        public static final int wall_notification_shared=0x7f05005c;
         /**  Wall Notification List Constants 
          */
-        public static final int wall_notification_type=0x7f050057;
+        public static final int wall_notification_type=0x7f05005b;
     }
     public static final class style {
         /** 

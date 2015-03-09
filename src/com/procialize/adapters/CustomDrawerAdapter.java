@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.procialize.EditProfileActivity;
 import com.procialize.R;
+import com.procialize.customClasses.DataWrapper;
 import com.procialize.customClasses.DrawerItem;
 import com.procialize.customClasses.UserProfile;
+import com.procialize.utility.Constants;
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
@@ -28,6 +32,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 	List<DrawerItem> drawerItemList;
 	ArrayList<UserProfile> myUserList;
 	int layoutResID;
+	Constants constant = new Constants();
 	
 	public CustomDrawerAdapter(Context context, int layoutResourceID, List<DrawerItem> listItems) {
 		super(context, layoutResourceID, listItems);
@@ -105,9 +110,10 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 						int position, long id) {
 					// TODO Auto-generated method stub
 					Toast.makeText(context, "Edit Profile", Toast.LENGTH_SHORT).show();
-					/*Intent edit_profile = new Intent(context, EditProfileActivity.class);
-					edit_profile.putExtra("userProfile_Array", myUserList);
-					context.startActivity(edit_profile);*/
+					Intent edit_profile = new Intent(context, EditProfileActivity.class);
+//					edit_profile.putExtra("userProfile_Array", constant.USER_PROFILE_DB_LIST);
+					edit_profile.putExtra("userProfile_Array", new DataWrapper(constant.USER_PROFILE_DB_LIST));
+					context.startActivity(edit_profile);
 				}
 			});
 			/*drawerHolder.spinner.setOnItemSelectedListener(new OnItemSelectedListener() {

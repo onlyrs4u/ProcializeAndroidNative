@@ -26,6 +26,8 @@ public class Constants {
 	
 	public String INDEPENDENT_WALL_NOTIFICATION_URL = "wall_notification_list";
 	
+	public String INDEPENDENT_USER_NOTIFICATION_URL = "notification_list/";
+	
 	public String ATTENDEE_IMAGE_URL = "uploads/attendee/";
 	
 	public String EXHIBITOR_IMAGE_URL = "uploads/exhibitor/";
