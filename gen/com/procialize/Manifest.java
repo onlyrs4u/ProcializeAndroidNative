@@ -9,6 +9,6 @@ package com.procialize;
 
 public final class Manifest {
     public static final class permission {
-        public static final String C2D_MESSAGE="com.hprog99.android.permission.C2D_MESSAGE";
+        public static final String C2D_MESSAGE="com.procialize.permission.C2D_MESSAGE";
     }
 }

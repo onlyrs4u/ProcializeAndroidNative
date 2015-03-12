@@ -83,23 +83,10 @@ public class MainActivity extends SherlockFragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawer_main);
 
+		// GCM
 		GetGCM();
 		// sendMessageGCM();
 
-		// // GCM
-		// String msg = "";
-		// String regId = "";
-		// if (gcm == null) {
-		// gcm = GoogleCloudMessaging.getInstance(MainActivity.this);
-		// }
-		// try {
-		// regId = gcm.register("custom-resource-88104");
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// Log.d("RegisterActivity", "registerInBackground - regId: " + regId);
-		// msg = "Device registered, registration ID=" + regId;
 		helper = new DBHelper(this);
 		constant = new Constants();
 		provider_name = getIntent().getStringExtra("provider");
@@ -274,16 +261,22 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 					data.putString("action", ACTION);
 					String msgId = "TestMessage";
-					gcm.send(REG_ID + "@gcm.googleapis.com", msgId,
+					gcm.send("670961870240" + "@gcm.googleapis.com", msgId,
 							GCM_DEFAULT_TTL, data);
-					System.out.println("sending..............................");
+
 				} catch (IOException e) {
 					Log.e("grokkingandroid",
 							"IOException while sending registration id", e);
 				}
 				return null;
 			}
-		};
+
+			@Override
+			protected void onPostExecute(Object result) {
+				super.onPostExecute(result);
+				System.out.println("sending..............................");
+			}
+		}.execute();
 
 		// java.lang.NullPointerException: Attempt to invoke virtual method
 		// 'void
@@ -509,11 +502,6 @@ public class MainActivity extends SherlockFragmentActivity implements
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}
 
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) {
-	 * getSupportMenuInflater().inflate(R.menu.activity_main, menu); return
-	 * true; }
-	 */
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -641,11 +629,3 @@ public class MainActivity extends SherlockFragmentActivity implements
 		}
 	}
 }
-// GoogleCloudMessaging gcm = GoogleCloudMessaging.get(context);
-/*
- * String to = NOTIFICATION_KEY; AtomicInteger msgId = new AtomicInteger();
- * String id = Integer.toString(msgId.incrementAndGet()); Bundle data = new
- * Bundle(); data.putString("hello", "world");
- * 
- * gcm.send(to, id, data);
- */

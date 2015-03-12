@@ -17,7 +17,7 @@ public final class GCMHelper {
 	}
 
 	public String GCMRegister(String SENDER_ID) throws Exception {
-		String regid = "";
+		String regid = "";                                                                                                           
 		// Check if Play store services are available.
 		if (!checkPlayServices())
 			throw new Exception(
