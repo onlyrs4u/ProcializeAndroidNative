@@ -94,7 +94,7 @@ public class SocialMediaLogin extends Activity implements OnClickListener{
 		SQLiteDatabase db = procializeDB.getReadableDatabase();
 		
 	}
-	
+	 
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub

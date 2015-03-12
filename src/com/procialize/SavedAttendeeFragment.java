@@ -63,7 +63,7 @@ public class SavedAttendeeFragment extends SherlockFragment {
 		savedAttendeedDBList = new ArrayList<Bookmarked>();
 		
 		constant = new Constants();
-		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.BOOKMARK_URL + constant.API_ACCESS_TOKEN;
+		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.BOOKMARK_URL + Constants.API_ACCESS_TOKEN;
 		
 		bookmarksList = new ArrayList<Bookmarked>();
 		savedAttendeesListView = (ListView)getActivity().findViewById(R.id.saved_attendees_list);

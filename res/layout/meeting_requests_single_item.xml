@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/single_relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
+
+    <!-- Notification Content -->
+
+    <TextView
+        android:id="@+id/meeting_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meeting_list_row_content"
+        android:textColor="@color/titlebackgroundcolor"
+        android:textSize="20sp" />
+
+    <!-- Notification Date -->
+
+    <TextView
+        android:id="@+id/meeting_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meeting_content"
+        android:layout_marginTop="1dip"
+        android:text="@string/meeting_list_row_date"
+        android:textSize="13sp" />
+
+    <!-- Sender Name -->
+
+    <TextView
+        android:id="@+id/meeting_sender_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meeting_date"
+        android:layout_marginTop="5dp"
+        android:text="@string/meeting_list_row_sender_name"
+        android:textSize="13sp" />
+
+    <!-- Confirm Button -->
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meeting_sender_name"
+        android:layout_marginTop="5dp"
+        android:text="@string/meeting_list_row_confirm" />
+
+    <!-- Decline Button -->
+
+    <Button
+        android:id="@+id/decline_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meeting_sender_name"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/confirm_button"
+        android:text="@string/meeting_list_row_decline" />
+
+</RelativeLayout>

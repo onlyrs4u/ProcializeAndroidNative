@@ -1,135 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Procialize Android Native</string>
     <string name="menu_settings">Settings</string>
-    
-    <!-- Social Media Login -->
-	<string name="facebook_cd">facebook</string>
-	<string name="linkedIn_cd">LinkedIn</string>
-	<string name="already_account_text">Already have an account with Procialize</string>
-	<string name="username">Username</string>
-	<string name="password">Password</string>
-	<string name="login_button">Login</string>
-	<string name="sign_up_button">Sign up</string>
-	<string name="cancel_button">Cancel</string>
-	<string name="submit_button">Submit</string>
-	<string name="create_new">Create New Account</string>
-	<string name="logo_cd">App Logo</string>
-	<string name="event_name">Event App Name</string>
-	<string name="event_date">Event Date</string>
-	
-	<!-- App Sign up -->
-	<string name="sign_up_text">SIGN UP</string>
-	<string name="email_hint">Email</string>
-	<string name="password_hint">Password</string>
-	<string name="first_name_hint">First Name</string>
-	<string name="last_name_hint">Last Name</string>
-	<string name="city_hint">City</string>
-	<string name="mandate_text">** All fields are mandatory **</string>
-	<string name="save_button">Save</string>
-	
-	<!-- Attendees Detail -->
-	<string name="attendee_thumbnail_cd">Attendee Thumbnail</string>
-	<string name="attendee_save_cd">Save Attendee</string>
-	<string name="attendee_share_cd">Share Attendee</string>
-	<string name="attendee_send_msg_cd">Send Message</string>
-	<string name="attendee_set_meeting_cd">Set Meeting</string>
-	<string name="attendee_profile_header">Attendee Profile</string>
-	<string name="attendees_detail_full_name">Full Name</string>
-	<string name="attendees_detail_designation">Designation</string>
-	<string name="attendees_detail_company_name">Company Name</string>
-	<string name="attendees_detail_city_name">City Name</string>
-	<string name="attendees_detail_send_message">Send Message</string>
-	<string name="attendees_detail_set_meeting">  Set Meeting  </string>
-	<string name="attendees_detail_save_attendee">Save Attendee</string>
-	<string name="attendees_detail_share_attendee">Share Attendee</string>
-	
-	<!-- Custom Spinner Item -->
-	<string name="custom_spinner_profile_image_cd">Profile Image</string>
-	<string name="custom_spinner_item_full_name">Full Name</string>
-	<string name="custom_spinner_item_designation">Designation</string>
-	<string name="custom_spinner_item_company_name">Company Name</string>
-	
-	<!-- Edit Profile -->
-	<string name="edit_profile_text">Edit your profile</string>
-	<string name="choose_file">Choose file</string>
-	<string name="edit_profile_fname_hint">First Name</string>
-	<string name="edit_profile_lname_hint">Last Name</string>
-	<string name="edit_profile_designation_hint">Designation</string>
-	<string name="edit_profile_company_hint">Company Name</string>
-	<string name="edit_profile_description_hint">Description</string>
-	<string name="edit_profile_industry_hint">Add Industry</string>
-	<string name="edit_profile_functionality_hint">Add Functionality</string>
-	<string name="edit_profile_country_hint">Country</string>
-	<string name="edit_profile_city_hint">City</string>
-	<string name="edit_profile_mobile_hint">Mobile Number</string>
-	<string name="edit_profile_phone_hint">Phone Number</string>
-	<string name="edit_profile_save_button">Save Profile</string>
-	
-	<!-- Exhibitor Detail -->
-	<string name="exhibitor_thumbnail_cd">Exhibitor Thumbnail</string>
-	<string name="exhibitor_save_cd">Save Exhibitor</string>
-	<string name="exhibitor_share_cd">Share Exhibitor</string>
-	<string name="exhibitor_send_msg_cd">Send Message</string>
-	<string name="exhibitor_set_meeting_cd">Set Meeting</string>
-	<string name="exhibitor_profile_header">Exhibitor Profile</string>
-	<string name="exhibitors_detail_full_name">Full Name</string>
-	<string name="exhibitors_detail_designation">Designation</string>
-	<string name="exhibitors_detail_company_name">Company Name</string>
-	<string name="exhibitors_detail_city_name">City Name</string>
-	<string name="exhibitors_detail_send_message">Send Message</string>
-	<string name="exhibitors_detail_set_meeting">  Set Meeting  </string>
-	<string name="exhibitors_detail_save_attendee">Save Exhibitor</string>
-	<string name="exhibitors_detail_share_attendee">Share Exhibitor</string>
-	
-	<!-- Single List Row -->
-	<string name="single_list_row_full_name">Full Name</string>
-	<string name="single_list_row_designation">Designation</string>
-	<string name="single_list_row_company_name">Company Name</string>
-	<string name="single_list_row_city_name">City Name</string>
-	
-	<!-- Message Single List Row -->
-	<string name="message_list_row_content">Notification Content</string>
-	<string name="message_list_row_date">Notification Date</string>
-	<string name="message_list_row_sender_name">Sender Name</string>
-	<string name="message_list_row_reply">Reply</string>
 
-	<!-- Speaker Detail -->
-	<string name="speaker_thumbnail_cd">Speaker Thumbnail</string>
-	<string name="speaker_save_cd">Save Speaker</string>
-	<string name="speaker_share_cd">Share Speaker</string>
-	<string name="speaker_send_msg_cd">Send Message</string>
-	<string name="speaker_set_meeting_cd">Set Meeting</string>
-	<string name="speaker_profile_header">Speaker Profile</string>
-	<string name="speakers_detail_full_name">Full Name</string>
-	<string name="speakers_detail_designation">Designation</string>
-	<string name="speakers_detail_company_name">Company Name</string>
-	<string name="speakers_detail_city_name">City Name</string>
-	<string name="speakers_detail_send_message">Send Message</string>
-	<string name="speakers_detail_set_meeting">  Set Meeting  </string>
-	<string name="speakers_detail_save_attendee">Save Speaker</string>
-	<string name="speakers_detail_share_attendee">Share Speaker</string>
-	
-	<!-- Wall Notification List Constants -->
-	<string name="wall_notification_type">default notification type </string><!-- Sh -->
-	<string name="wall_notification_shared">I have shared profile of</string><!-- Sh -->
-	<string name="wall_notification_saved">I have saved profile of</string><!-- Sav -->
-	<!-- <string name="wall_notification_notification">has posted the following notification</string> --><!-- N -->
-	<string name="wall_notification_notification"></string><!-- N -->
-	<string name="wall_notification_download_brochure">I have downloaded the brochure of</string><!-- Download Brochure -->
-	<string name="wall_notification_sender_full_name">Sender Full Name </string>
-	<string name="wall_notification_sender_designation">Sender Designation </string>
-	<string name="wall_notification_sender_company_name">Sender Company Name </string>
-	<string name="wall_notification_notification_date_time">Notification Date Time</string>
-	<string name="wall_notification_receiver_full_name">Receiver Full Name </string>
-	<string name="wall_notification_receiver_designation">Receiver Designation </string>
-	<string name="wall_notification_receiver_company_name">Receiver Company Name </string>
-	<string name="wall_notification_data">Remaining Data </string>
-	
-	<string name="action_settings">Settings</string>
+    <!-- Social Media Login -->
+    <string name="facebook_cd">facebook</string>
+    <string name="linkedIn_cd">LinkedIn</string>
+    <string name="already_account_text">Already have an account with Procialize</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="submit_button">Submit</string>
+    <string name="create_new">Create New Account</string>
+    <string name="logo_cd">App Logo</string>
+    <string name="event_name">Event App Name</string>
+    <string name="event_date">Event Date</string>
+
+    <!-- App Sign up -->
+    <string name="sign_up_text">SIGN UP</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="city_hint">City</string>
+    <string name="mandate_text">** All fields are mandatory **</string>
+    <string name="save_button">Save</string>
+
+    <!-- Attendees Detail -->
+    <string name="attendee_thumbnail_cd">Attendee Thumbnail</string>
+    <string name="attendee_save_cd">Save Attendee</string>
+    <string name="attendee_share_cd">Share Attendee</string>
+    <string name="attendee_send_msg_cd">Send Message</string>
+    <string name="attendee_set_meeting_cd">Set Meeting</string>
+    <string name="attendee_profile_header">Attendee Profile</string>
+    <string name="attendees_detail_full_name">Full Name</string>
+    <string name="attendees_detail_designation">Designation</string>
+    <string name="attendees_detail_company_name">Company Name</string>
+    <string name="attendees_detail_city_name">City Name</string>
+    <string name="attendees_detail_send_message">Send Message</string>
+    <string name="attendees_detail_set_meeting">  Set Meeting  </string>
+    <string name="attendees_detail_save_attendee">Save Attendee</string>
+    <string name="attendees_detail_share_attendee">Share Attendee</string>
+
+    <!-- Custom Spinner Item -->
+    <string name="custom_spinner_profile_image_cd">Profile Image</string>
+    <string name="custom_spinner_item_full_name">Full Name</string>
+    <string name="custom_spinner_item_designation">Designation</string>
+    <string name="custom_spinner_item_company_name">Company Name</string>
+
+    <!-- Edit Profile -->
+    <string name="edit_profile_text">Edit your profile</string>
+    <string name="choose_file">Choose file</string>
+    <string name="edit_profile_fname_hint">First Name</string>
+    <string name="edit_profile_lname_hint">Last Name</string>
+    <string name="edit_profile_designation_hint">Designation</string>
+    <string name="edit_profile_company_hint">Company Name</string>
+    <string name="edit_profile_description_hint">Description</string>
+    <string name="edit_profile_industry_hint">Add Industry</string>
+    <string name="edit_profile_functionality_hint">Add Functionality</string>
+    <string name="edit_profile_country_hint">Country</string>
+    <string name="edit_profile_city_hint">City</string>
+    <string name="edit_profile_mobile_hint">Mobile Number</string>
+    <string name="edit_profile_phone_hint">Phone Number</string>
+    <string name="edit_profile_save_button">Save Profile</string>
+
+    <!-- Exhibitor Detail -->
+    <string name="exhibitor_thumbnail_cd">Exhibitor Thumbnail</string>
+    <string name="exhibitor_save_cd">Save Exhibitor</string>
+    <string name="exhibitor_share_cd">Share Exhibitor</string>
+    <string name="exhibitor_send_msg_cd">Send Message</string>
+    <string name="exhibitor_set_meeting_cd">Set Meeting</string>
+    <string name="exhibitor_profile_header">Exhibitor Profile</string>
+    <string name="exhibitors_detail_full_name">Full Name</string>
+    <string name="exhibitors_detail_designation">Designation</string>
+    <string name="exhibitors_detail_company_name">Company Name</string>
+    <string name="exhibitors_detail_city_name">City Name</string>
+    <string name="exhibitors_detail_send_message">Send Message</string>
+    <string name="exhibitors_detail_set_meeting">  Set Meeting  </string>
+    <string name="exhibitors_detail_save_attendee">Save Exhibitor</string>
+    <string name="exhibitors_detail_share_attendee">Share Exhibitor</string>
+
+    <!-- Single List Row -->
+    <string name="single_list_row_full_name">Full Name</string>
+    <string name="single_list_row_designation">Designation</string>
+    <string name="single_list_row_company_name">Company Name</string>
+    <string name="single_list_row_city_name">City Name</string>
+
+    <!-- Message Single List Row -->
+    <string name="message_list_row_content">Notification Content</string>
+    <string name="message_list_row_date">Notification Date</string>
+    <string name="message_list_row_sender_name">Sender Name</string>
+    <string name="message_list_row_reply">Reply</string>
+
+    <!-- Meeting Requests Single List Row -->
+    <string name="meeting_list_row_content">Notification Content</string>
+    <string name="meeting_list_row_date">Notification Date</string>
+    <string name="meeting_list_row_sender_name">Sender Name</string>
+    <string name="meeting_list_row_confirm">Confirm Meeting</string>
+    <string name="meeting_list_row_decline">Decline Meeting</string>
+
+    <!-- Speaker Detail -->
+    <string name="speaker_thumbnail_cd">Speaker Thumbnail</string>
+    <string name="speaker_save_cd">Save Speaker</string>
+    <string name="speaker_share_cd">Share Speaker</string>
+    <string name="speaker_send_msg_cd">Send Message</string>
+    <string name="speaker_set_meeting_cd">Set Meeting</string>
+    <string name="speaker_profile_header">Speaker Profile</string>
+    <string name="speakers_detail_full_name">Full Name</string>
+    <string name="speakers_detail_designation">Designation</string>
+    <string name="speakers_detail_company_name">Company Name</string>
+    <string name="speakers_detail_city_name">City Name</string>
+    <string name="speakers_detail_send_message">Send Message</string>
+    <string name="speakers_detail_set_meeting">  Set Meeting  </string>
+    <string name="speakers_detail_save_attendee">Save Speaker</string>
+    <string name="speakers_detail_share_attendee">Share Speaker</string>
+
+    <!-- Wall Notification List Constants -->
+    <string name="wall_notification_type">default notification type </string>
+ <!-- Sh -->
+    <string name="wall_notification_shared">I have shared profile of</string>
+ <!-- Sh -->
+    <string name="wall_notification_saved">I have saved profile of</string>
+ <!-- Sav -->
+    <!-- <string name="wall_notification_notification">has posted the following notification</string> -->
+    <!-- N -->
+    <string name="wall_notification_notification"></string>
+ <!-- N -->
+    <string name="wall_notification_download_brochure">I have downloaded the brochure of</string>
+ <!-- Download Brochure -->
+    <string name="wall_notification_sender_full_name">Sender Full Name </string>
+    <string name="wall_notification_sender_designation">Sender Designation </string>
+    <string name="wall_notification_sender_company_name">Sender Company Name </string>
+    <string name="wall_notification_notification_date_time">Notification Date Time</string>
+    <string name="wall_notification_receiver_full_name">Receiver Full Name </string>
+    <string name="wall_notification_receiver_designation">Receiver Designation </string>
+    <string name="wall_notification_receiver_company_name">Receiver Company Name </string>
+    <string name="wall_notification_data">Remaining Data </string>
+    <string name="action_settings">Settings</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
-    
     <string name="agenda_fragment_tab">This is Agenda Fragment Tab</string>
     <string name="attendees_fragment_tab">This is Attendees Fragment Tab</string>
     <string name="exhibitors_fragment_tab">This is Exhibitors Fragment Tab</string>
@@ -141,5 +153,7 @@
     <string name="saved_exhibitors_fragment_tab">This is Bookmarked -> Saved Exhibitors Fragment Tab</string>
     <string name="saved_speakers_fragment_tab">This is Bookmarked -> Saved Speakers Fragment Tab</string>
     <string name="saved_attendees_fragment_tab">This is Bookmarked -> Saved Attendees Fragment Tab</string>
-	
+    <string name="title_activity_main_activity_test">MainActivityTest</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

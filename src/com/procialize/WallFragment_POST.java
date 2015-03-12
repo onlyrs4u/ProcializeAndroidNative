@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -27,8 +29,8 @@ import com.procialize.adapters.CustomSpinnerAdapter;
 import com.procialize.adapters.WallNotificationListAdapter;
 import com.procialize.customClasses.Attendees;
 import com.procialize.customClasses.Events;
-import com.procialize.customClasses.UserProfile;
 import com.procialize.customClasses.UserNotifications;
+import com.procialize.customClasses.UserProfile;
 import com.procialize.customClasses.WallNotifications;
 import com.procialize.database.DBHelper;
 import com.procialize.network.ServiceHandler;
@@ -163,6 +165,10 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 	 * */
 	private class GetEventDetails extends AsyncTask<Void, Void, Void> {
 
+		JSONObject jsonObj = null;
+		String error = "";
+		String msg = "";
+		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -206,25 +212,38 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 			String jsonStr = sh.makeServiceCall(url_, ServiceHandler.POST, nameValuePair);
 			Log.d("Response: ", "> " + jsonStr);
 			
-			//Event Parser
-			eventParser = new EventInfoParser();
-			eventsList = eventParser.EventInfo_Parser(jsonStr);
-			
-			//Attendees Parser
-			attendeeParser = new AttendeesParser();
-			attendeesList = attendeeParser.Attendee_Parser(jsonStr);
-			
-			//User Profile Parser
-			userParser = new UserProfileParser();
-			userData = userParser.UserData_Parser(jsonStr);
-			
-			//Wall Notification Parser
-			wallNotificationParser = new WallNotificationsParser();
-			wallNotificationList = wallNotificationParser.wallNotification_Parser(jsonStr);
-			
-			//User Notification Parser
-			userNotificationParser = new UserNotificationParser();
-			userNotificationList = userNotificationParser.userNotification_Parser(jsonStr);
+			if (jsonStr != null) {
+				try {
+					jsonObj = new JSONObject(jsonStr);
+					error = jsonObj.getString("error");
+					msg = jsonObj.getString("msg");
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(!(error.equalsIgnoreCase("error"))){
+				//Event Parser
+				eventParser = new EventInfoParser();
+				eventsList = eventParser.EventInfo_Parser(jsonStr);
+				
+				//Attendees Parser
+				attendeeParser = new AttendeesParser();
+				attendeesList = attendeeParser.Attendee_Parser(jsonStr);
+				
+				//User Profile Parser
+				userParser = new UserProfileParser();
+				userData = userParser.UserData_Parser(jsonStr);
+				
+				//Wall Notification Parser
+				wallNotificationParser = new WallNotificationsParser();
+				wallNotificationList = wallNotificationParser.wallNotification_Parser(jsonStr);
+				
+				//User Notification Parser
+				userNotificationParser = new UserNotificationParser();
+				userNotificationList = userNotificationParser.userNotification_Parser(jsonStr);
+			}
 			
 			return null;
 		}
@@ -233,22 +252,27 @@ public class WallFragment_POST extends SherlockFragment implements OnRefreshList
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			// Dismiss the progress dialog
-			
-			fireSqliteQueries();
-			
+			if(error.equalsIgnoreCase("error")){
+				Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_LONG).show();
+				getActivity().finish();
+			}else{
+				fireSqliteQueries();
+			}
 			if (pDialog.isShowing())
 				pDialog.dismiss();
 			
-			/**
-			 * Updating parsed JSON data into ListView
-			 * */
-			wallNotificationDBList = procializeDB.getWallNotifications();
-			WallNotificationAdapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
-			wallNotificationListView.setAdapter(WallNotificationAdapter);
-			
-			userProfileDBList = procializeDB.getUserProfile();
-			userProfileAdapter = new CustomSpinnerAdapter(getActivity(), 0, userProfileDBList);
-//			userProfileAdapter.myCustomItem.setAdapter(userProfileAdapter);
+			if(!(error.equalsIgnoreCase("error"))){
+				/**
+				 * Updating parsed JSON data into ListView
+				 * */
+				wallNotificationDBList = procializeDB.getWallNotifications();
+				WallNotificationAdapter = new WallNotificationListAdapter(getActivity(), wallNotificationDBList);
+				wallNotificationListView.setAdapter(WallNotificationAdapter);
+				
+				userProfileDBList = procializeDB.getUserProfile();
+				userProfileAdapter = new CustomSpinnerAdapter(getActivity(), 0, userProfileDBList);
+//				userProfileAdapter.myCustomItem.setAdapter(userProfileAdapter);
+			}
 			
 			Log.d("Created URL : ", ">>>>> " + url_);
 		}

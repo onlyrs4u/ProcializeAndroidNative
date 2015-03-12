@@ -335,7 +335,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS "+EVENTS_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS "+ATTENDEES_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS "+PROFILE_TABLE_NAME);
@@ -889,7 +888,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return;
@@ -1847,9 +1845,64 @@ public class DBHelper extends SQLiteOpenHelper {
         return wallNotificationList;
     }
     
-    //Get User Notification List
-    public List<UserNotifications> getUserNotifications(){
-    	String selectQuery = "select * from "+USER_NOTIFICATION_TABLE_NAME;
+    //Get User Notification - Messages List
+    public List<UserNotifications> getUserMessages(){
+    	String selectQuery = "select * from "+USER_NOTIFICATION_TABLE_NAME+" where "+USER_NOTIFICATION_TYPE+" =\'Msg\'";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        List<UserNotifications> userNotificationList = new ArrayList<UserNotifications>();
+        if (cursor.moveToFirst()) {
+            do {
+            	UserNotifications userNotificationsList = new UserNotifications();
+            	userNotificationsList.setNotification_id(cursor.getString(0));
+            	userNotificationsList.setNotification_type(cursor.getString(1));
+            	userNotificationsList.setSubject_id(cursor.getString(2));
+            	userNotificationsList.setSubject_type(cursor.getString(3));
+            	userNotificationsList.setObject_id(cursor.getString(4));
+            	userNotificationsList.setObject_type(cursor.getString(5));
+            	userNotificationsList.setRead(cursor.getString(6));
+            	userNotificationsList.setNotification_content(cursor.getString(7));
+            	userNotificationsList.setMeeting_id(cursor.getString(8));
+            	userNotificationsList.setMessage_id(cursor.getString(9));
+            	userNotificationsList.setEvent_id(cursor.getString(10));
+            	userNotificationsList.setNotification_date(cursor.getString(11));
+            	userNotificationsList.setUser_id(cursor.getString(12));
+            	userNotificationsList.setFirst_name(cursor.getString(13));
+            	userNotificationsList.setLast_name(cursor.getString(14));
+            	userNotificationsList.setType_of_user(cursor.getString(15));
+            	userNotificationsList.setCompany_name(cursor.getString(16));
+            	userNotificationsList.setDesignation(cursor.getString(17));
+            	userNotificationsList.setPhone(cursor.getString(18));
+//            	userNotificationsList.setPhoto(cursor.getString(19));
+            	userNotificationsList.setApprove(cursor.getString(19));
+            	userNotificationsList.setStart_time(cursor.getString(20));
+            	userNotificationsList.setEnd_time(cursor.getString(21));
+            	userNotificationsList.setEvent_name(cursor.getString(22));
+            	userNotificationsList.setAttendee_id(cursor.getString(23));
+            	userNotificationsList.setAttendee_name(cursor.getString(24));
+            	userNotificationsList.setOrganizer_name(cursor.getString(25));
+            	userNotificationsList.setReceiver_user_id(cursor.getString(26));
+            	userNotificationsList.setReceiver_first_name(cursor.getString(27));
+            	userNotificationsList.setReceiver_last_name(cursor.getString(28));
+            	userNotificationsList.setReceiver_type_of_user(cursor.getString(29));
+            	userNotificationsList.setReceiver_company_name(cursor.getString(30));
+            	userNotificationsList.setReceiver_designation(cursor.getString(31));
+            	userNotificationsList.setReceiver_phone(cursor.getString(32));
+            	userNotificationsList.setReceiver_photo(cursor.getString(33));
+            	userNotificationsList.setReceiver_attendee_id(cursor.getString(34));
+            	userNotificationsList.setReceiver_attendee_type(cursor.getString(35));
+            	
+            	userNotificationList.add(userNotificationsList);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return userNotificationList;
+    }
+    
+  //Get User Notification - Messages List
+    public List<UserNotifications> getUserMeetingRequests(){
+    	String selectQuery = "select * from "+USER_NOTIFICATION_TABLE_NAME+" where "+USER_NOTIFICATION_TYPE+" =\'Mtg\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

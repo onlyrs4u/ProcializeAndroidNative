@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.procialize"
     android:versionCode="1"
@@ -16,31 +17,39 @@
     <!-- Permission to write to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <permission
+        android:name="com.hprog99.android.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.hprog99.android.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme"
-        android:logo="@drawable/procialize_logo" >
+        android:logo="@drawable/procialize_logo"
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".SocialMediaLogin"
-            android:theme="@style/customTheme"
-			android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name=".AppSignUp"
             android:theme="@style/customTheme" >
         </activity>
-        <activity 
-            android:name=".ProfileActivity" >
+        <activity android:name=".ProfileActivity" >
         </activity>
-        <activity 
+        <activity
             android:name=".EditProfileActivity"
             android:theme="@style/customTheme" >
         </activity>
@@ -62,34 +71,56 @@
         </activity>
         <activity
             android:name=".AttendeeDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".ExhibitorDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".SpeakerDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".SavedAttendeeDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".SavedExhibitorDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
         <activity
             android:name=".SavedSpeakerDetailPage"
-            android:theme="@style/customTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/customTheme" >
         </activity>
+
+        <receiver
+            android:name=".GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.hprog99.android" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GCMNotificationIntentService" />
+
+        <activity
+            android:name=".MainActivityTest"
+            android:label="@string/title_activity_main_activity_test" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

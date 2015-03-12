@@ -38,7 +38,7 @@ public class UserProfileParser {
 				if(!(apiAccessToken.equalsIgnoreCase("") || apiAccessToken.equalsIgnoreCase(null)))
 				{
 					userProfile.setApi_access_token(apiAccessToken);
-					constant.API_ACCESS_TOKEN = userProfile.getApi_access_token();
+					Constants.API_ACCESS_TOKEN = userProfile.getApi_access_token();
 				}
 				String userEmail = user.getString("email");
 				if(!(userEmail.equalsIgnoreCase("") || userEmail.equalsIgnoreCase(null)))

@@ -116,7 +116,7 @@ public class EditProfileActivity extends Activity implements OnClickListener{
 		SaveBtn = (Button)findViewById(R.id.save_button);
 		SaveBtn.setTypeface(typeFace);
 		
-		api_access_token_ = constant.API_ACCESS_TOKEN;
+		api_access_token_ = Constants.API_ACCESS_TOKEN;
 		//Applying listener to the elements
 		chooseFileBtn.setOnClickListener(this);
 		SaveBtn.setOnClickListener(this);

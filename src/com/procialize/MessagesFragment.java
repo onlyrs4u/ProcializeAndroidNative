@@ -60,7 +60,7 @@ public class MessagesFragment extends SherlockFragment {
 		userNotificationDBList = new ArrayList<UserNotifications>();
 		
 		constant = new Constants();
-		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.INDEPENDENT_USER_NOTIFICATION_URL + constant.API_ACCESS_TOKEN;
+		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.INDEPENDENT_USER_NOTIFICATION_URL + Constants.API_ACCESS_TOKEN;
 		
 		userNotificationList = new ArrayList<UserNotifications>();
 		messagesListView = (ListView)getActivity().findViewById(R.id.messages_list);
@@ -114,7 +114,7 @@ public class MessagesFragment extends SherlockFragment {
 			/**
 			 * Updating parsed JSON data into ListView
 			 * */
-			userNotificationDBList = procializeDB.getUserNotifications();
+			userNotificationDBList = procializeDB.getUserMessages();
 			messagesAdapter = new MessagesListAdapter(getActivity(), userNotificationDBList);
 			messagesListView.setAdapter(messagesAdapter);
 			/*messagesListView.setOnItemClickListener(new OnItemClickListener() {

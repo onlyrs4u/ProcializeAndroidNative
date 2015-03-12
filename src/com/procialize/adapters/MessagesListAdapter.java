@@ -68,28 +68,24 @@ public class MessagesListAdapter extends BaseAdapter{
  
         UserNotifications notifications = messagesList.get(position);
         
-        String notification_type = notifications.getNotification_type();
-        if(notification_type.equalsIgnoreCase("Msg"))
-        {
-        	notification_content.setText(notifications.getNotification_content());
-            notification_content.setTypeface(typeFace);
-             
-            notification_date.setText(notifications.getNotification_date());
-            notification_date.setTypeface(typeFace);
+        notification_content.setText(notifications.getNotification_content());
+        notification_content.setTypeface(typeFace);
+        
+        notification_date.setText(notifications.getNotification_date());
+        notification_date.setTypeface(typeFace);
+        
+        notification_sender_name.setText(notifications.getFirst_name()+ " "+ notifications.getLast_name());
+        notification_sender_name.setTypeface(typeFace);
             
-            notification_sender_name.setText(notifications.getFirst_name()+ " "+ notifications.getLast_name());
-            notification_sender_name.setTypeface(typeFace);
-            
-            reply_button.setTypeface(typeFace);
-            reply_button.setOnClickListener(new OnClickListener() {
-    			
-    			@Override
-    			public void onClick(View v) {
-    				// TODO Auto-generated method stub
-    				Toast.makeText(activity, "Nahi deta reply ...", Toast.LENGTH_LONG).show();
-    			}
-    		});
-        }
+        reply_button.setTypeface(typeFace);
+        reply_button.setOnClickListener(new OnClickListener() {
+        	
+        	@Override
+        	public void onClick(View v) {
+        		// TODO Auto-generated method stub
+        		Toast.makeText(activity, "Nahi deta reply ...", Toast.LENGTH_LONG).show();
+        	}
+        });
 
         return convertView;
     }

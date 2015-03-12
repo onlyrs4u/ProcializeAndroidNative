@@ -103,7 +103,7 @@ public class SpeakerDetailPage extends Activity implements OnClickListener {
 		speaker_city.setTypeface(typeFace);
 		
 		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.SAVE_SHARE_SOCIAL;
-        api_access_token_ = constant.API_ACCESS_TOKEN;
+        api_access_token_ = Constants.API_ACCESS_TOKEN;
         subject_id_ = specificSpeaker.getAttendee_id();
         subject_type_ = specificSpeaker.getAttendee_type();
         event_id_ = "1"; //specificAttendee.getEvent_id()
