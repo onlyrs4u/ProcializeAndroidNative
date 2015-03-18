@@ -19,49 +19,54 @@ import com.procialize.customClasses.Attendees;
 import com.procialize.database.DBHelper;
 
 public class AttendeesListFragment extends SherlockFragment {
-	
+
 	private ListView attendeesList;
 	private List<Attendees> attendeesDBList;
 	private DBHelper dbHelper;
 	private AttendeesListAdapter adapter;
-	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.attendees_fragment, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.attendees_fragment,
+				container, false);
 		return rootView;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-	    // TODO Auto-generated method stub
-	    super.onActivityCreated(savedInstanceState);
-	    
-	    Runtime rt = Runtime.getRuntime();
-	    long maxMemory = rt.maxMemory();
-	    Log.v("onCreate", "maxMemory:" + Long.toString(maxMemory));
-	    
-	    dbHelper = new DBHelper(getActivity());
-	    attendeesDBList = new ArrayList<Attendees>();
-	    
-	    attendeesList = (ListView)getActivity().findViewById(R.id.attendees_list);
-	    attendeesDBList = dbHelper.getAttendeeDetails();
-	    
-	    adapter = new AttendeesListAdapter(getActivity(), attendeesDBList);
-	    attendeesList.setAdapter(adapter);
-	    
-	    attendeesList.setOnItemClickListener(new OnItemClickListener() {
+		super.onActivityCreated(savedInstanceState);
+
+		Runtime rt = Runtime.getRuntime();
+		long maxMemory = rt.maxMemory();
+		Log.v("onCreate", "maxMemory:" + Long.toString(maxMemory));
+
+		dbHelper = new DBHelper(getActivity());
+		attendeesDBList = new ArrayList<Attendees>();
+
+		attendeesList = (ListView) getActivity().findViewById(
+				R.id.attendees_list);
+		attendeesDBList = dbHelper.getAttendeeDetails();
+
+		adapter = new AttendeesListAdapter(getActivity(), attendeesDBList);
+		attendeesList.setAdapter(adapter);
+
+		attendeesList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
 				// TODO Auto-generated method stub
-				Attendees specificAttendee = adapter.getAttendeeFromList(position);
-				
-				Intent attendeeDetail = new Intent(getActivity(), AttendeeDetailPage.class);
+				Attendees specificAttendee = adapter
+						.getAttendeeFromList(position);
+
+				Intent attendeeDetail = new Intent(getActivity(),
+						AttendeeDetailPage.class);
 				attendeeDetail.putExtra("SpecificAttendee", specificAttendee);
 				getActivity().startActivity(attendeeDetail);
 			}
 		});
-	    
+
 	}
 
 }

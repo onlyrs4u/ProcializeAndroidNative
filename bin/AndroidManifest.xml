@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="20" />
 
     <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" >
@@ -16,17 +16,17 @@
     </uses-permission>
     <!-- Permission to write to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.procialize.permission.C2D_MESSAGE"
+        android:name="com.procialize..permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.procialize.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.procialize..permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -103,17 +103,16 @@
         </activity>
 
         <receiver
-            android:name="com.procialize.GCMBroadcastReceiver"
-            android:permission="ccom.google.android.c2dm.permission.SEND" >
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
                 <category android:name="com.procialize" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.procialize.GCMNotificationIntentService" />
+        <service android:name=".GcmIntentService" />
 
         <activity
             android:name=".MainActivityTest"

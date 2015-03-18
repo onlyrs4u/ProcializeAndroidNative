@@ -57,7 +57,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 	String api_access_token_ = "";
 	String subject_id_ = "";
 	String subject_type_ = "";
-	String event_id_ = "";
+	String event_id_ = "1";
 	String type_ = "";
 	String transaction_type_ = "";
 	String image_url = "";
@@ -290,6 +290,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 			pDialog.setMessage("Please wait...");
 			pDialog.setCancelable(false);
 			pDialog.show();
+			
 		}
 
 		@Override
@@ -303,7 +304,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 			nameValuePair.add(new BasicNameValuePair("event_id", event_id_));
 			nameValuePair.add(new BasicNameValuePair("message_text", sendMsg));
 			nameValuePair
-					.add(new BasicNameValuePair("target_attendee_id", "381"));
+					.add(new BasicNameValuePair("target_attendee_id", "249"));
 			nameValuePair.add(new BasicNameValuePair("target_user_type", "A"));
 
 			// Making a request to url and getting response

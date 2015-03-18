@@ -62,9 +62,10 @@ public class MainActivity extends SherlockFragmentActivity implements
 	private String url_to_create = "";
 	Constants constant;
 	Profile profileMap;
-	String provider_name;
+	String provider_name="";
 	String appUsername;
 	String appPassword;
+	
 	ArrayList<UserProfile> myUserList = new ArrayList<UserProfile>();
 	DBHelper helper;
 
@@ -362,7 +363,6 @@ public class MainActivity extends SherlockFragmentActivity implements
 					GCMHelper gcmRegistrationHelper = new GCMHelper(
 							getApplicationContext());
 					gcmRegID = gcmRegistrationHelper.GCMRegister(REG_ID);
-					new updateGCMRegId().execute();
 
 				} catch (Exception bug) {
 					bug.printStackTrace();
@@ -435,6 +435,8 @@ public class MainActivity extends SherlockFragmentActivity implements
 			}
 			break;
 		case 2:
+
+			new updateGCMRegId().execute();
 			// Event Info
 			Toast.makeText(MainActivity.this, "Event Info ", Toast.LENGTH_SHORT)
 					.show();
@@ -470,6 +472,8 @@ public class MainActivity extends SherlockFragmentActivity implements
 			ft.replace(R.id.content_frame, speakerListFrag);
 			break;
 		case 8:
+
+			sendMessage();
 			// Our Sponsors
 			Toast.makeText(MainActivity.this, "Our Sponsors",
 					Toast.LENGTH_SHORT).show();
@@ -501,7 +505,6 @@ public class MainActivity extends SherlockFragmentActivity implements
 		// Close drawer
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -579,15 +582,21 @@ public class MainActivity extends SherlockFragmentActivity implements
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 
 			nameValuePair.add(new BasicNameValuePair("api_access_token",
-					"077e29b11be80ab57e1a2ecabb7da330"));
+					"00ec53c4682d36f5c4359f4ae7bd7ba1"));
 			nameValuePair.add(new BasicNameValuePair("registration_id",
 					gcmRegID));
+			System.out.println("GCM  :" + gcmRegID);
 			nameValuePair.add(new BasicNameValuePair("mobile_os", "android"));
 
 			// Making a request to url and getting response
 			String jsonStr = sh.makeServiceCall(gcmUpdateURL,
 					ServiceHandler.POST, nameValuePair);
 			Log.d("Response: ", "> " + jsonStr);
+			// 03-16 10:20:04.796: V/UserPresentBroadcastReceiver(1875):
+			// Received Intent { act=android.intent.action.USER_PRESENT
+			// flg=0x24000010
+			// cmp=com.google.android.gms/.auth.trustagent.UserPresentBroadcastReceiver
+			// }.
 
 			if (jsonStr != null) {
 				try {
@@ -627,5 +636,33 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 			// Log.d("Created URL : ", ">>>>> " + url_);
 		}
+	}
+
+	public void sendMessage() {
+
+		Intent i = new Intent("USER_ACTION");
+		i.putExtra("msg", "value");
+		sendBroadcast(i);
+		gcm = GoogleCloudMessaging.getInstance(this);
+		new AsyncTask() {
+
+			@Override
+			protected Object doInBackground(Object... params) {
+				String msg = "";
+				try {
+					Bundle data = new Bundle();
+					data.putString("my_message", "Hello World");
+					data.putString("my_action",
+							"com.google.android.gcm.demo.app.ECHO_NOW");
+					// String id = Integer.toString(msgId.incrementAndGet());
+					gcm.send(gcmRegID + "@gcm.googleapis.com", "1", data);
+					msg = "Sent message";
+				} catch (IOException ex) {
+					msg = "Error :" + ex.getMessage();
+				}
+				return msg;
+			}
+		}.execute(null, null, null);
+
 	}
 }

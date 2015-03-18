@@ -17,11 +17,11 @@ public final class GCMHelper {
 	}
 
 	public String GCMRegister(String SENDER_ID) throws Exception {
-		String regid = "";                                                                                                           
+		String regid = "";
 		// Check if Play store services are available.
 		if (!checkPlayServices())
 			throw new Exception(
-					"Google Play Services not supported. Please install and configure Google Play Store.");
+					"Google Play Services not supported. Please install and configure Google Play S`tore.");
 
 		if (gcm == null) {
 			gcm = GoogleCloudMessaging.getInstance(context);

@@ -11,7 +11,7 @@
         android:layout_marginRight="12dp"
         android:layout_marginTop="7dp"
         android:contentDescription="@string/custom_spinner_profile_image_cd"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/user_pic" />
 
     <TextView
         android:id="@+id/text_main_name"
@@ -43,12 +43,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sub_text_email"
-        android:layout_marginLeft="5dip"
         android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
         android:layout_toRightOf="@+id/left_pic"
         android:text="@string/custom_spinner_item_company_name"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#ffffff"
         android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sub_text_company"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/left_pic"
+        android:background="@drawable/edit_icon" />
 
 </RelativeLayout>
