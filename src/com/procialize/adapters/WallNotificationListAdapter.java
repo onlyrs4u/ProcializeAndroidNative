@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Spannable;
@@ -18,7 +19,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.procialize.AttendeeDetailPage;
+import com.procialize.ExhibitorDetailPage;
 import com.procialize.R;
+import com.procialize.SpeakerDetailPage;
 import com.procialize.customClasses.WallNotifications;
 import com.procialize.libraries.ImageLoader;
 import com.procialize.libraries.MLRoundedImageView;
@@ -71,7 +75,8 @@ public class WallNotificationListAdapter extends BaseAdapter{
         TextView wallNotificationSenderName = (TextView) convertView.findViewById(R.id.wall_notification_sender_name);
         TextView wallNotificationText = (TextView) convertView.findViewById(R.id.wall_notification_text);
  
-        WallNotifications wallNotifications = wallNotificationList.get(position);
+        WallNotifications wallNotifications = new WallNotifications();
+        wallNotifications = wallNotificationList.get(position);
 
         // Image url
         String image_url = "";
@@ -154,7 +159,30 @@ public class WallNotificationListAdapter extends BaseAdapter{
    		senderNameStringBuilder.setSpan(new NonUnderlinedClickableSpan() {
 			@Override
 			public void onClick(View widget) {
-				Toast.makeText(activity, "Clicked senderName", Toast.LENGTH_LONG).show();
+				
+				WallNotifications wall_Notifications = getWallNotificationFromList(position);
+				if(wall_Notifications.getObject_type().equalsIgnoreCase("A")){
+					Intent attendeeDetail = new Intent(activity, AttendeeDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "object");
+					activity.startActivity(attendeeDetail);	
+				}else if(wall_Notifications.getObject_type().equalsIgnoreCase("E")){
+					Intent attendeeDetail = new Intent(activity, ExhibitorDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "object");
+					activity.startActivity(attendeeDetail);	
+				}else if(wall_Notifications.getObject_type().equalsIgnoreCase("S")){
+					Intent attendeeDetail = new Intent(activity, SpeakerDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "object");
+					activity.startActivity(attendeeDetail);	
+				}else{
+					Toast.makeText(activity, "Clicked senderName", Toast.LENGTH_LONG).show();	
+				}
+				
 			}
 		},0, finalSenderName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
    		wallNotificationSenderName.setText(senderNameStringBuilder);
@@ -164,7 +192,29 @@ public class WallNotificationListAdapter extends BaseAdapter{
    		notificationDataStringBuilder.setSpan(new NonUnderlinedClickableSpan() {
 			@Override
 			public void onClick(View widget) {
-				Toast.makeText(activity, "Clicked receiverName", Toast.LENGTH_LONG).show();
+				
+				WallNotifications wall_Notifications = getWallNotificationFromList(position);
+				if(wall_Notifications.getSubject_type().equalsIgnoreCase("A")){
+					Intent attendeeDetail = new Intent(activity, AttendeeDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "subject");
+					activity.startActivity(attendeeDetail);	
+				}else if(wall_Notifications.getSubject_type().equalsIgnoreCase("E")){
+					Intent attendeeDetail = new Intent(activity, ExhibitorDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "subject");
+					activity.startActivity(attendeeDetail);	
+				}else if(wall_Notifications.getSubject_type().equalsIgnoreCase("S")){
+					Intent attendeeDetail = new Intent(activity, SpeakerDetailPage.class);
+					attendeeDetail.putExtra("fromActivity", "WallList");
+					attendeeDetail.putExtra("SpecificWallAttendee", wall_Notifications);
+					attendeeDetail.putExtra("whoCame", "subject");
+					activity.startActivity(attendeeDetail);	
+				}else{
+					Toast.makeText(activity, "Clicked receiverName", Toast.LENGTH_LONG).show();	
+				}
 			}
 		}, strTrailingEnd.length(), strTrailingEnd.length() + receiverName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
    		wallNotificationText.setText(notificationDataStringBuilder);

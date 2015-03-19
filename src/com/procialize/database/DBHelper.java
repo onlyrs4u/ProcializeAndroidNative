@@ -1811,11 +1811,7 @@ public class DBHelper extends SQLiteOpenHelper {
     
     //Get Wall Notification List
     public List<WallNotifications> getWallNotifications(){
-        String selectQuery = "select "+WALL_NOTIFICATION_FIRST_NAME+", "+WALL_NOTIFICATION_LAST_NAME+", "+WALL_NOTIFICATION_DESIGNATION+", "+
-        					WALL_NOTIFICATION_COMPANY_NAME+", "+WALL_NOTIFICATION_TYPE+", "+WALL_RECEIVER_FIRST_NAME+", "+WALL_RECEIVER_LAST_NAME+", "+
-        					WALL_RECEIVER_DESIGNATION+", "+WALL_RECEIVER_COMPANY_NAME+", "+WALL_NOTIFICATION_ORGANIZER_NAME+", "+
-        					WALL_NOTIFICATION_CONTENT+", "+WALL_NOTIFICATION_OBJECT_TYPE+", "+WALL_NOTIFICATION_ORGANIZER_PHOTO+", "+
-        					WALL_NOTIFICATION_PHOTO+" from "+WALL_NOTIFICATION_TABLE_NAME;
+        String selectQuery = "select * from "+WALL_NOTIFICATION_TABLE_NAME;
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -1823,20 +1819,37 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
             	WallNotifications wallNotificationsList = new WallNotifications();
-            	wallNotificationsList.setFirst_name(cursor.getString(0));
-            	wallNotificationsList.setLast_name(cursor.getString(1));
-            	wallNotificationsList.setDesignation(cursor.getString(2));
-            	wallNotificationsList.setCompany_name(cursor.getString(3));
-            	wallNotificationsList.setNotification_type(cursor.getString(4));
-            	wallNotificationsList.setReceiver_first_name(cursor.getString(5));
-            	wallNotificationsList.setReceiver_last_name(cursor.getString(6));
-            	wallNotificationsList.setReceiver_designation(cursor.getString(7));
-            	wallNotificationsList.setReceiver_company_name(cursor.getString(8));
-            	wallNotificationsList.setOrganizer_name(cursor.getString(9));
-            	wallNotificationsList.setNotification_content(cursor.getString(10));
-            	wallNotificationsList.setObject_type(cursor.getString(11));
-            	wallNotificationsList.setOrganizer_photo(cursor.getString(12));
-            	wallNotificationsList.setPhoto(cursor.getString(13));
+            	wallNotificationsList.setNotification_id(cursor.getString(0));
+            	wallNotificationsList.setNotification_type(cursor.getString(1));
+            	wallNotificationsList.setSubject_id(cursor.getString(2));
+            	wallNotificationsList.setSubject_type(cursor.getString(3));
+            	wallNotificationsList.setObject_id(cursor.getString(4));
+            	wallNotificationsList.setObject_type(cursor.getString(5));
+            	wallNotificationsList.setNotification_content(cursor.getString(6));
+            	wallNotificationsList.setEvent_id(cursor.getString(7));
+            	wallNotificationsList.setAnnouncement_id(cursor.getString(8));
+            	wallNotificationsList.setNotification_date(cursor.getString(9));
+            	wallNotificationsList.setUser_id(cursor.getString(10));
+            	wallNotificationsList.setFirst_name(cursor.getString(11));
+            	wallNotificationsList.setLast_name(cursor.getString(12));
+            	wallNotificationsList.setType_of_user(cursor.getString(13));
+            	wallNotificationsList.setCompany_name(cursor.getString(14));
+            	wallNotificationsList.setDesignation(cursor.getString(15));
+            	wallNotificationsList.setPhone(cursor.getString(16));
+            	wallNotificationsList.setPhoto(cursor.getString(17));
+            	wallNotificationsList.setEvent_name(cursor.getString(18));
+            	wallNotificationsList.setAttendee_id(cursor.getString(19));
+            	wallNotificationsList.setAttendee_name(cursor.getString(20));
+            	wallNotificationsList.setOrganizer_photo(cursor.getString(21));
+            	wallNotificationsList.setOrganizer_name(cursor.getString(22));
+            	wallNotificationsList.setReceiver_user_id(cursor.getString(23));
+            	wallNotificationsList.setReceiver_first_name(cursor.getString(24));
+            	wallNotificationsList.setReceiver_last_name(cursor.getString(25));
+            	wallNotificationsList.setReceiver_type_of_user(cursor.getString(26));
+            	wallNotificationsList.setReceiver_company_name(cursor.getString(27));
+            	wallNotificationsList.setReceiver_designation(cursor.getString(28));
+            	wallNotificationsList.setReceiver_attendee_id(cursor.getString(29));
+            	wallNotificationsList.setReceiver_attendee_type(cursor.getString(30));
             	
             	wallNotificationList.add(wallNotificationsList);
             } while (cursor.moveToNext());

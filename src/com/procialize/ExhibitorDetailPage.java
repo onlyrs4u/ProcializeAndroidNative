@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.customClasses.Attendees;
+import com.procialize.customClasses.WallNotifications;
 import com.procialize.libraries.ImageLoader;
 import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.network.ServiceHandler;
@@ -46,8 +47,10 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
     int loader = R.drawable.ic_launcher;
     Constants constant = new Constants();
     Attendees specificExhibitor;
+    WallNotifications specificExhibitorFromWall;
     private ProgressDialog pDialog;
     
+    String fromActivity = "";
     String url_ = "";
     String api_access_token_ = "";
     String subject_id_ = "";
@@ -55,6 +58,8 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
     String event_id_ = "";
     String type_ = "";
 	String transaction_type_ = "";
+	String image_url = "";
+	String whoCame = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,46 +69,77 @@ public class ExhibitorDetailPage extends Activity implements OnClickListener {
 		setContentView(R.layout.exhibitors_detail);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
-		specificExhibitor = new Attendees();
-		specificExhibitor = (Attendees)getIntent().getSerializableExtra("SpecificExhibitor");
+		fromActivity = getIntent().getExtras().getString("fromActivity");
+		whoCame = getIntent().getExtras().getString("whoCame");
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/HERO.ttf");
         
 		exhibitor_thumbnail = (MLRoundedImageView) findViewById(R.id.exhibitor_detail_thumbnail);
-        
-        // Image url
-        String image_url = "";
-        image_url = constant.WEBSERVICE_URL + constant.EXHIBITOR_IMAGE_URL + specificExhibitor.getAttendee_image();
-        
-        ImageLoader imgLoader = new ImageLoader(ExhibitorDetailPage.this);
-        
-        // whenever you want to load an image from url
-        // call DisplayImage function
-        // url - image url to load
-        // loader - loader image, will be displayed before getting image
-        // image - ImageView 
-        imgLoader.DisplayImage(image_url, loader, exhibitor_thumbnail);
-        
-        exhibitor_detail_header = (TextView) findViewById(R.id.exhibitor_detail_header);
+		exhibitor_detail_header = (TextView) findViewById(R.id.exhibitor_detail_header);
         exhibitor_detail_header.setTypeface(typeFace);
-		
-		exhibitor_name = (TextView) findViewById(R.id.exhibitor_detail_name);
-		exhibitor_name.setText(specificExhibitor.getAttendee_first_name()+" "+specificExhibitor.getAttendee_last_name());
-		exhibitor_name.setTypeface(typeFace);
+        exhibitor_name = (TextView) findViewById(R.id.exhibitor_detail_name);
+        exhibitor_name.setTypeface(typeFace);
+        exhibitor_designation = (TextView) findViewById(R.id.exhibitor_detail_designation);
+        exhibitor_designation.setTypeface(typeFace);
+        exhibitor_comp_name = (TextView) findViewById(R.id.exhibitor_detail_comp_name);
+        exhibitor_comp_name.setTypeface(typeFace);
+        exhibitor_city = (TextView) findViewById(R.id.exhibitor_detail_city);
+        exhibitor_city.setTypeface(typeFace);
         
-		exhibitor_designation = (TextView) findViewById(R.id.exhibitor_detail_designation);
-		exhibitor_designation.setText(specificExhibitor.getAttendee_designation());
-		exhibitor_designation.setTypeface(typeFace);
-        
-		exhibitor_comp_name = (TextView) findViewById(R.id.exhibitor_detail_comp_name);
-		exhibitor_comp_name.setText(specificExhibitor.getAttendee_company_name());
-		exhibitor_comp_name.setTypeface(typeFace);
-        
-		exhibitor_city = (TextView) findViewById(R.id.exhibitor_detail_city);
-		exhibitor_city.setText(specificExhibitor.getAttendee_city());
-		exhibitor_city.setTypeface(typeFace);
-		
-		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.SAVE_SHARE_SOCIAL;
+        if(fromActivity.equalsIgnoreCase("AttendeesList")){
+        	specificExhibitor = new Attendees();
+    		specificExhibitor = (Attendees)getIntent().getSerializableExtra("SpecificExhibitor");
+    		
+    		// Image url
+    		image_url = constant.WEBSERVICE_URL + constant.EXHIBITOR_IMAGE_URL + specificExhibitor.getAttendee_image();
+            
+            ImageLoader imgLoader = new ImageLoader(ExhibitorDetailPage.this);
+            
+            // whenever you want to load an image from url
+            // call DisplayImage function
+            // url - image url to load
+            // loader - loader image, will be displayed before getting image
+            // image - ImageView 
+            imgLoader.DisplayImage(image_url, loader, exhibitor_thumbnail);
+    		exhibitor_name.setText(specificExhibitor.getAttendee_first_name()+" "+specificExhibitor.getAttendee_last_name());
+    		exhibitor_designation.setText(specificExhibitor.getAttendee_designation());
+    		exhibitor_comp_name.setText(specificExhibitor.getAttendee_company_name());
+    		exhibitor_city.setText(specificExhibitor.getAttendee_city());
+    		
+    		subject_id_ = specificExhibitor.getAttendee_id();
+            subject_type_ = specificExhibitor.getAttendee_type();
+        }else if(fromActivity.equalsIgnoreCase("WallList")){
+        	specificExhibitorFromWall = new WallNotifications();
+        	specificExhibitorFromWall = (WallNotifications) getIntent().getSerializableExtra("SpecificWallAttendee");
+			
+			// Image url
+			image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL + specificExhibitorFromWall.getPhoto();
+			ImageLoader imgLoader = new ImageLoader(ExhibitorDetailPage.this);
+			// whenever you want to load an image from url
+			// call DisplayImage function
+			// url - image url to load
+			// loader - loader image, will be displayed before getting image
+			// image - ImageView
+			imgLoader.DisplayImage(image_url, loader, exhibitor_thumbnail);
+			if(whoCame.equalsIgnoreCase("object")){
+				exhibitor_name.setText(specificExhibitorFromWall.getFirst_name() + " " + specificExhibitorFromWall.getLast_name());
+				exhibitor_designation.setText(specificExhibitorFromWall.getDesignation());
+				exhibitor_comp_name.setText(specificExhibitorFromWall.getCompany_name());
+//				exhibitor_city.setText(specificAttendeeFromWall.getAttendee_city());
+				subject_id_ = specificExhibitorFromWall.getObject_id();
+				subject_type_ = specificExhibitorFromWall.getObject_type();
+			}else if(whoCame.equalsIgnoreCase("subject")){
+				exhibitor_name.setText(specificExhibitorFromWall.getReceiver_first_name() + " " + specificExhibitorFromWall.getReceiver_last_name());
+				exhibitor_designation.setText(specificExhibitorFromWall.getReceiver_designation());
+				exhibitor_comp_name.setText(specificExhibitorFromWall.getReceiver_company_name());
+//				exhibitor_city.setText(specificAttendeeFromWall.getAttendee_city());
+				subject_id_ = specificExhibitorFromWall.getSubject_id();
+				subject_type_ = specificExhibitorFromWall.getSubject_type();
+			}
+			
+        }
+
+        url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER + constant.SAVE_SHARE_SOCIAL;
         api_access_token_ = Constants.API_ACCESS_TOKEN;
         subject_id_ = specificExhibitor.getAttendee_id();
         subject_type_ = specificExhibitor.getAttendee_type();

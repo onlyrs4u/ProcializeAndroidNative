@@ -1,7 +1,13 @@
 package com.procialize.customClasses;
 
-public class WallNotifications {
+import java.io.Serializable;
 
+public class WallNotifications implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Wall Sender Data
 	private String notification_id = "";
 	private String notification_type = "";

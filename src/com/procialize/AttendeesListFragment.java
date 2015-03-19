@@ -57,11 +57,10 @@ public class AttendeesListFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Attendees specificAttendee = adapter
-						.getAttendeeFromList(position);
-
-				Intent attendeeDetail = new Intent(getActivity(),
-						AttendeeDetailPage.class);
+				Attendees specificAttendee = adapter.getAttendeeFromList(position);
+				
+				Intent attendeeDetail = new Intent(getActivity(), AttendeeDetailPage.class);
+				attendeeDetail.putExtra("fromActivity", "AttendeesList");
 				attendeeDetail.putExtra("SpecificAttendee", specificAttendee);
 				getActivity().startActivity(attendeeDetail);
 			}

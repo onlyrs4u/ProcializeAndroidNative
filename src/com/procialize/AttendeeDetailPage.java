@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.procialize.customClasses.Attendees;
+import com.procialize.customClasses.WallNotifications;
 import com.procialize.libraries.ImageLoader;
 import com.procialize.libraries.MLRoundedImageView;
 import com.procialize.network.ServiceHandler;
@@ -50,8 +51,10 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 	int loader = R.drawable.ic_launcher;
 	Constants constant = new Constants();
 	Attendees specificAttendee;
+	WallNotifications specificAttendeeFromWall;
 	private ProgressDialog pDialog;
 
+	String fromActivity = "";
 	String url_ = "";
 	String sensMsgUrl = "http://procialize.in/test/API/event_api_call/send_message";
 	String api_access_token_ = "";
@@ -63,6 +66,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 	String image_url = "";
 	Editable value;
 	String sendMsg = "";
+	String whoCame = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,31 +74,14 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.attendees_detail);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.custom_title);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+		
+		fromActivity = getIntent().getExtras().getString("fromActivity");
+		whoCame = getIntent().getExtras().getString("whoCame");
 
-		specificAttendee = new Attendees();
-		specificAttendee = (Attendees) getIntent().getSerializableExtra(
-				"SpecificAttendee");
-
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),
-				"fonts/HERO.ttf");
+		Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/HERO.ttf");
 
 		attendee_thumbnail = (MLRoundedImageView) findViewById(R.id.attendee_detail_thumbnail);
-
-		// Image url
-		image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL
-				+ specificAttendee.getAttendee_image();
-
-		ImageLoader imgLoader = new ImageLoader(AttendeeDetailPage.this);
-
-		// whenever you want to load an image from url
-		// call DisplayImage function
-		// url - image url to load
-		// loader - loader image, will be displayed before getting image
-		// image - ImageView
-		imgLoader.DisplayImage(image_url, loader, attendee_thumbnail);
-
 		attendee_detail_header = (TextView) findViewById(R.id.attendee_detail_header);
 		attendee_detail_header.setTypeface(typeFace);
 
@@ -104,23 +91,65 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 		attendee_name.setTypeface(typeFace);
 
 		attendee_designation = (TextView) findViewById(R.id.attendee_detail_designation);
-		attendee_designation
-				.setText(specificAttendee.getAttendee_designation());
-		attendee_name.setTypeface(typeFace);
-
+		attendee_designation.setTypeface(typeFace);
 		attendee_comp_name = (TextView) findViewById(R.id.attendee_detail_comp_name);
-		attendee_comp_name.setText(specificAttendee.getAttendee_company_name());
-		attendee_name.setTypeface(typeFace);
-
+		attendee_comp_name.setTypeface(typeFace);
 		attendee_city = (TextView) findViewById(R.id.attendee_detail_city);
-		attendee_city.setText(specificAttendee.getAttendee_city());
-		attendee_name.setTypeface(typeFace);
+		attendee_city.setTypeface(typeFace);
 
-		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER
-				+ constant.SAVE_SHARE_SOCIAL;
+		if(fromActivity.equalsIgnoreCase("AttendeesList")){
+			specificAttendee = new Attendees();
+			specificAttendee = (Attendees) getIntent().getSerializableExtra("SpecificAttendee");
+			
+			// Image url
+			image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL + specificAttendee.getAttendee_image();
+			ImageLoader imgLoader = new ImageLoader(AttendeeDetailPage.this);
+			// whenever you want to load an image from url
+			// call DisplayImage function
+			// url - image url to load
+			// loader - loader image, will be displayed before getting image
+			// image - ImageView
+			imgLoader.DisplayImage(image_url, loader, attendee_thumbnail);
+			attendee_name.setText(specificAttendee.getAttendee_first_name() + " " + specificAttendee.getAttendee_last_name());
+			attendee_designation.setText(specificAttendee.getAttendee_designation());
+			attendee_comp_name.setText(specificAttendee.getAttendee_company_name());
+			attendee_city.setText(specificAttendee.getAttendee_city());
+			
+			subject_id_ = specificAttendee.getAttendee_id();
+			subject_type_ = specificAttendee.getAttendee_type();
+		}else if(fromActivity.equalsIgnoreCase("WallList")){
+			specificAttendeeFromWall = new WallNotifications();
+			specificAttendeeFromWall = (WallNotifications) getIntent().getSerializableExtra("SpecificWallAttendee");
+			
+			// Image url
+			image_url = constant.WEBSERVICE_URL + constant.ATTENDEE_IMAGE_URL + specificAttendeeFromWall.getPhoto();
+			ImageLoader imgLoader = new ImageLoader(AttendeeDetailPage.this);
+			// whenever you want to load an image from url
+			// call DisplayImage function
+			// url - image url to load
+			// loader - loader image, will be displayed before getting image
+			// image - ImageView
+			imgLoader.DisplayImage(image_url, loader, attendee_thumbnail);
+			if(whoCame.equalsIgnoreCase("object")){
+				attendee_name.setText(specificAttendeeFromWall.getFirst_name() + " " + specificAttendeeFromWall.getLast_name());
+				attendee_designation.setText(specificAttendeeFromWall.getDesignation());
+				attendee_comp_name.setText(specificAttendeeFromWall.getCompany_name());
+//				attendee_city.setText(specificAttendeeFromWall.getAttendee_city());
+				subject_id_ = specificAttendeeFromWall.getObject_id();
+				subject_type_ = specificAttendeeFromWall.getObject_type();
+			}else if(whoCame.equalsIgnoreCase("subject")){
+				attendee_name.setText(specificAttendeeFromWall.getReceiver_first_name() + " " + specificAttendeeFromWall.getReceiver_last_name());
+				attendee_designation.setText(specificAttendeeFromWall.getReceiver_designation());
+				attendee_comp_name.setText(specificAttendeeFromWall.getReceiver_company_name());
+//				attendee_city.setText(specificAttendeeFromWall.getAttendee_city());
+				subject_id_ = specificAttendeeFromWall.getSubject_id();
+				subject_type_ = specificAttendeeFromWall.getSubject_type();
+			}
+			
+		}
+
+		url_ = constant.WEBSERVICE_URL + constant.WEBSERVICE_FOLDER	+ constant.SAVE_SHARE_SOCIAL;
 		api_access_token_ = Constants.API_ACCESS_TOKEN;
-		subject_id_ = specificAttendee.getAttendee_id();
-		subject_type_ = specificAttendee.getAttendee_type();
 		event_id_ = "1"; // specificAttendee.getEvent_id()
 		// type_ = ""; //Share - Sh, Save - Sav
 		transaction_type_ = "Social";// Other option - delete
@@ -155,8 +184,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 
 			alert.setPositiveButton("Send",
 					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
+						public void onClick(DialogInterface dialog, int whichButton) {
 							value = input.getText();
 							sendMsg = (String) value.toString();
 							new SendMessageAttendee().execute();
@@ -166,8 +194,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 
 			alert.setNegativeButton("Cancel",
 					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
+						public void onClick(DialogInterface dialog, int whichButton) {
 
 						}
 					});
@@ -175,8 +202,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 			alert.show();
 
 		} else if (view == setMeeting) {
-			Toast.makeText(AttendeeDetailPage.this, "Coming soon",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(AttendeeDetailPage.this, "Coming soon", Toast.LENGTH_SHORT).show();
 		} else if (view == saveAttendee) {
 			type_ = "Sav";
 			new SaveShareAttendee().execute();
@@ -185,7 +211,7 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 			Intent sharingIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
 			Uri screenshotUri = Uri.parse(image_url);
 			sharingIntent.setType("image/*");
-			sharingIntent.putExtra(Intent.EXTRA_TEXT,
+			sharingIntent.putExtra(Intent.EXTRA_TEXT, "Body text of the new status");
 					"Body text of the new status");
 			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
 			startActivity(Intent.createChooser(sharingIntent,
