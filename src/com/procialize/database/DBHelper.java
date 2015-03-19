@@ -2067,7 +2067,7 @@ public class DBHelper extends SQLiteOpenHelper {
     
     //get Saved Exhibitor Details
     public List<Bookmarked> getSavedExhibitorList(){
-        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'E\'";;
+        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'E\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -2124,7 +2124,7 @@ public class DBHelper extends SQLiteOpenHelper {
     
     //get Saved Speakers Details
     public List<Bookmarked> getSavedSpeakersList(){
-        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'S\'";;
+        String selectQuery = "select * from "+BOOKMARKED_TABLE_NAME+" where "+BOOKMARKED_RECEIVER_ATTENDEE_TYPE+" =\'S\'";
         
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -212,7 +212,6 @@ public class AttendeeDetailPage extends Activity implements OnClickListener {
 			Uri screenshotUri = Uri.parse(image_url);
 			sharingIntent.setType("image/*");
 			sharingIntent.putExtra(Intent.EXTRA_TEXT, "Body text of the new status");
-					"Body text of the new status");
 			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
 			startActivity(Intent.createChooser(sharingIntent,
 					"Share image using"));
